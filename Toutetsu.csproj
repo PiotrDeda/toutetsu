@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\RokuroEngine\RokuroEngine.csproj" />
+		<ProjectReference Include="..\RokuroEngine\RokuroEngine.csproj"/>
 	</ItemGroup>
 
 	<ItemGroup>
