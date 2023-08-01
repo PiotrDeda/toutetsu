@@ -1,4 +1,4 @@
-namespace Toutetsu.Loaders;
+namespace Toutetsu.Scenes;
 
 public enum SceneID
 {
