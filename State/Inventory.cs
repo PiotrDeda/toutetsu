@@ -1,0 +1,84 @@
+using Toutetsu.Items;
+using static Toutetsu.Items.ItemType;
+
+namespace Toutetsu.State;
+
+public class Inventory
+{
+	public const int CursorIndex = 0;
+	public const int EquipmentStartIndex = 1;
+	public const int EquipmentEndIndex = 7;
+	public const int SpellStartIndex = 8;
+	public const int SpellEndIndex = 11;
+	public const int MainInventoryStartIndex = 12;
+	public const int MainInventoryEndIndex = 36;
+
+	public Inventory()
+	{
+		// Cursor
+		Slots[0] = new InventorySlot(CursorIndex, 0, 0, General);
+
+		// Weapon
+		Slots[1] = new InventorySlot(EquipmentStartIndex, 32, 96, Weapon);
+
+		// Helmet, armor, boots, trinket, shield, book
+		for (int i = EquipmentStartIndex + 1; i <= EquipmentEndIndex; i++)
+			Slots[i] = new InventorySlot(i,
+				96 + i / 3 * 64,
+				32 + i % 3 * 64,
+				Helmet + i - EquipmentStartIndex - 1);
+
+		// Spells
+		for (int i = SpellStartIndex; i <= SpellEndIndex; i++)
+			Slots[i] = new InventorySlot(i,
+				272,
+				40 + i * 80,
+				Spell);
+
+		// Main inventory
+		for (int i = MainInventoryStartIndex; i <= MainInventoryEndIndex; i++)
+			Slots[i] = new InventorySlot(i,
+				32 + i % 5 * 64,
+				384 + i / 5 * 64,
+				General);
+	}
+
+	public InventorySlot[] Slots { get; } = new InventorySlot[37];
+
+	public void SwitchCursorItem(int index, bool equipmentLocked)
+	{
+		if (equipmentLocked && index > CursorIndex && index < MainInventoryStartIndex)
+			return;
+
+		if (Slots[CursorIndex].Item.Type == Blank || Slots[index].Type == General ||
+			Slots[index].Type == Slots[CursorIndex].Item.Type)
+		{
+			ItemData temp = Slots[index].Item;
+			Slots[index].Item = Slots[CursorIndex].Item;
+			Slots[CursorIndex].Item = temp;
+		}
+
+		RefreshStats();
+	}
+
+	public void AddItem(ItemData item)
+	{
+		for (int i = MainInventoryStartIndex; i <= MainInventoryEndIndex; i++)
+			if (Slots[i].Item.Type == Blank)
+			{
+				Slots[i].Item = item;
+				return;
+			}
+
+		Slots[MainInventoryEndIndex].Item = item;
+	}
+
+	void RefreshStats()
+	{
+		List<ItemData> items = new();
+		for (int i = EquipmentStartIndex; i <= EquipmentEndIndex; i++)
+			if (Slots[i].Item.Type != Blank)
+				items.Add(Slots[i].Item);
+		GameState.PlayerStats.UpdateStats(items);
+	}
+}

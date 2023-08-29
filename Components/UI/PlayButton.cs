@@ -1,7 +1,7 @@
 using Rokuro;
 using Rokuro.Graphics;
 using Rokuro.Objects;
-using Toutetsu.Scenes;
+using Toutetsu.Loaders;
 
 namespace Toutetsu.Components.UI;
 

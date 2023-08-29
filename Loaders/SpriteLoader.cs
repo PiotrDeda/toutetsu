@@ -1,6 +1,6 @@
 using Rokuro.Graphics;
 
-namespace Toutetsu.Sprites;
+namespace Toutetsu.Loaders;
 
 public class SpriteLoader
 {
