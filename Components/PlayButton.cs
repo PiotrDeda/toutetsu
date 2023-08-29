@@ -3,7 +3,7 @@ using Rokuro.Graphics;
 using Rokuro.Objects;
 using Toutetsu.Loaders;
 
-namespace Toutetsu.Components.UI;
+namespace Toutetsu.Components;
 
 public class PlayButton : InteractableObject
 {

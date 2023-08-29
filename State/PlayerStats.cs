@@ -76,21 +76,13 @@ public class PlayerStats
 
 	void RefreshText()
 	{
-		string textLeft = $"""
-						   {CurrentHP} / {CurrentStats.MaxHP}
-						   {CurrentStats.WhiteAttack}
-						   {CurrentStats.WhiteDefense}
-						   {CurrentStats.CritChance}
-						   """;
+		string textLeft = $"{CurrentHP} / {CurrentStats.MaxHP}\n{CurrentStats.WhiteAttack}\n" +
+						  $"{CurrentStats.WhiteDefense}\n{CurrentStats.CritChance}";
 
 		foreach (TextObject sprite in SpritesLeft)
 			sprite.Text = textLeft;
 
-		string textRight = $"""
-							{CurrentStats.BlackAttack}
-							{CurrentStats.BlackDefense}
-							{CurrentStats.Agility}
-							""";
+		string textRight = $"{CurrentStats.BlackAttack}\n{CurrentStats.BlackDefense}\n{CurrentStats.Agility}";
 
 		foreach (TextObject sprite in SpritesRight)
 			sprite.Text = textRight;

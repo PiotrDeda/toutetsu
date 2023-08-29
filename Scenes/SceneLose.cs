@@ -2,7 +2,7 @@ using Rokuro;
 using Rokuro.Graphics;
 using Rokuro.Math;
 using Rokuro.Objects;
-using Toutetsu.Components.UI;
+using Toutetsu.Components;
 
 namespace Toutetsu.Scenes;
 

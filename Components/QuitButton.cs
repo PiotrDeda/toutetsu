@@ -2,7 +2,7 @@ using Rokuro;
 using Rokuro.Graphics;
 using Rokuro.Objects;
 
-namespace Toutetsu.Components.UI;
+namespace Toutetsu.Components;
 
 public class QuitButton : InteractableObject
 {
