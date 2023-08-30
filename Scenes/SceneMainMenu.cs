@@ -13,15 +13,15 @@ public class SceneMainMenu : Scene
 		Name = "SceneMainMenu";
 		
 		var title = new SimpleObject(App.GetSprite("title"), Camera);
-		title.Position = new Vector(482, 64);
+		title.Position = new Vector2D(482, 64);
 		RegisterGameObject(title);
 
 		var playButton = new PlayButton(Camera);
-		playButton.Position = new Vector(482, 317);
+		playButton.Position = new Vector2D(482, 317);
 		RegisterGameObject(playButton);
 		
 		var quitButton = new QuitButton(Camera);
-		quitButton.Position = new Vector(482, 445);
+		quitButton.Position = new Vector2D(482, 445);
 		RegisterGameObject(quitButton);
 	}
 	

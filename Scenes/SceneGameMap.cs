@@ -19,8 +19,8 @@ public class SceneGameMap : Scene
 		Map = new GameMap(Camera, 40);
 
 		// Camera boundaries
-		Camera.BoundaryMin = new Vector(-GameMap.TileSize, -GameMap.TileSize);
-		Camera.BoundaryMax = new Vector(GameMap.TileSize * (Map.MapSize + 1),
+		Camera.BoundaryMin = new Vector2D(-GameMap.TileSize, -GameMap.TileSize);
+		Camera.BoundaryMax = new Vector2D(GameMap.TileSize * (Map.MapSize + 1),
 			GameMap.TileSize * (Map.MapSize + 1));
 
 		// Map
@@ -29,28 +29,28 @@ public class SceneGameMap : Scene
 
 		// Inventory
 		var inventoryBackground = new SimpleObject(App.GetSprite("equipment_bg"), UICamera);
-		inventoryBackground.Position = new Vector(912, 0);
+		inventoryBackground.Position = new Vector2D(912, 0);
 		RegisterGameObject(inventoryBackground);
 
 		var inventoryView = new InventoryView(GameState.Inventory, UICamera);
-		inventoryView.Position = new Vector(912, 0);
+		inventoryView.Position = new Vector2D(912, 0);
 		RegisterGameObject(inventoryView);
 
 		// TODO: Generate starting items
 
 		// Stats
 		var statsTextLeft = new TextObject("StatsLeft", UICamera);
-		statsTextLeft.Position = new Vector(970, 240);
+		statsTextLeft.Position = new Vector2D(970, 240);
 		RegisterGameObject(statsTextLeft);
 
 		var statsTextRight = new TextObject("StatsRight", UICamera);
-		statsTextRight.Position = new Vector(1082, 264);
+		statsTextRight.Position = new Vector2D(1082, 264);
 		RegisterGameObject(statsTextRight);
 
 		GameState.PlayerStats.AddViewSprites(statsTextLeft, statsTextRight);
 
 		// Level text
-		LevelText.Position = new Vector(800, 10);
+		LevelText.Position = new Vector2D(800, 10);
 		RegisterGameObject(LevelText);
 
 		// Key controls

@@ -25,24 +25,23 @@ public class InventoryView : BaseObject, IDrawable, IMouseInteractable
 		if (Enabled)
 			foreach (InventorySlot slot in Inventory.Slots)
 				if (slot.Index != Inventory.CursorIndex)
-					App.Drawer.Draw(slot.Item.Sprite, Camera,
-						new Vector(Position.X + slot.OffsetX, Position.Y + slot.OffsetY));
+					App.Drawer.Draw(slot.Item.Sprite, Camera, Position + slot.Offset);
 
 		Sprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
-		Vector cursorPosition = App.GetMousePosition() -
-								new Vector(cursorSprite.Width, cursorSprite.Height) * Camera.Scale / 2;
+		Vector2D cursorPosition = App.GetMousePosition() -
+								new Vector2D(cursorSprite.Width, cursorSprite.Height) * Camera.Scale / 2;
 		App.Drawer.Draw(cursorSprite, Camera, cursorPosition);
 	}
 
 	public bool WasMouseoverHandled { get; set; } = false;
 
-	public bool IsMouseOver(Vector mousePosition)
+	public bool IsMouseOver(Vector2D mousePosition)
 	{
 		if (Enabled)
 			foreach (InventorySlot slot in Inventory.Slots)
 			{
-				Vector screenPosition =
-					Camera.GetScreenPosition(new Vector(Position.X + slot.OffsetX, Position.Y + slot.OffsetY));
+				Vector2D screenPosition =
+					Camera.GetScreenPosition(Position + slot.Offset);
 				if (slot.Index != Inventory.CursorIndex &&
 					mousePosition.X >= screenPosition.X &&
 					mousePosition.X <= screenPosition.X + slot.Item.Sprite.Width * Camera.Scale &&

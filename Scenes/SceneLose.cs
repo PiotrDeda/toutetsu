@@ -16,7 +16,7 @@ public class SceneLose : Scene
 		RegisterGameObject(loseScreen);
 		
 		var quitButton = new QuitButton(Camera);
-		quitButton.Position = new Vector(482, 445);
+		quitButton.Position = new Vector2D(482, 445);
 		RegisterGameObject(quitButton);
 	}
 	

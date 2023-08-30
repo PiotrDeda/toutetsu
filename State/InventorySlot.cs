@@ -1,20 +1,19 @@
+using Rokuro.Math;
 using Toutetsu.Items;
 
 namespace Toutetsu.State;
 
 public class InventorySlot
 {
-	public InventorySlot(int index, int offsetX, int offsetY, ItemType type)
+	public InventorySlot(int index, Vector2D offset, ItemType type)
 	{
 		Index = index;
-		OffsetX = offsetX;
-		OffsetY = offsetY;
+		Offset = offset;
 		Type = type;
 	}
 
 	public int Index { get; set; }
-	public int OffsetX { get; set; }
-	public int OffsetY { get; set; }
+	public Vector2D Offset { get; set; }
 	public ItemType Type { get; set; }
 	public ItemData Item { get; set; } = new BlankItem();
 }
