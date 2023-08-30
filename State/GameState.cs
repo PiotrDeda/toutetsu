@@ -10,6 +10,11 @@ public static class GameState
 
 	public static PlayerStats PlayerStats => Instance.PlayerStats;
 	public static Inventory Inventory => Instance.Inventory;
+	public static int CurrentLevel
+	{
+		get => Instance.CurrentLevel;
+		set => Instance.CurrentLevel = value;
+	}
 
 	public static void SetSceneGameMap(SceneGameMap scene) => Instance.SceneGameMap = scene;
 

@@ -8,35 +8,35 @@ namespace Toutetsu.State;
 
 class GameStateInstance
 {
-	public int CurrentLevel { get; set; } = 0;
 	public PlayerStats PlayerStats { get; } = new();
 	public Inventory Inventory { get; } = new();
 	public SceneGameMap SceneGameMap { private get; set; } = null!;
 	public SceneFight SceneFight { private get; set; } = null!;
+	public int CurrentLevel { get; set; } = 0;
 
 	public void NextLevel()
 	{
-		//SceneGameMap.NextLevel();
+		SceneGameMap.NextLevel();
 	}
 
 	public void StartFight(EnemyData enemyData, bool bossFight)
 	{
 		App.SceneManager.SetNextScene((int)SceneID.Fight);
-		//SceneFight.SetupFight(enemyData, Inventory);
-		//SceneFight.BossFight = bossFight;
+		// TODO: SceneFight.SetupFight(enemyData, Inventory);
+		// TODO: SceneFight.BossFight = bossFight;
 	}
 
 	public void DoPlayerAttack(StatsSet spellStats)
 	{
-		//SceneFight.LockSpells();
-		//SceneFight.EnemyStats.maxHP = GameState.PlayerStats.DealDamage(spellStats, SceneFight.EnemyStats);
-		//SceneFight.AttackAnimationEnemy.sprite.play(SceneFight.ChangeTurnCallback, SceneFight);
+		// TODO: SceneFight.LockSpells();
+		// TODO: SceneFight.EnemyStats.maxHP = GameState.PlayerStats.DealDamage(spellStats, SceneFight.EnemyStats);
+		// TODO: SceneFight.AttackAnimationEnemy.sprite.play(SceneFight.ChangeTurnCallback, SceneFight);
 	}
 
 	public void DoEnemyAttack()
 	{
-		//PlayerStats.TakeDamage(SceneFight.EnemyStats);
-		//SceneFight.AttackAnimationPlayer.sprite.play(SceneFight.ChangeTurnCallback, SceneFight);
+		// TODO: PlayerStats.TakeDamage(SceneFight.EnemyStats);
+		// TODO: SceneFight.AttackAnimationPlayer.sprite.play(SceneFight.ChangeTurnCallback, SceneFight);
 	}
 
 	public void HealPlayer() => PlayerStats.CurrentHP = PlayerStats.CurrentStats.MaxHP;

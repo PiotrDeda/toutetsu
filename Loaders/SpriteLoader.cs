@@ -17,8 +17,8 @@ public class SpriteLoader
 		sprites["lose_screen"] = new Sprite("ui/lose_screen");
 		sprites["player_fight"] = new AnimatedSprite("tiles/player", 2, 30, 4);
 		sprites["fight_bg"] = new Sprite("ui/fight_bg");
-		//sprites["attack_animation_player"] = new PlayableSprite("ui/attack_animation", 3, 100);
-		//sprites["attack_animation_enemy"] = new PlayableSprite("ui/attack_animation", 3, 100);
+		// TODO: sprites["attack_animation_player"] = new PlayableSprite("ui/attack_animation", 3, 100);
+		// TODO: sprites["attack_animation_enemy"] = new PlayableSprite("ui/attack_animation", 3, 100);
 
 		// Tiles
 		sprites["player"] = new AnimatedSprite("tiles/player", 2, 30, 4);

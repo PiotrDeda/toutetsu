@@ -16,26 +16,26 @@ public class SceneGameMap : Scene
 		// Variable init
 		Name = "SceneGameMap";
 		LevelText = new TextObject("Level 1", Camera);
-		GameMap = new GameMap(Camera, 40);
+		Map = new GameMap(Camera, 40);
 
 		// Camera boundaries
 		Camera.BoundaryMin = new Vector(-GameMap.TileSize, -GameMap.TileSize);
-		Camera.BoundaryMax = new Vector(GameMap.TileSize * (GameMap.MapSize + 1),
-			GameMap.TileSize * (GameMap.MapSize + 1));
+		Camera.BoundaryMax = new Vector(GameMap.TileSize * (Map.MapSize + 1),
+			GameMap.TileSize * (Map.MapSize + 1));
 
 		// Map
 		NextLevel();
-		RegisterGameObject(GameMap);
+		RegisterGameObject(Map);
 
 		// Inventory
 		var inventoryBackground = new SimpleObject(App.GetSprite("equipment_bg"), UICamera);
 		inventoryBackground.Position = new Vector(912, 0);
 		RegisterGameObject(inventoryBackground);
-		
+
 		var inventoryView = new InventoryView(GameState.Inventory, UICamera);
 		inventoryView.Position = new Vector(912, 0);
 		RegisterGameObject(inventoryView);
-        
+
 		// TODO: Generate starting items
 
 		// Stats
@@ -63,11 +63,17 @@ public class SceneGameMap : Scene
 
 	Camera Camera { get; } = new();
 	UICamera UICamera { get; } = new();
-	GameMap GameMap { get; }
+	GameMap Map { get; }
 	TextObject LevelText { get; }
 
-	void NextLevel()
+	public void NextLevel()
 	{
-		// TODO
+		GameState.CurrentLevel++;
+		GameState.HealPlayer();
+		// TODO: Generate random map
+		// TODO: Camera.CenterOn(Map.Player.Position);
+		if (GameState.CurrentLevel == 4)
+			; // TODO: Map.AddInteract(ToutetsuUnit().Generate(), Map.ExitPosition);
+		LevelText.Text = $"Level {GameState.CurrentLevel}";
 	}
 }
