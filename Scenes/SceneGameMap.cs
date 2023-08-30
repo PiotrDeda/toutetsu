@@ -15,7 +15,7 @@ public class SceneGameMap : Scene
 	{
 		// Variable init
 		Name = "SceneGameMap";
-		LevelText = new TextObject("Level 1", Camera);
+		LevelText = new TextObject("Level 1", UICamera);
 		Map = new GameMap(Camera, 40);
 
 		// Camera boundaries
@@ -59,6 +59,17 @@ public class SceneGameMap : Scene
 		App.InputManager.SetKeyEvent(Keycode.SDLK_a, KeyEvents.MoveLeft);
 		App.InputManager.SetKeyEvent(Keycode.SDLK_d, KeyEvents.MoveRight);
 		App.InputManager.SetKeyEvent(Keycode.SDLK_r, KeyEvents.CenterCamera);
+
+		// Debug
+		// TODO: remove
+		var floor = new Floor();
+		Map.FloorLayer[1, 1].MapObject = floor;
+		Map.FloorLayer[2, 1].MapObject = floor;
+		Map.FloorLayer[3, 1].MapObject = floor;
+		Map.FloorLayer[4, 1].MapObject = floor;
+		Map.WallLayer[2, 1].MapObject = new Wall();
+		Map.InteractLayer[3, 1].MapObject = new PlayerPuppet();
+		Map.PlayerPosition = new Vector2D(3, 1);
 	}
 
 	Camera Camera { get; } = new();
@@ -66,12 +77,37 @@ public class SceneGameMap : Scene
 	GameMap Map { get; }
 	TextObject LevelText { get; }
 
+	public override void HandleEvent(IInputEvent e)
+	{
+		if (e is KeyEvent keyEvent)
+			if (keyEvent == KeyEvents.MoveDown)
+				Map.MovePlayer(new Vector2D(0, 1));
+			else if (keyEvent == KeyEvents.MoveUp)
+				Map.MovePlayer(new Vector2D(0, -1));
+			else if (keyEvent == KeyEvents.MoveLeft)
+				Map.MovePlayer(new Vector2D(-1, 0));
+			else if (keyEvent == KeyEvents.MoveRight)
+				Map.MovePlayer(new Vector2D(1, 0));
+			else if (keyEvent == KeyEvents.CenterCamera)
+				Camera.CenterOn(Map.PlayerPosition);
+
+		if (e is MouseWheelEvent mouseWheelEvent)
+			if (mouseWheelEvent.Scroll.Y > 0)
+				Camera.ZoomIn();
+			else if (mouseWheelEvent.Scroll.Y < 0)
+				Camera.ZoomOut();
+
+		if (e is MouseMotionEvent mouseMotionEvent)
+			if (mouseMotionEvent.RightButton)
+				Camera.Position -= mouseMotionEvent.RelativeMotion / Camera.Scale;
+	}
+
 	public void NextLevel()
 	{
 		GameState.CurrentLevel++;
 		GameState.HealPlayer();
 		// TODO: Generate random map
-		// TODO: Camera.CenterOn(Map.Player.Position);
+		Camera.CenterOn(Map.PlayerPosition);
 		if (GameState.CurrentLevel == 4)
 			; // TODO: Map.AddInteract(ToutetsuUnit().Generate(), Map.ExitPosition);
 		LevelText.Text = $"Level {GameState.CurrentLevel}";

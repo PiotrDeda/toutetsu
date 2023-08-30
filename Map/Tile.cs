@@ -1,14 +1,16 @@
 using Rokuro;
 using Rokuro.Graphics;
+using Rokuro.Math;
 using Rokuro.Objects;
 
 namespace Toutetsu.Map;
 
 public class Tile : BaseObject, IDrawable
 {
-	public Tile(Camera camera)
+	public Tile(Camera camera, Vector2D position)
 	{
 		Camera = camera;
+		Position = position;
 	}
 
 	public Camera Camera { get; set; }

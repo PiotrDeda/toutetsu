@@ -11,5 +11,5 @@ public class MapObject
 
 	public Sprite Sprite { get; set; }
 
-	public virtual bool OnInteract => false;
+	public virtual bool OnInteract() => false;
 }
