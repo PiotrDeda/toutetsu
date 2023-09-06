@@ -1,4 +1,4 @@
-using Rokuro;
+using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Math;
 using Rokuro.Objects;

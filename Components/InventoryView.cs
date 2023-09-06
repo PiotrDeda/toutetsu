@@ -1,4 +1,4 @@
-using Rokuro;
+using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Math;
 using Rokuro.Objects;
@@ -27,9 +27,9 @@ public class InventoryView : BaseObject, IDrawable, IMouseInteractable
 				if (slot.Index != Inventory.CursorIndex)
 					App.Drawer.Draw(slot.Item.Sprite, Camera, Position + slot.Offset);
 
-		Sprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
+		ISprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
 		Vector2D cursorPosition = App.GetMousePosition() -
-								new Vector2D(cursorSprite.Width, cursorSprite.Height) * Camera.Scale / 2;
+								new Vector2D(cursorSprite.Width(), cursorSprite.Height()) * Camera.Scale / 2;
 		App.Drawer.Draw(cursorSprite, Camera, cursorPosition);
 	}
 
@@ -44,9 +44,9 @@ public class InventoryView : BaseObject, IDrawable, IMouseInteractable
 					Camera.GetScreenPosition(Position + slot.Offset);
 				if (slot.Index != Inventory.CursorIndex &&
 					mousePosition.X >= screenPosition.X &&
-					mousePosition.X <= screenPosition.X + slot.Item.Sprite.Width * Camera.Scale &&
+					mousePosition.X <= screenPosition.X + slot.Item.Sprite.Width() * Camera.Scale &&
 					mousePosition.Y >= screenPosition.Y &&
-					mousePosition.Y <= screenPosition.Y + slot.Item.Sprite.Height * Camera.Scale)
+					mousePosition.Y <= screenPosition.Y + slot.Item.Sprite.Height() * Camera.Scale)
 				{
 					LastClickedIndex = slot.Index;
 					return true;

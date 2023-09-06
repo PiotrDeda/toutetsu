@@ -1,4 +1,4 @@
-using Rokuro;
+using Rokuro.Core;
 using Toutetsu.Enemies;
 using Toutetsu.Items;
 using Toutetsu.Loaders;

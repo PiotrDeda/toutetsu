@@ -68,15 +68,15 @@ public class GameMap : BaseObject, IDrawable
 				Camera.Position += direction * TileSize;
 			}
 
-		MapObject player = InteractLayer[PlayerPosition.X, PlayerPosition.Y].MapObject!;
+		var playerSprite = (AnimatedSprite)InteractLayer[PlayerPosition.X, PlayerPosition.Y].MapObject!.Sprite;
 		if (direction.X == 0 && direction.Y == 1)
-			player.Sprite.State = 0;
+			playerSprite.State = 0;
 		else if (direction.X == 0 && direction.Y == -1)
-			player.Sprite.State = 1;
+			playerSprite.State = 1;
 		else if (direction.X == -1 && direction.Y == 0)
-			player.Sprite.State = 2;
+			playerSprite.State = 2;
 		else if (direction.X == 1 && direction.Y == 0)
-			player.Sprite.State = 3;
+			playerSprite.State = 3;
 	}
 
 	public void Clear()

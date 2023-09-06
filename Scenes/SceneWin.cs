@@ -1,4 +1,4 @@
-using Rokuro;
+using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Math;
 using Rokuro.Objects;
@@ -12,7 +12,7 @@ public class SceneWin : Scene
 	{
 		Name = "SceneWin";
 		
-		var winScreen = new SimpleObject(App.GetSprite("win_screen"), Camera);
+		var winScreen = new SimpleObject(App.SpriteManager.CreateSpriteFromTemplate("win_screen"), Camera);
 		RegisterGameObject(winScreen);
 		
 		var quitButton = new QuitButton(Camera);

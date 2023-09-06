@@ -1,4 +1,4 @@
-using Rokuro;
+using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Input;
 using Rokuro.Math;
@@ -28,7 +28,8 @@ public class SceneGameMap : Scene
 		RegisterGameObject(Map);
 
 		// Inventory
-		var inventoryBackground = new SimpleObject(App.GetSprite("equipment_bg"), UICamera);
+		var inventoryBackground =
+			new SimpleObject(App.SpriteManager.CreateSpriteFromTemplate("equipment_bg"), UICamera);
 		inventoryBackground.Position = new Vector2D(912, 0);
 		RegisterGameObject(inventoryBackground);
 
@@ -61,12 +62,11 @@ public class SceneGameMap : Scene
 		App.InputManager.SetKeyEvent(Keycode.SDLK_r, KeyEvents.CenterCamera);
 
 		// Debug
-		// TODO: remove
+		// TODO: Remove when map generation is done
 		var floor = new Floor();
-		Map.FloorLayer[1, 1].MapObject = floor;
-		Map.FloorLayer[2, 1].MapObject = floor;
 		Map.FloorLayer[3, 1].MapObject = floor;
 		Map.FloorLayer[4, 1].MapObject = floor;
+		Map.WallLayer[1, 1].MapObject = new WallTorch();
 		Map.WallLayer[2, 1].MapObject = new Wall();
 		Map.InteractLayer[3, 1].MapObject = new PlayerPuppet();
 		Map.PlayerPosition = new Vector2D(3, 1);

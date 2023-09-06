@@ -1,4 +1,4 @@
-using Rokuro;
+using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Math;
 using Rokuro.Objects;
@@ -12,7 +12,7 @@ public class SceneMainMenu : Scene
 	{
 		Name = "SceneMainMenu";
 		
-		var title = new SimpleObject(App.GetSprite("title"), Camera);
+		var title = new SimpleObject(App.SpriteManager.CreateSpriteFromTemplate("title"), Camera);
 		title.Position = new Vector2D(482, 64);
 		RegisterGameObject(title);
 

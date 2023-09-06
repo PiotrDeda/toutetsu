@@ -3,4 +3,4 @@ using Toutetsu.Items;
 
 namespace Toutetsu.Enemies;
 
-public record EnemyData(string DisplayName, Sprite MapSprite, Sprite FightSprite, StatsSet Stats);
+public record EnemyData(string DisplayName, ISprite MapSprite, ISprite FightSprite, StatsSet Stats);
