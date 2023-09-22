@@ -4,6 +4,7 @@ using Rokuro.Input;
 using Rokuro.MathUtils;
 using Rokuro.Objects;
 using Toutetsu.Components;
+using Toutetsu.Items;
 using Toutetsu.Map;
 using Toutetsu.State;
 
@@ -70,6 +71,7 @@ public class SceneGameMap : Scene
 		Map.WallLayer[2, 1].MapObject = new Wall();
 		Map.InteractLayer[3, 1].MapObject = new PlayerPuppet();
 		Map.PlayerPosition = new Vector2D(3, 1);
+		GameState.Inventory.AddItem(RandomItemGenerator.Generate());
 	}
 
 	Camera Camera { get; } = new();

@@ -25,22 +25,22 @@ public class Inventory
 		// Helmet, armor, boots, trinket, shield, book
 		for (int i = EquipmentStartIndex + 1; i <= EquipmentEndIndex; i++)
 			Slots[i] = new InventorySlot(i, new Vector2D(
-				96 + i / 3 * 64,
-				32 + i % 3 * 64
+				96 + (i - EquipmentStartIndex - 1) / 3 * 64,
+				32 + (i - EquipmentStartIndex - 1) % 3 * 64
 			), Helmet + i - EquipmentStartIndex - 1);
 
 		// Spells
 		for (int i = SpellStartIndex; i <= SpellEndIndex; i++)
 			Slots[i] = new InventorySlot(i, new Vector2D(
 				272,
-				40 + i * 80
+				40 + (i - SpellStartIndex) * 80
 			), Spell);
 
 		// Main inventory
 		for (int i = MainInventoryStartIndex; i <= MainInventoryEndIndex; i++)
 			Slots[i] = new InventorySlot(i, new Vector2D(
-				32 + i % 5 * 64,
-				384 + i / 5 * 64
+				32 + (i - MainInventoryStartIndex) % 5 * 64,
+				384 + (i - MainInventoryStartIndex) / 5 * 64
 			), General);
 	}
 
