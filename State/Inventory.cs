@@ -1,4 +1,4 @@
-using Rokuro.Math;
+using Rokuro.MathUtils;
 using Toutetsu.Items;
 using static Toutetsu.Items.ItemType;
 

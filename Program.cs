@@ -1,5 +1,5 @@
 ﻿using Rokuro.Core;
-using Rokuro.Math;
+using Rokuro.MathUtils;
 using Toutetsu.Loaders;
 
 App.Run(

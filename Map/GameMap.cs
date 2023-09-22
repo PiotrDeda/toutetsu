@@ -1,5 +1,5 @@
 using Rokuro.Graphics;
-using Rokuro.Math;
+using Rokuro.MathUtils;
 using Rokuro.Objects;
 
 namespace Toutetsu.Map;

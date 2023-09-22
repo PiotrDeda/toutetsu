@@ -1,7 +1,7 @@
 using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Input;
-using Rokuro.Math;
+using Rokuro.MathUtils;
 using Rokuro.Objects;
 using Toutetsu.Components;
 using Toutetsu.Map;
