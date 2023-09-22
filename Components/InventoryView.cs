@@ -17,6 +17,7 @@ public class InventoryView : BaseObject, IDrawable, IMouseInteractable
 	public Inventory Inventory { get; set; }
 	public Camera Camera { get; set; }
 	public bool EquipmentLocked { get; set; } = false;
+	public bool WasMouseoverHandled { get; set; } = false;
 
 	int LastClickedIndex { get; set; }
 
@@ -29,11 +30,9 @@ public class InventoryView : BaseObject, IDrawable, IMouseInteractable
 
 		ISprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
 		Vector2D cursorPosition = App.GetMousePosition() -
-								new Vector2D(cursorSprite.Width(), cursorSprite.Height()) * Camera.Scale / 2;
+								  new Vector2D(cursorSprite.Width(), cursorSprite.Height()) * Camera.Scale / 2;
 		App.Drawer.Draw(cursorSprite, Camera, cursorPosition);
 	}
-
-	public bool WasMouseoverHandled { get; set; } = false;
 
 	public bool IsMouseOver(Vector2D mousePosition)
 	{
