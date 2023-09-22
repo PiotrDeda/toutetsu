@@ -10,6 +10,7 @@ public static class GameState
 
 	public static PlayerStats PlayerStats => Instance.PlayerStats;
 	public static Inventory Inventory => Instance.Inventory;
+
 	public static int CurrentLevel
 	{
 		get => Instance.CurrentLevel;

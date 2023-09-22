@@ -108,7 +108,7 @@ public class SpriteTemplateLoader
 		templates["spell_sunray"] = new StaticSpriteTemplate("items/spell_sunray");
 		templates["spell_elemental_seal"] = new StaticSpriteTemplate("items/spell_elemental_seal");
 		templates["spell_darkness"] = new StaticSpriteTemplate("items/spell_darkness");
-		
+
 		return templates;
 	}
 }

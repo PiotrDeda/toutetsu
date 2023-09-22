@@ -2,7 +2,4 @@ using Rokuro.Graphics;
 
 namespace Toutetsu.Scenes;
 
-public class SceneFight : Scene
-{
-	
-}
+public class SceneFight : Scene {}
