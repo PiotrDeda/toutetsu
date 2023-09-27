@@ -7,9 +7,9 @@ namespace Toutetsu.State;
 public class PlayerStats
 {
 	int _currentHP = 100;
-	StatsSet _currentStats = new(100, 0, 0, 0, 0, 2, 1);
+	StatsSet _currentStats = new(100, 0, 0, 0, 0, 1, 1);
 
-	public StatsSet BaseStats { get; } = new(100, 0, 0, 0, 0, 2, 1);
+	public StatsSet BaseStats { get; } = new(100, 0, 0, 0, 0, 1, 1);
 
 	public StatsSet CurrentStats
 	{

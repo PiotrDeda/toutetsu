@@ -1,6 +1,6 @@
 namespace Toutetsu.Items;
 
-public interface IItemFactory
+public interface IItemTemplate
 {
 	ItemData Create();
 }

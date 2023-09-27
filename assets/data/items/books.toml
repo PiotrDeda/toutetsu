@@ -1,0 +1,27 @@
+[[items]]
+id = "white_book_i"
+white_attack = [5, 1]
+
+[[items]]
+id = "white_book_ii"
+white_attack = [10, 2]
+crit = [3, 1]
+
+[[items]]
+id = "white_book_iii"
+white_attack = [15, 3]
+crit = [6, 2]
+
+[[items]]
+id = "black_book_i"
+black_attack = [5, 1]
+
+[[items]]
+id = "black_book_ii"
+black_attack = [10, 2]
+crit = [3, 1]
+
+[[items]]
+id = "black_book_iii"
+black_attack = [15, 3]
+crit = [6, 2]

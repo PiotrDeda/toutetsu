@@ -71,7 +71,9 @@ public class SceneGameMap : Scene
 		Map.WallLayer[2, 1].MapObject = new Wall();
 		Map.InteractLayer[3, 1].MapObject = new PlayerPuppet();
 		Map.PlayerPosition = new Vector2D(3, 1);
-		GameState.Inventory.AddItem(RandomItemGenerator.Generate());
+		ItemRegister.LoadItemData(); // TODO: Move somewhere else
+		GameState.Inventory.AddItem(RandomItemGenerator.Generate(RandomItemGenerator.Type.StartingWeapon));
+		GameState.Inventory.AddItem(RandomItemGenerator.Generate(RandomItemGenerator.Type.StartingSpell));
 	}
 
 	Camera Camera { get; } = new();
