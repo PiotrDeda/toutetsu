@@ -10,8 +10,8 @@ public class SceneLoader
 	{
 		List<Scene> scenes = new();
 
-		var sceneGameMap = new SceneGameMap();
-		var sceneFight = new SceneFight();
+		SceneGameMap sceneGameMap = new();
+		SceneFight sceneFight = new();
 
 		scenes.Add(new SceneMainMenu());
 		scenes.Add(sceneGameMap);

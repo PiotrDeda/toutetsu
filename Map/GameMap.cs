@@ -19,10 +19,10 @@ public class GameMap : BaseObject, IDrawable
 		{
 			for (int j = 0; j < mapSize; j++)
 			{
-				var position = new Vector2D(i * TileSize, j * TileSize);
-				FloorLayer[i, j] = new Tile(Camera, position);
-				WallLayer[i, j] = new Tile(Camera, position);
-				InteractLayer[i, j] = new Tile(Camera, position);
+				Vector2D position = new(i * TileSize, j * TileSize);
+				FloorLayer[i, j] = new(Camera, position);
+				WallLayer[i, j] = new(Camera, position);
+				InteractLayer[i, j] = new(Camera, position);
 			}
 		}
 	}
@@ -54,7 +54,7 @@ public class GameMap : BaseObject, IDrawable
 
 	public void MovePlayer(Vector2D direction)
 	{
-		var dest = new Vector2D(PlayerPosition.X + direction.X, PlayerPosition.Y + direction.Y);
+		Vector2D dest = new(PlayerPosition.X + direction.X, PlayerPosition.Y + direction.Y);
 
 		if (dest.X >= 0 && dest.X < MapSize && dest.Y >= 0 && dest.Y < MapSize)
 			if (WallLayer[dest.X, dest.Y].MapObject is null &&

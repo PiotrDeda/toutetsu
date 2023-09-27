@@ -1,6 +1,5 @@
 using Rokuro.Core;
 using Rokuro.Graphics;
-using Rokuro.MathUtils;
 using Rokuro.Objects;
 using Toutetsu.Components;
 
@@ -12,11 +11,11 @@ public class SceneWin : Scene
 	{
 		Name = "SceneWin";
 
-		var winScreen = new SimpleObject(App.SpriteManager.CreateSpriteFromTemplate("win_screen"), Camera);
+		SimpleObject winScreen = new(App.SpriteManager.CreateSpriteFromTemplate("win_screen"), Camera);
 		RegisterGameObject(winScreen);
 
-		var quitButton = new QuitButton(Camera);
-		quitButton.Position = new Vector2D(482, 445);
+		QuitButton quitButton = new(Camera);
+		quitButton.Position = new(482, 445);
 		RegisterGameObject(quitButton);
 	}
 

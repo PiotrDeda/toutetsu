@@ -1,7 +1,6 @@
 using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Input;
-using Rokuro.MathUtils;
 using Rokuro.Objects;
 using Toutetsu.Components;
 using Toutetsu.Items;
@@ -16,43 +15,41 @@ public class SceneGameMap : Scene
 	{
 		// Variable init
 		Name = "SceneGameMap";
-		LevelText = new TextObject("Level 1", UICamera);
-		Map = new GameMap(Camera, 40);
+		LevelText = new("Level 1", UICamera);
+		Map = new(Camera, 40);
 
 		// Camera boundaries
-		Camera.BoundaryMin = new Vector2D(-GameMap.TileSize, -GameMap.TileSize);
-		Camera.BoundaryMax = new Vector2D(GameMap.TileSize * (Map.MapSize + 1),
-			GameMap.TileSize * (Map.MapSize + 1));
+		Camera.BoundaryMin = new(-GameMap.TileSize, -GameMap.TileSize);
+		Camera.BoundaryMax = new(GameMap.TileSize * (Map.MapSize + 1), GameMap.TileSize * (Map.MapSize + 1));
 
 		// Map
 		NextLevel();
 		RegisterGameObject(Map);
 
 		// Inventory
-		var inventoryBackground =
-			new SimpleObject(App.SpriteManager.CreateSpriteFromTemplate("equipment_bg"), UICamera);
-		inventoryBackground.Position = new Vector2D(912, 0);
+		SimpleObject inventoryBackground = new(App.SpriteManager.CreateSpriteFromTemplate("equipment_bg"), UICamera);
+		inventoryBackground.Position = new(912, 0);
 		RegisterGameObject(inventoryBackground);
 
-		var inventoryView = new InventoryView(GameState.Inventory, UICamera);
-		inventoryView.Position = new Vector2D(912, 0);
+		InventoryView inventoryView = new(GameState.Inventory, UICamera);
+		inventoryView.Position = new(912, 0);
 		RegisterGameObject(inventoryView);
 
 		// TODO: Generate starting items
 
 		// Stats
-		var statsTextLeft = new TextObject("StatsLeft", UICamera);
-		statsTextLeft.Position = new Vector2D(970, 240);
+		TextObject statsTextLeft = new("StatsLeft", UICamera);
+		statsTextLeft.Position = new(970, 240);
 		RegisterGameObject(statsTextLeft);
 
-		var statsTextRight = new TextObject("StatsRight", UICamera);
-		statsTextRight.Position = new Vector2D(1082, 264);
+		TextObject statsTextRight = new("StatsRight", UICamera);
+		statsTextRight.Position = new(1082, 264);
 		RegisterGameObject(statsTextRight);
 
 		GameState.PlayerStats.AddViewSprites(statsTextLeft, statsTextRight);
 
 		// Level text
-		LevelText.Position = new Vector2D(800, 10);
+		LevelText.Position = new(800, 10);
 		RegisterGameObject(LevelText);
 
 		// Key controls
@@ -64,13 +61,13 @@ public class SceneGameMap : Scene
 
 		// Debug
 		// TODO: Remove when map generation is done
-		var floor = new Floor();
+		Floor floor = new();
 		Map.FloorLayer[3, 1].MapObject = floor;
 		Map.FloorLayer[4, 1].MapObject = floor;
 		Map.WallLayer[1, 1].MapObject = new WallTorch();
 		Map.WallLayer[2, 1].MapObject = new Wall();
 		Map.InteractLayer[3, 1].MapObject = new PlayerPuppet();
-		Map.PlayerPosition = new Vector2D(3, 1);
+		Map.PlayerPosition = new(3, 1);
 		ItemRegister.LoadItemData(); // TODO: Move somewhere else
 		GameState.Inventory.AddItem(RandomItemGenerator.Generate(RandomItemGenerator.Type.StartingWeapon));
 		GameState.Inventory.AddItem(RandomItemGenerator.Generate(RandomItemGenerator.Type.StartingSpell));
@@ -85,13 +82,13 @@ public class SceneGameMap : Scene
 	{
 		if (e is KeyEvent keyEvent)
 			if (keyEvent == KeyEvents.MoveDown)
-				Map.MovePlayer(new Vector2D(0, 1));
+				Map.MovePlayer(new(0, 1));
 			else if (keyEvent == KeyEvents.MoveUp)
-				Map.MovePlayer(new Vector2D(0, -1));
+				Map.MovePlayer(new(0, -1));
 			else if (keyEvent == KeyEvents.MoveLeft)
-				Map.MovePlayer(new Vector2D(-1, 0));
+				Map.MovePlayer(new(-1, 0));
 			else if (keyEvent == KeyEvents.MoveRight)
-				Map.MovePlayer(new Vector2D(1, 0));
+				Map.MovePlayer(new(1, 0));
 			else if (keyEvent == KeyEvents.CenterCamera)
 				Camera.CenterOn(Map.PlayerPosition);
 

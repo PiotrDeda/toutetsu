@@ -1,4 +1,3 @@
-using Rokuro.MathUtils;
 using Toutetsu.Items;
 using static Toutetsu.Items.ItemType;
 
@@ -17,28 +16,28 @@ public class Inventory
 	public Inventory()
 	{
 		// Cursor
-		Slots[0] = new InventorySlot(CursorIndex, new Vector2D(0, 0), General);
+		Slots[0] = new(CursorIndex, new(0, 0), General);
 
 		// Weapon
-		Slots[1] = new InventorySlot(EquipmentStartIndex, new Vector2D(32, 96), Weapon);
+		Slots[1] = new(EquipmentStartIndex, new(32, 96), Weapon);
 
 		// Helmet, armor, boots, trinket, shield, book
 		for (int i = EquipmentStartIndex + 1; i <= EquipmentEndIndex; i++)
-			Slots[i] = new InventorySlot(i, new Vector2D(
+			Slots[i] = new(i, new(
 				96 + (i - EquipmentStartIndex - 1) / 3 * 64,
 				32 + (i - EquipmentStartIndex - 1) % 3 * 64
 			), Helmet + i - EquipmentStartIndex - 1);
 
 		// Spells
 		for (int i = SpellStartIndex; i <= SpellEndIndex; i++)
-			Slots[i] = new InventorySlot(i, new Vector2D(
+			Slots[i] = new(i, new(
 				272,
 				40 + (i - SpellStartIndex) * 80
 			), Spell);
 
 		// Main inventory
 		for (int i = MainInventoryStartIndex; i <= MainInventoryEndIndex; i++)
-			Slots[i] = new InventorySlot(i, new Vector2D(
+			Slots[i] = new(i, new(
 				32 + (i - MainInventoryStartIndex) % 5 * 64,
 				384 + (i - MainInventoryStartIndex) / 5 * 64
 			), General);

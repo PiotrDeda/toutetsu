@@ -1,6 +1,5 @@
 using Rokuro.Core;
 using Rokuro.Graphics;
-using Rokuro.MathUtils;
 using Rokuro.Objects;
 using Toutetsu.Components;
 
@@ -12,16 +11,16 @@ public class SceneMainMenu : Scene
 	{
 		Name = "SceneMainMenu";
 
-		var title = new SimpleObject(App.SpriteManager.CreateSpriteFromTemplate("title"), Camera);
-		title.Position = new Vector2D(482, 64);
+		SimpleObject title = new(App.SpriteManager.CreateSpriteFromTemplate("title"), Camera);
+		title.Position = new(482, 64);
 		RegisterGameObject(title);
 
-		var playButton = new PlayButton(Camera);
-		playButton.Position = new Vector2D(482, 317);
+		PlayButton playButton = new(Camera);
+		playButton.Position = new(482, 317);
 		RegisterGameObject(playButton);
 
-		var quitButton = new QuitButton(Camera);
-		quitButton.Position = new Vector2D(482, 445);
+		QuitButton quitButton = new(Camera);
+		quitButton.Position = new(482, 445);
 		RegisterGameObject(quitButton);
 	}
 
