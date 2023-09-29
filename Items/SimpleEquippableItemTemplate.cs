@@ -21,7 +21,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 	StatsSet Means { get; }
 	StatsSet Deviations { get; }
 
-	public ItemData Create() => new SimpleEquippableItem(Sprite, Type,
+	public ItemData Create() => new SimpleEquippableItem(Sprite, Type, new(
 		RandomUtils.NextStandardInt(Means.MaxHP, Deviations.MaxHP),
 		RandomUtils.NextStandardInt(Means.WhiteAttack, Deviations.WhiteAttack),
 		RandomUtils.NextStandardInt(Means.BlackAttack, Deviations.BlackAttack),
@@ -29,7 +29,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		RandomUtils.NextStandardInt(Means.BlackDefense, Deviations.BlackDefense),
 		RandomUtils.NextStandardInt(Means.CritChance, Deviations.CritChance),
 		RandomUtils.NextStandardInt(Means.Agility, Deviations.Agility)
-	);
+	));
 
 	public static Dictionary<string, IItemTemplate> FromToml(string toml, ItemType type)
 	{
@@ -40,7 +40,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		}
 		catch (Exception e)
 		{
-			Logger.ThrowError($"Couldn't load items: {e.Message}");
+			Logger.ThrowError($"Couldn't load equippable items: {e.Message}");
 			return new();
 		}
 
@@ -49,7 +49,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		{
 			if (itemModel.Id is null)
 			{
-				Logger.LogWarning("Found item with missing id");
+				Logger.LogWarning("Found equippable item with missing id");
 				continue;
 			}
 
@@ -72,13 +72,13 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		[UsedImplicitly] public List<int> BlackAttack { get; set; } = new() { 0, 0 };
 		[UsedImplicitly] public List<int> WhiteDefense { get; set; } = new() { 0, 0 };
 		[UsedImplicitly] public List<int> BlackDefense { get; set; } = new() { 0, 0 };
-		[UsedImplicitly] public List<int> Crit { get; set; } = new() { 0, 0 };
+		[UsedImplicitly] public List<int> CritChance { get; set; } = new() { 0, 0 };
 		[UsedImplicitly] public List<int> Agility { get; set; } = new() { 0, 0 };
 
-		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type) =>
-			new(Id ?? throw new InvalidOperationException(), type,
-				new(MaxHP[0], WhiteAttack[0], BlackAttack[0], WhiteDefense[0], BlackDefense[0], Crit[0], Agility[0]),
-				new(MaxHP[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], Crit[1], Agility[1])
-			);
+		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type) => new(
+			Id ?? throw new InvalidOperationException(), type,
+			new(MaxHP[0], WhiteAttack[0], BlackAttack[0], WhiteDefense[0], BlackDefense[0], CritChance[0], Agility[0]),
+			new(MaxHP[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], CritChance[1], Agility[1])
+		);
 	}
 }

@@ -8,7 +8,7 @@ public static class ItemRegister
 
 	public static void LoadItemData()
 	{
-		// TODO: Move reading files to engine?
+		// TODO: Move reading files TOML engine
 		try
 		{
 			Dictionary<ItemType, string> types = new() {
@@ -24,11 +24,13 @@ public static class ItemRegister
 			foreach (KeyValuePair<ItemType, string> t in types)
 				SimpleEquippableItemTemplate.FromToml(File.ReadAllText($"assets/data/items/{t.Value}.toml"), t.Key)
 					.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
+
+			SimpleSpellItemTemplate.FromToml(File.ReadAllText("assets/data/items/spells.toml"))
+				.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
 		}
 		catch (Exception e)
 		{
-			Console.WriteLine(e);
-			throw;
+			Logger.ThrowError($"Couldn't load items: {e.Message}");
 		}
 	}
 

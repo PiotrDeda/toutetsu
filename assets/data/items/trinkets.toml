@@ -1,6 +1,6 @@
 [[items]]
 id = "crit_pendant"
-crit = [5, 0]
+crit_chance = [5, 0]
 
 [[items]]
 id = "health_pendant"

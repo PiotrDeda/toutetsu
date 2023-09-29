@@ -1,87 +1,87 @@
 [[items]]
 id = "wooden_wand"
 white_attack = [5, 2]
-crit = [1, 1]
+crit_chance = [1, 1]
 
 [[items]]
 id = "iron_wand"
 white_attack = [30, 4]
-crit = [2, 1]
+crit_chance = [2, 1]
 
 [[items]]
 id = "golden_wand"
 white_attack = [60, 8]
-crit = [3, 1]
+crit_chance = [3, 1]
 
 [[items]]
 id = "enchanted_wand"
 white_attack = [120, 16]
-crit = [4, 1]
+crit_chance = [4, 1]
 
 [[items]]
 id = "wooden_sword"
 white_attack = [10, 2]
 black_attack = [3, 1]
-crit = [1, 1]
+crit_chance = [1, 1]
 
 [[items]]
 id = "iron_sword"
 white_attack = [20, 4]
 black_attack = [5, 2]
-crit = [2, 1]
+crit_chance = [2, 1]
 
 [[items]]
 id = "golden_sword"
 white_attack = [40, 8]
 black_attack = [10, 4]
-crit = [3, 1]
+crit_chance = [3, 1]
 
 [[items]]
 id = "enchanted_sword"
 white_attack = [80, 16]
 black_attack = [20, 8]
-crit = [4, 1]
+crit_chance = [4, 1]
 
 [[items]]
 id = "wooden_axe"
 white_attack = [3, 1]
 black_attack = [10, 2]
-crit = [1, 1]
+crit_chance = [1, 1]
 
 [[items]]
 id = "iron_axe"
 white_attack = [6, 2]
 black_attack = [20, 4]
-crit = [2, 1]
+crit_chance = [2, 1]
 
 [[items]]
 id = "golden_axe"
 white_attack = [12, 4]
 black_attack = [40, 8]
-crit = [3, 1]
+crit_chance = [3, 1]
 
 [[items]]
 id = "enchanted_axe"
 white_attack = [24, 8]
 black_attack = [80, 16]
-crit = [4, 1]
+crit_chance = [4, 1]
 
 [[items]]
 id = "wooden_staff"
 black_attack = [15, 2]
-crit = [1, 1]
+crit_chance = [1, 1]
 
 [[items]]
 id = "iron_staff"
 black_attack = [30, 4]
-crit = [2, 1]
+crit_chance = [2, 1]
 
 [[items]]
 id = "golden_staff"
 black_attack = [60, 8]
-crit = [3, 1]
+crit_chance = [3, 1]
 
 [[items]]
 id = "enchanted_staff"
 black_attack = [120, 16]
-crit = [4, 1]
+crit_chance = [4, 1]

@@ -4,36 +4,22 @@ namespace Toutetsu.Items;
 
 public class SimpleEquippableItem : ItemData
 {
-	public SimpleEquippableItem(ISprite sprite, ItemType type, int maxHP, int whiteAttack, int blackAttack,
-		int whiteDefense, int blackDefense, int critChance, int agility)
+	public SimpleEquippableItem(ISprite sprite, ItemType type, StatsSet stats)
 	{
 		Sprite = sprite;
 		Type = type;
-		MaxHP = maxHP;
-		WhiteAttack = whiteAttack;
-		BlackAttack = blackAttack;
-		WhiteDefense = whiteDefense;
-		BlackDefense = blackDefense;
-		CritChance = critChance;
-		Agility = agility;
+		Stats = stats;
 	}
 
-	int MaxHP { get; }
-	int WhiteAttack { get; }
-	int BlackAttack { get; }
-	int WhiteDefense { get; }
-	int BlackDefense { get; }
-	int CritChance { get; }
-	int Agility { get; }
+	StatsSet Stats { get; }
 
-	public override StatsSet ApplyStatModifiers(StatsSet stats) =>
-		new(
-			stats.MaxHP + MaxHP,
-			stats.WhiteAttack + WhiteAttack,
-			stats.BlackAttack + BlackAttack,
-			stats.WhiteDefense + WhiteDefense,
-			stats.BlackDefense + BlackDefense,
-			stats.CritChance + CritChance,
-			stats.Agility + Agility
-		);
+	public override StatsSet ApplyStatModifiers(StatsSet stats) => new(
+		stats.MaxHP + Stats.MaxHP,
+		stats.WhiteAttack + Stats.WhiteAttack,
+		stats.BlackAttack + Stats.BlackAttack,
+		stats.WhiteDefense + Stats.WhiteDefense,
+		stats.BlackDefense + Stats.BlackDefense,
+		stats.CritChance + Stats.CritChance,
+		stats.Agility + Stats.Agility
+	);
 }

@@ -1,0 +1,66 @@
+[[items]]
+id = "spell_weapon"
+
+[[items]]
+id = "spell_zap"
+white_attack = 5
+crit_chance = 1
+
+[[items]]
+id = "spell_burn"
+white_attack = 2
+black_attack = 2
+crit_chance = 1
+
+[[items]]
+id = "spell_arrow"
+black_attack = 5
+crit_chance = 1
+
+[[items]]
+id = "spell_holy_strike"
+white_attack = 10
+crit_chance = 2
+
+[[items]]
+id = "spell_keystone"
+white_attack = 4
+black_attack = 4
+crit_chance = 2
+
+[[items]]
+id = "spell_dark_orb"
+black_attack = 10
+crit_chance = 2
+
+[[items]]
+id = "spell_star_shower"
+white_attack = 15
+crit_chance = 3
+
+[[items]]
+id = "spell_water_gun"
+white_attack = 6
+black_attack = 6
+crit_chance = 3
+
+[[items]]
+id = "spell_poison"
+black_attack = 15
+crit_chance = 3
+
+[[items]]
+id = "spell_sunray"
+white_attack = 20
+crit_chance = 4
+
+[[items]]
+id = "spell_elemental_seal"
+white_attack = 8
+black_attack = 8
+crit_chance = 4
+
+[[items]]
+id = "spell_darkness"
+black_attack = 20
+crit_chance = 4
