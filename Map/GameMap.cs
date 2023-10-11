@@ -1,6 +1,7 @@
 using Rokuro.Graphics;
 using Rokuro.MathUtils;
 using Rokuro.Objects;
+using Toutetsu.State;
 
 namespace Toutetsu.Map;
 
@@ -8,10 +9,12 @@ public class GameMap : BaseObject, IDrawable
 {
 	public static readonly int TileSize = 64;
 
-	public GameMap(Camera camera, int mapSize)
+	public GameMap(Camera camera, Player player, int mapSize)
 	{
 		Camera = camera;
+		Player = player;
 		MapSize = mapSize;
+
 		FloorLayer = new Tile[mapSize, mapSize];
 		WallLayer = new Tile[mapSize, mapSize];
 		InteractLayer = new Tile[mapSize, mapSize];
@@ -25,16 +28,18 @@ public class GameMap : BaseObject, IDrawable
 				InteractLayer[i, j] = new(Camera, position);
 			}
 		}
+
+		InteractLayer[Player.Position.X, Player.Position.Y].MapObject = Player.Puppet;
 	}
 
 	public int MapSize { get; }
 	public Tile[,] FloorLayer { get; }
 	public Tile[,] WallLayer { get; }
 	public Tile[,] InteractLayer { get; }
-	public Vector2D PlayerPosition { get; set; }
 	public Vector2D ExitPosition { get; set; }
 
 	Camera Camera { get; }
+	Player Player { get; }
 
 	public void Draw()
 	{
@@ -54,21 +59,22 @@ public class GameMap : BaseObject, IDrawable
 
 	public void MovePlayer(Vector2D direction)
 	{
-		Vector2D dest = new(PlayerPosition.X + direction.X, PlayerPosition.Y + direction.Y);
+		// TODO: Refactor how object positioning works (shared handling between GameMap and Player is not good)
+		Vector2D dest = new(Player.Position.X + direction.X, Player.Position.Y + direction.Y);
 
 		if (dest.X >= 0 && dest.X < MapSize && dest.Y >= 0 && dest.Y < MapSize)
 			if (WallLayer[dest.X, dest.Y].MapObject is null &&
 				FloorLayer[dest.X, dest.Y].MapObject is not null)
 			{
 				MapObject? mapObject = InteractLayer[dest.X, dest.Y].MapObject;
-				if (mapObject is not null && mapObject.OnInteract())
+				if (mapObject is not null && mapObject.OnInteract(Player))
 					return;
-				MoveInteract(PlayerPosition, dest);
-				PlayerPosition += direction;
+				MoveInteract(Player.Position, dest);
+				Player.Position += direction;
 				Camera.Position += direction * TileSize;
 			}
 
-		var playerSprite = (AnimatedSprite)InteractLayer[PlayerPosition.X, PlayerPosition.Y].MapObject!.Sprite;
+		var playerSprite = (AnimatedSprite)InteractLayer[Player.Position.X, Player.Position.Y].MapObject!.Sprite;
 		if (direction.X == 0 && direction.Y == 1)
 			playerSprite.State = 0;
 		else if (direction.X == 0 && direction.Y == -1)

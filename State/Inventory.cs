@@ -1,3 +1,4 @@
+using Rokuro.Graphics;
 using Toutetsu.Items;
 using static Toutetsu.Items.ItemType;
 
@@ -13,37 +14,41 @@ public class Inventory
 	public const int MainInventoryStartIndex = 12;
 	public const int MainInventoryEndIndex = 36;
 
-	public Inventory()
+	public Inventory(SpriteManager spriteManager, PlayerStats playerStats)
 	{
+		PlayerStats = playerStats;
+
 		// Cursor
-		Slots[0] = new(CursorIndex, new(0, 0), General);
+		Slots[0] = new(CursorIndex, new(0, 0), General, spriteManager);
 
 		// Weapon
-		Slots[1] = new(EquipmentStartIndex, new(32, 96), Weapon);
+		Slots[1] = new(EquipmentStartIndex, new(32, 96), Weapon, spriteManager);
 
 		// Helmet, armor, boots, trinket, shield, book
 		for (int i = EquipmentStartIndex + 1; i <= EquipmentEndIndex; i++)
 			Slots[i] = new(i, new(
 				96 + (i - EquipmentStartIndex - 1) / 3 * 64,
 				32 + (i - EquipmentStartIndex - 1) % 3 * 64
-			), Helmet + i - EquipmentStartIndex - 1);
+			), Helmet + i - EquipmentStartIndex - 1, spriteManager);
 
 		// Spells
 		for (int i = SpellStartIndex; i <= SpellEndIndex; i++)
 			Slots[i] = new(i, new(
 				272,
 				40 + (i - SpellStartIndex) * 80
-			), Spell);
+			), Spell, spriteManager);
 
 		// Main inventory
 		for (int i = MainInventoryStartIndex; i <= MainInventoryEndIndex; i++)
 			Slots[i] = new(i, new(
 				32 + (i - MainInventoryStartIndex) % 5 * 64,
 				384 + (i - MainInventoryStartIndex) / 5 * 64
-			), General);
+			), General, spriteManager);
 	}
 
 	public InventorySlot[] Slots { get; } = new InventorySlot[37];
+
+	PlayerStats PlayerStats { get; }
 
 	public void SwitchCursorItem(int index, bool equipmentLocked)
 	{
@@ -79,6 +84,6 @@ public class Inventory
 		for (int i = EquipmentStartIndex; i <= EquipmentEndIndex; i++)
 			if (Slots[i].Item.Type != Blank)
 				items.Add(Slots[i].Item);
-		GameState.PlayerStats.UpdateStats(items);
+		PlayerStats.UpdateStats(items);
 	}
 }

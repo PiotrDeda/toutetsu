@@ -7,9 +7,9 @@ namespace Toutetsu.Items;
 
 public class SimpleSpellItemTemplate : IItemTemplate
 {
-	public SimpleSpellItemTemplate(string spriteName, StatsSet spellStats)
+	public SimpleSpellItemTemplate(ISprite sprite, StatsSet spellStats)
 	{
-		Sprite = App.SpriteManager.CreateSpriteFromTemplate(spriteName);
+		Sprite = sprite;
 		SpellStats = spellStats;
 	}
 
@@ -18,7 +18,7 @@ public class SimpleSpellItemTemplate : IItemTemplate
 
 	public ItemData Create() => new SimpleSpellItem(Sprite, SpellStats);
 
-	public static Dictionary<string, IItemTemplate> FromToml(string toml)
+	public static Dictionary<string, IItemTemplate> FromToml(string toml, SpriteManager spriteManager)
 	{
 		TomlModel model;
 		try
@@ -40,7 +40,7 @@ public class SimpleSpellItemTemplate : IItemTemplate
 				continue;
 			}
 
-			itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate());
+			itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate(spriteManager));
 		}
 
 		return itemTemplates;
@@ -58,7 +58,8 @@ public class SimpleSpellItemTemplate : IItemTemplate
 		[UsedImplicitly] public int BlackAttack { get; set; }
 		[UsedImplicitly] public int CritChance { get; set; }
 
-		public SimpleSpellItemTemplate ToItemTemplate() =>
-			new(Id ?? throw new InvalidOperationException(), StatsSet.SpellStats(WhiteAttack, BlackAttack, CritChance));
+		public SimpleSpellItemTemplate ToItemTemplate(SpriteManager spriteManager) =>
+			new(spriteManager.CreateSpriteFromTemplate(Id ?? throw new InvalidOperationException()),
+				StatsSet.SpellStats(WhiteAttack, BlackAttack, CritChance));
 	}
 }

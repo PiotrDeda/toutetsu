@@ -1,4 +1,5 @@
 using Rokuro.Graphics;
+using Toutetsu.State;
 
 namespace Toutetsu.Map;
 
@@ -11,5 +12,5 @@ public class MapObject
 
 	public ISprite Sprite { get; set; }
 
-	public virtual bool OnInteract() => false;
+	public virtual bool OnInteract(Player player) => false;
 }

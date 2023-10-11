@@ -1,8 +1,8 @@
-using Rokuro.Core;
+using Rokuro.Graphics;
 
 namespace Toutetsu.Map;
 
 public class PlayerPuppet : MapObject
 {
-	public PlayerPuppet() : base(App.SpriteManager.CreateSpriteFromTemplate("player")) {}
+	public PlayerPuppet(SpriteManager spriteManager) : base(spriteManager.CreateSpriteFromTemplate("player")) {}
 }

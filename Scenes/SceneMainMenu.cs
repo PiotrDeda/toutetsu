@@ -7,22 +7,24 @@ namespace Toutetsu.Scenes;
 
 public class SceneMainMenu : Scene
 {
-	public SceneMainMenu()
+	public SceneMainMenu(SpriteManager spriteManager, SceneManager sceneManager, Drawer drawer, WindowData windowData,
+		IQuittable appQuittable)
 	{
 		Name = "SceneMainMenu";
+		Camera = new(drawer, windowData);
 
-		SimpleObject title = new(App.SpriteManager.CreateSpriteFromTemplate("title"), Camera);
+		SimpleObject title = new(spriteManager.CreateSpriteFromTemplate("title"), Camera);
 		title.Position = new(482, 64);
 		RegisterGameObject(title);
 
-		PlayButton playButton = new(Camera);
+		PlayButton playButton = new(Camera, spriteManager, sceneManager);
 		playButton.Position = new(482, 317);
 		RegisterGameObject(playButton);
 
-		QuitButton quitButton = new(Camera);
+		QuitButton quitButton = new(Camera, spriteManager, appQuittable);
 		quitButton.Position = new(482, 445);
 		RegisterGameObject(quitButton);
 	}
 
-	UICamera Camera { get; } = new();
+	UICamera Camera { get; }
 }

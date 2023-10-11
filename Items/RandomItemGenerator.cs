@@ -3,7 +3,7 @@ using static Toutetsu.Items.RandomItemGenerator.Type;
 
 namespace Toutetsu.Items;
 
-public static class RandomItemGenerator
+public class RandomItemGenerator
 {
 	public enum Type
 	{
@@ -15,7 +15,16 @@ public static class RandomItemGenerator
 		StartingSpell
 	}
 
-	static Dictionary<Type, List<string>> Items { get; } = new() {
+	public RandomItemGenerator(ItemRegister itemRegister, RNG rng)
+	{
+		ItemRegister = itemRegister;
+		RNG = rng;
+	}
+
+	ItemRegister ItemRegister { get; }
+	RNG RNG { get; }
+
+	Dictionary<Type, List<string>> Items { get; } = new() {
 		{
 			Tier1, new() {
 				"wooden_wand", "wooden_sword", "wooden_axe", "wooden_staff", "crit_pendant", "white_shield",
@@ -50,6 +59,6 @@ public static class RandomItemGenerator
 		}
 	};
 
-	public static ItemData Generate(Type type) =>
-		ItemRegister.CreateItem(Items[type][App.Rand.Next(Items[type].Count)]);
+	public ItemData Generate(Type type) =>
+		ItemRegister.CreateItem(Items[type][RNG.Rand.Next(Items[type].Count)]);
 }

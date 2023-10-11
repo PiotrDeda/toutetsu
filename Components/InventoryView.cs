@@ -1,5 +1,5 @@
-using Rokuro.Core;
 using Rokuro.Graphics;
+using Rokuro.Inputs;
 using Rokuro.MathUtils;
 using Rokuro.Objects;
 using Toutetsu.State;
@@ -8,16 +8,18 @@ namespace Toutetsu.Components;
 
 public class InventoryView : BaseObject, IDrawable, IMouseInteractable
 {
-	public InventoryView(Inventory inventory, Camera camera)
+	public InventoryView(Inventory inventory, Camera camera, Input input)
 	{
 		Inventory = inventory;
 		Camera = camera;
+		Input = input;
 	}
 
-	public Inventory Inventory { get; set; }
-	public Camera Camera { get; set; }
 	public bool EquipmentLocked { get; set; } = false;
 
+	Inventory Inventory { get; }
+	Camera Camera { get; }
+	Input Input { get; }
 	int LastClickedIndex { get; set; }
 
 	public void Draw()
@@ -25,12 +27,12 @@ public class InventoryView : BaseObject, IDrawable, IMouseInteractable
 		if (Enabled)
 			foreach (InventorySlot slot in Inventory.Slots)
 				if (slot.Index != Inventory.CursorIndex)
-					App.Drawer.Draw(slot.Item.Sprite, Camera, Position + slot.Offset);
+					Camera.Draw(slot.Item.Sprite, Position + slot.Offset);
 
 		ISprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
-		Vector2D cursorPosition = App.GetMousePosition() -
+		Vector2D cursorPosition = Input.GetMousePosition() -
 								  new Vector2D(cursorSprite.Width(), cursorSprite.Height()) * Camera.Scale / 2;
-		App.Drawer.Draw(cursorSprite, Camera, cursorPosition);
+		Camera.Draw(cursorSprite, cursorPosition);
 	}
 
 	public bool WasMouseoverHandled { get; set; } = false;

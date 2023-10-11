@@ -31,6 +31,7 @@ public class PlayerStats
 		}
 	}
 
+	RNG RNG { get; } = new();
 	List<TextObject> SpritesLeft { get; } = new();
 	List<TextObject> SpritesRight { get; } = new();
 
@@ -55,7 +56,7 @@ public class PlayerStats
 		int totalDamage = CalculateDamage(enemyStats.WhiteAttack, CurrentStats.WhiteDefense) +
 						  CalculateDamage(enemyStats.BlackAttack, CurrentStats.BlackDefense);
 
-		if (App.Rand.Next(0, 100) < enemyStats.CritChance)
+		if (RNG.Rand.Next(0, 100) < enemyStats.CritChance)
 			totalDamage *= 2;
 
 		CurrentHP -= totalDamage;
@@ -68,11 +69,13 @@ public class PlayerStats
 		int totalDamage = CalculateDamage(CurrentStats.WhiteAttack + spellStats.WhiteAttack, enemyStats.WhiteDefense) +
 						  CalculateDamage(CurrentStats.BlackAttack + spellStats.BlackAttack, enemyStats.BlackDefense);
 
-		if (App.Rand.Next(0, 100) < CurrentStats.CritChance)
+		if (RNG.Rand.Next(0, 100) < CurrentStats.CritChance)
 			totalDamage *= 2;
 
 		return enemyStats.MaxHP - totalDamage;
 	}
+
+	public void FullHeal() => CurrentHP = CurrentStats.MaxHP;
 
 	void RefreshText()
 	{

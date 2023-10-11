@@ -1,14 +1,23 @@
 using Rokuro.Core;
+using Rokuro.Graphics;
 
 namespace Toutetsu.Items;
 
-public static class ItemRegister
+public class ItemRegister
 {
-	static Dictionary<string, IItemTemplate> ItemTemplates { get; } = new();
-
-	public static void LoadItemData()
+	public ItemRegister(SpriteManager spriteManager, RNG rng)
 	{
-		// TODO: Move reading files TOML engine
+		SpriteManager = spriteManager;
+		RNG = rng;
+	}
+
+	SpriteManager SpriteManager { get; }
+	RNG RNG { get; }
+	Dictionary<string, IItemTemplate> ItemTemplates { get; } = new();
+
+	public void LoadItemData()
+	{
+		// TODO: Switch to YAML files?
 		try
 		{
 			Dictionary<ItemType, string> types = new() {
@@ -22,10 +31,10 @@ public static class ItemRegister
 			};
 
 			foreach (KeyValuePair<ItemType, string> t in types)
-				SimpleEquippableItemTemplate.FromToml(File.ReadAllText($"assets/data/items/{t.Value}.toml"), t.Key)
-					.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
+				SimpleEquippableItemTemplate.FromToml(File.ReadAllText($"assets/data/items/{t.Value}.toml"), t.Key,
+					SpriteManager, RNG).ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
 
-			SimpleSpellItemTemplate.FromToml(File.ReadAllText("assets/data/items/spells.toml"))
+			SimpleSpellItemTemplate.FromToml(File.ReadAllText("assets/data/items/spells.toml"), SpriteManager)
 				.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
 		}
 		catch (Exception e)
@@ -34,12 +43,12 @@ public static class ItemRegister
 		}
 	}
 
-	public static ItemData CreateItem(string id)
+	public ItemData CreateItem(string id)
 	{
 		if (ItemTemplates.TryGetValue(id, out IItemTemplate? template))
 			return template.Create();
 
 		Logger.LogWarning($"Item \"{id}\" not found");
-		return new BlankItem();
+		return new BlankItem(SpriteManager);
 	}
 }

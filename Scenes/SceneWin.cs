@@ -7,17 +7,18 @@ namespace Toutetsu.Scenes;
 
 public class SceneWin : Scene
 {
-	public SceneWin()
+	public SceneWin(SpriteManager spriteManager, Drawer drawer, WindowData windowData, IQuittable appQuittable)
 	{
 		Name = "SceneWin";
+		Camera = new(drawer, windowData);
 
-		SimpleObject winScreen = new(App.SpriteManager.CreateSpriteFromTemplate("win_screen"), Camera);
+		SimpleObject winScreen = new(spriteManager.CreateSpriteFromTemplate("win_screen"), Camera);
 		RegisterGameObject(winScreen);
 
-		QuitButton quitButton = new(Camera);
+		QuitButton quitButton = new(Camera, spriteManager, appQuittable);
 		quitButton.Position = new(482, 445);
 		RegisterGameObject(quitButton);
 	}
 
-	UICamera Camera { get; } = new();
+	UICamera Camera { get; }
 }

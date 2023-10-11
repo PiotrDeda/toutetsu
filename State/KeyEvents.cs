@@ -1,4 +1,4 @@
-using Rokuro.Input;
+using Rokuro.Inputs;
 
 namespace Toutetsu.State;
 

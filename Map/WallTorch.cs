@@ -1,8 +1,8 @@
-using Rokuro.Core;
+using Rokuro.Graphics;
 
 namespace Toutetsu.Map;
 
 public class WallTorch : MapObject
 {
-	public WallTorch() : base(App.SpriteManager.CreateSpriteFromTemplate("wall_torch")) {}
+	public WallTorch(SpriteManager spriteManager) : base(spriteManager.CreateSpriteFromTemplate("wall_torch")) {}
 }

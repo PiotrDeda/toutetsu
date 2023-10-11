@@ -1,8 +1,8 @@
-using Rokuro.Core;
+using Rokuro.Graphics;
 
 namespace Toutetsu.Map;
 
 public class Floor : MapObject
 {
-	public Floor() : base(App.SpriteManager.CreateSpriteFromTemplate("floor")) {}
+	public Floor(SpriteManager spriteManager) : base(spriteManager.CreateSpriteFromTemplate("floor")) {}
 }

@@ -1,37 +1,40 @@
 using JetBrains.Annotations;
 using Rokuro.Core;
 using Rokuro.Graphics;
-using Rokuro.MathUtils;
 using Tomlyn;
 
 namespace Toutetsu.Items;
 
 public class SimpleEquippableItemTemplate : IItemTemplate
 {
-	public SimpleEquippableItemTemplate(string spriteName, ItemType type, StatsSet means, StatsSet deviations)
+	public SimpleEquippableItemTemplate(ISprite sprite, ItemType type, StatsSet means, StatsSet deviations,
+		RNG rng)
 	{
-		Sprite = App.SpriteManager.CreateSpriteFromTemplate(spriteName);
+		Sprite = sprite;
 		Type = type;
 		Means = means;
 		Deviations = deviations;
+		RNG = rng;
 	}
 
+	RNG RNG { get; }
 	ISprite Sprite { get; }
 	ItemType Type { get; }
 	StatsSet Means { get; }
 	StatsSet Deviations { get; }
 
 	public ItemData Create() => new SimpleEquippableItem(Sprite, Type, new(
-		RandomUtils.NextStandardInt(Means.MaxHP, Deviations.MaxHP),
-		RandomUtils.NextStandardInt(Means.WhiteAttack, Deviations.WhiteAttack),
-		RandomUtils.NextStandardInt(Means.BlackAttack, Deviations.BlackAttack),
-		RandomUtils.NextStandardInt(Means.WhiteDefense, Deviations.WhiteDefense),
-		RandomUtils.NextStandardInt(Means.BlackDefense, Deviations.BlackDefense),
-		RandomUtils.NextStandardInt(Means.CritChance, Deviations.CritChance),
-		RandomUtils.NextStandardInt(Means.Agility, Deviations.Agility)
+		RNG.NextStandardInt(Means.MaxHP, Deviations.MaxHP),
+		RNG.NextStandardInt(Means.WhiteAttack, Deviations.WhiteAttack),
+		RNG.NextStandardInt(Means.BlackAttack, Deviations.BlackAttack),
+		RNG.NextStandardInt(Means.WhiteDefense, Deviations.WhiteDefense),
+		RNG.NextStandardInt(Means.BlackDefense, Deviations.BlackDefense),
+		RNG.NextStandardInt(Means.CritChance, Deviations.CritChance),
+		RNG.NextStandardInt(Means.Agility, Deviations.Agility)
 	));
 
-	public static Dictionary<string, IItemTemplate> FromToml(string toml, ItemType type)
+	public static Dictionary<string, IItemTemplate> FromToml(string toml, ItemType type, SpriteManager spriteManager,
+		RNG rng)
 	{
 		TomlModel model;
 		try
@@ -53,7 +56,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 				continue;
 			}
 
-			itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate(type));
+			itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate(type, spriteManager, rng));
 		}
 
 		return itemTemplates;
@@ -75,10 +78,12 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		[UsedImplicitly] public List<int> CritChance { get; set; } = new() { 0, 0 };
 		[UsedImplicitly] public List<int> Agility { get; set; } = new() { 0, 0 };
 
-		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type) => new(
-			Id ?? throw new InvalidOperationException(), type,
+		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type, SpriteManager spriteManager,
+			RNG rng) => new(
+			spriteManager.CreateSpriteFromTemplate(Id ?? throw new InvalidOperationException()), type,
 			new(MaxHP[0], WhiteAttack[0], BlackAttack[0], WhiteDefense[0], BlackDefense[0], CritChance[0], Agility[0]),
-			new(MaxHP[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], CritChance[1], Agility[1])
+			new(MaxHP[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], CritChance[1], Agility[1]),
+			rng
 		);
 	}
 }

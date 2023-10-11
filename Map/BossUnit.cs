@@ -5,11 +5,11 @@ namespace Toutetsu.Map;
 
 public class BossUnit : Unit
 {
-	public BossUnit(EnemyData enemyData) : base(enemyData) {}
+	public BossUnit(EnemyData enemyData, FightManager fightManager) : base(enemyData, fightManager) {}
 
-	public override bool OnInteract()
+	public override bool OnInteract(Player player)
 	{
-		GameState.StartFight(EnemyData, true);
+		FightManager.StartFight(EnemyData, true);
 		return false;
 	}
 }

@@ -1,4 +1,3 @@
-using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.MathUtils;
 using Rokuro.Objects;
@@ -19,6 +18,6 @@ public class Tile : BaseObject, IDrawable
 	public void Draw()
 	{
 		if (Enabled && MapObject is not null)
-			App.Drawer.Draw(MapObject.Sprite, Camera, Position);
+			Camera.Draw(MapObject.Sprite, Position);
 	}
 }

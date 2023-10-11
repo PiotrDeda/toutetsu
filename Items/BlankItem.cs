@@ -1,12 +1,12 @@
-using Rokuro.Core;
+using Rokuro.Graphics;
 
 namespace Toutetsu.Items;
 
 public class BlankItem : ItemData
 {
-	public BlankItem()
+	public BlankItem(SpriteManager spriteManager)
 	{
-		Sprite = App.SpriteManager.CreateSpriteFromTemplate("blank_item");
+		Sprite = spriteManager.CreateSpriteFromTemplate("blank_item");
 		Type = ItemType.Blank;
 	}
 }

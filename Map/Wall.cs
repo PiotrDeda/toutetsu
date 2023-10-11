@@ -1,8 +1,8 @@
-using Rokuro.Core;
+using Rokuro.Graphics;
 
 namespace Toutetsu.Map;
 
 public class Wall : MapObject
 {
-	public Wall() : base(App.SpriteManager.CreateSpriteFromTemplate("wall")) {}
+	public Wall(SpriteManager spriteManager) : base(spriteManager.CreateSpriteFromTemplate("wall")) {}
 }

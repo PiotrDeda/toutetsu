@@ -12,9 +12,9 @@ public class PickupItem : MapObject
 
 	ItemData ItemData { get; }
 
-	public override bool OnInteract()
+	public override bool OnInteract(Player player)
 	{
-		GameState.Inventory.AddItem(ItemData);
+		player.Inventory.AddItem(ItemData);
 		return false;
 	}
 }

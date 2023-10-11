@@ -7,17 +7,18 @@ namespace Toutetsu.Scenes;
 
 public class SceneLose : Scene
 {
-	public SceneLose()
+	public SceneLose(SpriteManager spriteManager, Drawer drawer, WindowData windowData, IQuittable appQuittable)
 	{
 		Name = "SceneLose";
+		Camera = new(drawer, windowData);
 
-		SimpleObject loseScreen = new(App.SpriteManager.CreateSpriteFromTemplate("lose_screen"), Camera);
+		SimpleObject loseScreen = new(spriteManager.CreateSpriteFromTemplate("lose_screen"), Camera);
 		RegisterGameObject(loseScreen);
 
-		QuitButton quitButton = new(Camera);
+		QuitButton quitButton = new(Camera, spriteManager, appQuittable);
 		quitButton.Position = new(482, 445);
 		RegisterGameObject(quitButton);
 	}
 
-	UICamera Camera { get; } = new();
+	UICamera Camera { get; }
 }
