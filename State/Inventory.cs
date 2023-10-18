@@ -72,10 +72,18 @@ public class Inventory
 			if (Slots[i].Item.Type == Blank)
 			{
 				Slots[i].Item = item;
+				RefreshStats();
 				return;
 			}
 
 		Slots[MainInventoryEndIndex].Item = item;
+		RefreshStats();
+	}
+
+	public void AddItem(ItemData item, int slot)
+	{
+		Slots[slot].Item = item;
+		RefreshStats();
 	}
 
 	void RefreshStats()

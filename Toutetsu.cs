@@ -1,6 +1,7 @@
 using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Inputs;
+using Toutetsu.Enemies;
 using Toutetsu.Items;
 using Toutetsu.Loaders;
 using Toutetsu.Scenes;
@@ -27,16 +28,23 @@ public class Toutetsu : App
 		itemRegister.LoadItemData();
 		RandomItemGenerator randomItemGenerator = new(itemRegister, RNG);
 
-		// Scenes
-		Player player = new(SpriteManager);
-		FightManager fightManager = new(SceneManager);
+		// Enemies
+		EnemyRegister enemyRegister = new(SpriteManager);
+		enemyRegister.LoadEnemyData();
+		RandomEnemyGenerator randomEnemyGenerator = new(enemyRegister, RNG);
 
+		// Misc
+		Player player = new(SpriteManager);
+		FightManager fightManager = new(SceneManager, player);
+
+		// Scenes
 		List<Scene> scenes = new();
 
 		scenes.Add(new SceneMainMenu(SpriteManager, SceneManager, Drawer, WindowData, this));
-		scenes.Add(new SceneGameMap(SpriteManager, Input, Drawer, WindowData, randomItemGenerator, player,
-			fightManager));
-		scenes.Add(new SceneFight(player, fightManager));
+		scenes.Add(new SceneGameMap(SpriteManager, Input, Drawer, WindowData, RNG, randomItemGenerator,
+			randomEnemyGenerator, player, fightManager));
+		scenes.Add(new SceneFight(SpriteManager, SceneManager, Input, Drawer, WindowData, player, fightManager,
+			itemRegister));
 		scenes.Add(new SceneWin(SpriteManager, Drawer, WindowData, this));
 		scenes.Add(new SceneLose(SpriteManager, Drawer, WindowData, this));
 

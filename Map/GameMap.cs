@@ -28,10 +28,9 @@ public class GameMap : BaseObject, IDrawable
 				InteractLayer[i, j] = new(Camera, position);
 			}
 		}
-
-		InteractLayer[Player.Position.X, Player.Position.Y].MapObject = Player.Puppet;
 	}
 
+	public Player Player { get; }
 	public int MapSize { get; }
 	public Tile[,] FloorLayer { get; }
 	public Tile[,] WallLayer { get; }
@@ -39,7 +38,6 @@ public class GameMap : BaseObject, IDrawable
 	public Vector2D ExitPosition { get; set; }
 
 	Camera Camera { get; }
-	Player Player { get; }
 
 	public void Draw()
 	{

@@ -59,6 +59,43 @@ public class RandomItemGenerator
 		}
 	};
 
-	public ItemData Generate(Type type) =>
-		ItemRegister.CreateItem(Items[type][RNG.Rand.Next(Items[type].Count)]);
+	public ItemData Generate(Type type) => ItemRegister.CreateItem(Items[type][RNG.Rand.Next(Items[type].Count)]);
+
+	public Type GetTypeFromLevel(int currentLevel)
+	{
+		int tierPercentage = RNG.Rand.Next(100);
+		switch (currentLevel)
+		{
+			case 1:
+				if (tierPercentage < 80)
+					return Tier1;
+				if (tierPercentage < 99)
+					return Tier2;
+				return Tier3;
+			case 2:
+				if (tierPercentage < 10)
+					return Tier1;
+				if (tierPercentage < 90)
+					return Tier2;
+				if (tierPercentage < 99)
+					return Tier3;
+				return Tier4;
+			case 3:
+				if (tierPercentage < 1)
+					return Tier1;
+				if (tierPercentage < 10)
+					return Tier2;
+				if (tierPercentage < 90)
+					return Tier3;
+				return Tier4;
+			case 4:
+				if (tierPercentage < 1)
+					return Tier2;
+				if (tierPercentage < 20)
+					return Tier3;
+				return Tier4;
+			default:
+				return Tier4;
+		}
+	}
 }
