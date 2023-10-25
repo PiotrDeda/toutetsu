@@ -13,7 +13,7 @@ public class SceneFight : Scene
 	static readonly int EnemySpriteX = 732;
 	static readonly int EnemySpriteY = 544;
 
-	public SceneFight(SpriteManager spriteManager, SceneManager sceneManager, Input input, Drawer drawer,
+	public SceneFight(SpriteManager spriteManager, Input input, Drawer drawer,
 		WindowData windowData, Player player, FightManager fightManager, ItemRegister itemRegister)
 	{
 		// Variable init

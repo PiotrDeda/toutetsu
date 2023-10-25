@@ -43,8 +43,7 @@ public class Toutetsu : App
 		scenes.Add(new SceneMainMenu(SpriteManager, SceneManager, Drawer, WindowData, this));
 		scenes.Add(new SceneGameMap(SpriteManager, Input, Drawer, WindowData, RNG, randomItemGenerator,
 			randomEnemyGenerator, player, fightManager));
-		scenes.Add(new SceneFight(SpriteManager, SceneManager, Input, Drawer, WindowData, player, fightManager,
-			itemRegister));
+		scenes.Add(new SceneFight(SpriteManager, Input, Drawer, WindowData, player, fightManager, itemRegister));
 		scenes.Add(new SceneWin(SpriteManager, Drawer, WindowData, this));
 		scenes.Add(new SceneLose(SpriteManager, Drawer, WindowData, this));
 
