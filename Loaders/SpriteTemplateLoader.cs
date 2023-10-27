@@ -4,9 +4,9 @@ namespace Toutetsu.Loaders;
 
 public class SpriteTemplateLoader
 {
-	public static Dictionary<string, StaticSpriteTemplate> GetSpriteTemplates(SpriteManager spriteManager)
+	public static Dictionary<string, SpriteTemplate> GetSpriteTemplates(SpriteManager spriteManager)
 	{
-		Dictionary<string, StaticSpriteTemplate> templates = new();
+		Dictionary<string, SpriteTemplate> templates = new();
 		Func<string, Texture> texture = spriteManager.LoadTexture;
 
 		// UI
@@ -16,15 +16,15 @@ public class SpriteTemplateLoader
 		templates["equipment_bg"] = new(texture("ui/equipment_bg"));
 		templates["win_screen"] = new(texture("ui/win_screen"));
 		templates["lose_screen"] = new(texture("ui/lose_screen"));
-		templates["player_fight"] = new AnimatedSpriteTemplate(texture("tiles/player"), 2, 30, 4);
+		templates["player_fight"] = new(texture("tiles/player"), 4, 2, 30);
 		templates["fight_bg"] = new(texture("ui/fight_bg"));
-		// TODO: sprites["attack_animation_player"] = new PlayableSprite(texture("ui/attack_animation"), 3, 100);
-		// TODO: sprites["attack_animation_enemy"] = new PlayableSprite(texture("ui/attack_animation"), 3, 100);
+		templates["attack_animation_player"] = new(texture("ui/attack_animation"), 1, 3, 100);
+		templates["attack_animation_enemy"] = new(texture("ui/attack_animation"), 1, 3, 100);
 
 		// Tiles
-		templates["player"] = new AnimatedSpriteTemplate(texture("tiles/player"), 2, 30, 4);
+		templates["player"] = new(texture("tiles/player"), 4, 2, 30);
 		templates["wall"] = new(texture("tiles/wall"));
-		templates["wall_torch"] = new AnimatedSpriteTemplate(texture("tiles/wall_torch"), 3, 5);
+		templates["wall_torch"] = new(texture("tiles/wall_torch"), 1, 3, 5);
 		templates["floor"] = new(texture("tiles/floor"));
 		templates["floor_exit"] = new(texture("tiles/floor_exit"));
 

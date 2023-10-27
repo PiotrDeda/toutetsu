@@ -6,7 +6,7 @@ namespace Toutetsu.Map;
 public class LevelExit : MapObject
 {
 	public LevelExit(SpriteManager spriteManager, ILevelHandler levelHandler) :
-		base(spriteManager.CreateSpriteFromTemplate("floor_exit"))
+		base(spriteManager.CreateSprite<StaticSprite>("floor_exit"))
 	{
 		LevelHandler = levelHandler;
 	}

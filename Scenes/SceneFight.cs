@@ -23,11 +23,11 @@ public class SceneFight : Scene
 		FightManager = fightManager;
 
 		// Background
-		SimpleObject background = new(spriteManager.CreateSpriteFromTemplate("fight_bg"), Camera);
+		SimpleObject background = new(spriteManager.CreateSprite<StaticSprite>("fight_bg"), Camera);
 		RegisterGameObject(background);
 
 		// Inventory
-		SimpleObject inventoryBackground = new(spriteManager.CreateSpriteFromTemplate("equipment_bg"), Camera);
+		SimpleObject inventoryBackground = new(spriteManager.CreateSprite<StaticSprite>("equipment_bg"), Camera);
 		inventoryBackground.Position = new(912, 0);
 		RegisterGameObject(inventoryBackground);
 
@@ -48,13 +48,13 @@ public class SceneFight : Scene
 		Player.Stats.AddViewSprites(statsTextLeft, statsTextRight);
 
 		// Player sprite
-		SimpleObject playerSpriteObject = new(spriteManager.CreateSpriteFromTemplate("player_fight"), Camera);
+		SimpleObject playerSpriteObject = new(spriteManager.CreateSprite<AnimatedSprite>("player_fight"), Camera);
 		playerSpriteObject.Position = new(150, 480);
 		((AnimatedSprite)playerSpriteObject.Sprite).State = 3;
 		RegisterGameObject(playerSpriteObject);
 
 		// Enemy sprite
-		EnemySpriteObject = new(spriteManager.CreateSpriteFromTemplate("blank_item"), Camera);
+		EnemySpriteObject = new(spriteManager.CreateSprite<StaticSprite>("blank_item"), Camera);
 		EnemySpriteObject.Position = new(150, 480);
 		RegisterGameObject(EnemySpriteObject);
 

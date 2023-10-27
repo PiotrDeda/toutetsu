@@ -12,7 +12,7 @@ public class SceneLose : Scene
 		Name = "SceneLose";
 		Camera = new(drawer, windowData);
 
-		SimpleObject loseScreen = new(spriteManager.CreateSpriteFromTemplate("lose_screen"), Camera);
+		SimpleObject loseScreen = new(spriteManager.CreateSprite<StaticSprite>("lose_screen"), Camera);
 		RegisterGameObject(loseScreen);
 
 		QuitButton quitButton = new(Camera, spriteManager, appQuittable);

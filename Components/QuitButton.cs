@@ -7,7 +7,7 @@ namespace Toutetsu.Components;
 public class QuitButton : InteractableObject
 {
 	public QuitButton(Camera camera, SpriteManager spriteManager, IQuittable quittable) :
-		base(spriteManager.CreateSpriteFromTemplate("quit_button"), camera)
+		base(spriteManager.CreateSprite<StaticSprite>("quit_button"), camera)
 	{
 		Quittable = quittable;
 	}

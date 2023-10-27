@@ -80,7 +80,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 
 		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type, SpriteManager spriteManager,
 			RNG rng) => new(
-			spriteManager.CreateSpriteFromTemplate(Id ?? throw new InvalidOperationException()), type,
+			spriteManager.CreateSprite<StaticSprite>(Id ?? throw new InvalidOperationException()), type,
 			new(MaxHP[0], WhiteAttack[0], BlackAttack[0], WhiteDefense[0], BlackDefense[0], CritChance[0], Agility[0]),
 			new(MaxHP[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], CritChance[1], Agility[1]),
 			rng

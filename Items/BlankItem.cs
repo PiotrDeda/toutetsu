@@ -6,7 +6,7 @@ public class BlankItem : ItemData
 {
 	public BlankItem(SpriteManager spriteManager)
 	{
-		Sprite = spriteManager.CreateSpriteFromTemplate("blank_item");
+		Sprite = spriteManager.CreateSprite<StaticSprite>("blank_item");
 		Type = ItemType.Blank;
 	}
 }

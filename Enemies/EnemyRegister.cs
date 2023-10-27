@@ -8,8 +8,8 @@ public class EnemyRegister
 	public EnemyRegister(SpriteManager spriteManager)
 	{
 		SpriteManager = spriteManager;
-		BlankEnemy = new("blank_enemy", "NULL", spriteManager.CreateSpriteFromTemplate("blank_item"),
-			spriteManager.CreateSpriteFromTemplate("blank_item"), new());
+		BlankEnemy = new("blank_enemy", "NULL", spriteManager.CreateSprite<StaticSprite>("blank_item"),
+			spriteManager.CreateSprite<StaticSprite>("blank_item"), new());
 		Enemies.Add("blank_enemy", BlankEnemy);
 	}
 

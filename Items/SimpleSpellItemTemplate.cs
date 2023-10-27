@@ -59,7 +59,7 @@ public class SimpleSpellItemTemplate : IItemTemplate
 		[UsedImplicitly] public int CritChance { get; set; }
 
 		public SimpleSpellItemTemplate ToItemTemplate(SpriteManager spriteManager) =>
-			new(spriteManager.CreateSpriteFromTemplate(Id ?? throw new InvalidOperationException()),
+			new(spriteManager.CreateSprite<StaticSprite>(Id ?? throw new InvalidOperationException()),
 				StatsSet.SpellStats(WhiteAttack, BlackAttack, CritChance));
 	}
 }

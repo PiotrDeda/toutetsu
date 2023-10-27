@@ -13,7 +13,7 @@ public class SceneMainMenu : Scene
 		Name = "SceneMainMenu";
 		Camera = new(drawer, windowData);
 
-		SimpleObject title = new(spriteManager.CreateSpriteFromTemplate("title"), Camera);
+		SimpleObject title = new(spriteManager.CreateSprite<StaticSprite>("title"), Camera);
 		title.Position = new(482, 64);
 		RegisterGameObject(title);
 

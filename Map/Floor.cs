@@ -4,5 +4,5 @@ namespace Toutetsu.Map;
 
 public class Floor : MapObject
 {
-	public Floor(SpriteManager spriteManager) : base(spriteManager.CreateSpriteFromTemplate("floor")) {}
+	public Floor(SpriteManager spriteManager) : base(spriteManager.CreateSprite<StaticSprite>("floor")) {}
 }

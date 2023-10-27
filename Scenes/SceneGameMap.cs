@@ -37,7 +37,7 @@ public class SceneGameMap : Scene, ILevelHandler
 		RegisterGameObject(Map);
 
 		// Inventory
-		SimpleObject inventoryBackground = new(spriteManager.CreateSpriteFromTemplate("equipment_bg"), UICamera);
+		SimpleObject inventoryBackground = new(spriteManager.CreateSprite<StaticSprite>("equipment_bg"), UICamera);
 		inventoryBackground.Position = new(912, 0);
 		RegisterGameObject(inventoryBackground);
 

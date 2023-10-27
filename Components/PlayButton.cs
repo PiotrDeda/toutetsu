@@ -7,7 +7,7 @@ namespace Toutetsu.Components;
 public class PlayButton : InteractableObject
 {
 	public PlayButton(Camera camera, SpriteManager spriteManager, SceneManager sceneManager) :
-		base(spriteManager.CreateSpriteFromTemplate("play_button"), camera)
+		base(spriteManager.CreateSprite<StaticSprite>("play_button"), camera)
 	{
 		SceneManager = sceneManager;
 	}

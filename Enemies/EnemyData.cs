@@ -57,8 +57,8 @@ public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprit
 
 		public EnemyData ToEnemyData(SpriteManager spriteManager) => new(
 			Id!, DisplayName,
-			spriteManager.CreateSpriteFromTemplate(MapSprite ?? Id ?? throw new InvalidOperationException()),
-			spriteManager.CreateSpriteFromTemplate(FightSprite ?? Id ?? throw new InvalidOperationException()),
+			spriteManager.CreateSprite<StaticSprite>(MapSprite ?? Id ?? throw new InvalidOperationException()),
+			spriteManager.CreateSprite<StaticSprite>(FightSprite ?? Id ?? throw new InvalidOperationException()),
 			new(MaxHP, WhiteAttack, BlackAttack, WhiteDefense, BlackDefense, CritChance, Agility)
 		);
 	}
