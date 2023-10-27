@@ -55,8 +55,22 @@ public class SceneFight : Scene
 
 		// Enemy sprite
 		EnemySpriteObject = new(spriteManager.CreateSprite<StaticSprite>("blank_item"), Camera);
-		EnemySpriteObject.Position = new(150, 480);
+		EnemySpriteObject.Position = new(EnemySpriteX, EnemySpriteY);
 		RegisterGameObject(EnemySpriteObject);
+
+		// Attack animations
+		SimpleObject playerAttackAnimationObject =
+			new(spriteManager.CreateSprite<PlayableSprite>("attack_animation_player"), Camera);
+		playerAttackAnimationObject.Position = new(150, 480);
+		RegisterGameObject(playerAttackAnimationObject);
+
+		SimpleObject enemyAttackAnimationObject =
+			new(spriteManager.CreateSprite<PlayableSprite>("attack_animation_enemy"), Camera);
+		enemyAttackAnimationObject.Position = new(EnemySpriteX - 32, EnemySpriteY - 64);
+		RegisterGameObject(enemyAttackAnimationObject);
+
+		FightManager.PlayerAttackAnimation = (PlayableSprite)playerAttackAnimationObject.Sprite;
+		FightManager.EnemyAttackAnimation = (PlayableSprite)enemyAttackAnimationObject.Sprite;
 
 		// Enemy display name
 		EnemyDisplayName = new(Camera, "NULL", new(255, 255, 255), spriteManager.DefaultFont);

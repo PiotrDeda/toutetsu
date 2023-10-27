@@ -14,7 +14,10 @@ public class FightManager
 	}
 
 	public EnemyData Enemy { get; private set; } = null!;
+	public PlayableSprite PlayerAttackAnimation { get; set; } = null!;
+	public PlayableSprite EnemyAttackAnimation { get; set; } = null!;
 	public bool IsPlayerTurn { get; private set; } = true;
+	public bool IsSpellCastingEnabled { get; set; } = true;
 
 	SceneManager SceneManager { get; }
 	Player Player { get; }
@@ -29,22 +32,21 @@ public class FightManager
 		IsBossFight = isBossFight;
 		EnemyHP = Enemy.Stats.MaxHP;
 		PlayerTurnCount = Player.Stats.CurrentStats.Agility;
-		DoPlayerTurn();
 		SceneManager.SetNextScene((int)SceneID.Fight);
+		DoPlayerTurn();
 	}
 
 	public void DoPlayerAttack(StatsSet spellStats)
 	{
 		EnemyHP -= Player.Stats.DealDamage(spellStats, Enemy.Stats);
-		// TODO: SceneFight.AttackAnimationEnemy.sprite.play(SceneFight.ChangeTurnCallback, SceneFight);
-		ChangeTurn();
+		IsSpellCastingEnabled = false;
+		EnemyAttackAnimation.Play(ChangeTurn);
 	}
 
 	void DoEnemyAttack()
 	{
 		Player.Stats.TakeDamage(Enemy.Stats);
-		// TODO: SceneFight.AttackAnimationPlayer.sprite.play(SceneFight.ChangeTurnCallback, SceneFight);
-		ChangeTurn();
+		PlayerAttackAnimation.Play(ChangeTurn);
 	}
 
 	void ChangeTurn()
@@ -78,6 +80,7 @@ public class FightManager
 	void DoPlayerTurn()
 	{
 		IsPlayerTurn = true;
+		IsSpellCastingEnabled = true;
 		EnemyTurnCount = Enemy.Stats.Agility;
 	}
 

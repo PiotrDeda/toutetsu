@@ -38,7 +38,7 @@ public class SpellButton : BaseObject, IDrawable, IMouseInteractable
 
 	public void OnClick()
 	{
-		if (Enabled && Spell is not null && FightManager.IsPlayerTurn)
+		if (Enabled && Spell is not null && FightManager.IsSpellCastingEnabled)
 			FightManager.DoPlayerAttack(Spell.GetSpellStats());
 	}
 }
