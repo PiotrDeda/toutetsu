@@ -116,7 +116,7 @@ public class SceneGameMap : Scene, ILevelHandler
 	void CenterOnPlayer()
 	{
 		Tile player = Map.InteractLayer[Player.Position.X, Player.Position.Y];
-		Vector2D playerOffset = new(player.MapObject!.Sprite.Width() / 2, player.MapObject!.Sprite.Height() / 2);
+		Vector2D playerOffset = new(player.MapObject!.Sprite.GetWidth() / 2, player.MapObject!.Sprite.GetHeight() / 2);
 		Vector2D inventoryOffset = new((int)((1280 - 912) / 2.0 / Camera.Scale), 0);
 		Camera.CenterOn(player.Position + playerOffset + inventoryOffset);
 	}

@@ -31,7 +31,7 @@ public class InventoryView : BaseObject, IDrawable, IMouseInteractable
 
 		ISprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
 		Vector2D cursorPosition = Input.GetMousePosition() -
-								  new Vector2D(cursorSprite.Width(), cursorSprite.Height()) * Camera.Scale / 2;
+								  new Vector2D(cursorSprite.GetWidth(), cursorSprite.GetHeight()) * Camera.Scale / 2;
 		Camera.Draw(cursorSprite, cursorPosition);
 	}
 
@@ -46,9 +46,9 @@ public class InventoryView : BaseObject, IDrawable, IMouseInteractable
 					Camera.GetScreenPosition(Position + slot.Offset);
 				if (slot.Index != Inventory.CursorIndex &&
 					mousePosition.X >= screenPosition.X &&
-					mousePosition.X <= screenPosition.X + slot.Item.Sprite.Width() * Camera.Scale &&
+					mousePosition.X <= screenPosition.X + slot.Item.Sprite.GetWidth() * Camera.Scale &&
 					mousePosition.Y >= screenPosition.Y &&
-					mousePosition.Y <= screenPosition.Y + slot.Item.Sprite.Height() * Camera.Scale)
+					mousePosition.Y <= screenPosition.Y + slot.Item.Sprite.GetHeight() * Camera.Scale)
 				{
 					LastClickedIndex = slot.Index;
 					return true;

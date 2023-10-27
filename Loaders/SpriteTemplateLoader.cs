@@ -18,8 +18,8 @@ public class SpriteTemplateLoader
 		templates["lose_screen"] = new(texture("ui/lose_screen"));
 		templates["player_fight"] = new(texture("tiles/player"), 4, 2, 30);
 		templates["fight_bg"] = new(texture("ui/fight_bg"));
-		templates["attack_animation_player"] = new(texture("ui/attack_animation"), 1, 3, 100);
-		templates["attack_animation_enemy"] = new(texture("ui/attack_animation"), 1, 3, 100);
+		templates["attack_animation_player"] = new(texture("ui/attack_animation"), 1, 3, 5);
+		templates["attack_animation_enemy"] = new(texture("ui/attack_animation"), 1, 3, 5);
 
 		// Tiles
 		templates["player"] = new(texture("tiles/player"), 4, 2, 30);

@@ -30,9 +30,9 @@ public class SpellButton : BaseObject, IDrawable, IMouseInteractable
 	public bool IsMouseOver(Vector2D mousePosition) =>
 		Enabled && Spell is not null &&
 		mousePosition.X >= Camera.GetScreenPosition(Position).X &&
-		mousePosition.X <= Camera.GetScreenPosition(Position).X + Spell.Sprite.Width() * Camera.Scale &&
+		mousePosition.X <= Camera.GetScreenPosition(Position).X + Spell.Sprite.GetWidth() * Camera.Scale &&
 		mousePosition.Y >= Camera.GetScreenPosition(Position).Y &&
-		mousePosition.Y <= Camera.GetScreenPosition(Position).Y + Spell.Sprite.Height() * Camera.Scale;
+		mousePosition.Y <= Camera.GetScreenPosition(Position).Y + Spell.Sprite.GetHeight() * Camera.Scale;
 
 	public void OnMouseover() {}
 

@@ -85,8 +85,8 @@ public class SceneFight : Scene
 	{
 		EnemyDisplayName.Text = FightManager.Enemy.DisplayName;
 		EnemySpriteObject.Sprite = FightManager.Enemy.FightSprite;
-		EnemySpriteObject.Position = new(EnemySpriteX - EnemySpriteObject.Sprite.Width() / 2,
-			EnemySpriteY - EnemySpriteObject.Sprite.Height());
+		EnemySpriteObject.Position = new(EnemySpriteX - EnemySpriteObject.Sprite.GetWidth() / 2,
+			EnemySpriteY - EnemySpriteObject.Sprite.GetHeight());
 		for (int i = 1; i < 5; i++)
 			if (Player.Inventory.Slots[Inventory.SpellStartIndex + i - 1].Item.Type == ItemType.Spell)
 				SpellButtons[i].Spell = Player.Inventory.Slots[Inventory.SpellStartIndex + i - 1].Item;
