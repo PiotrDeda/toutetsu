@@ -1,7 +1,8 @@
 using JetBrains.Annotations;
 using Rokuro.Core;
 using Rokuro.Graphics;
-using Tomlyn;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace Toutetsu.Items;
 
@@ -18,12 +19,15 @@ public class SimpleSpellItemTemplate : IItemTemplate
 
 	public ItemData Create() => new SimpleSpellItem(Sprite, SpellStats);
 
-	public static Dictionary<string, IItemTemplate> FromToml(string toml, SpriteManager spriteManager)
+	public static Dictionary<string, IItemTemplate> FromYaml(string yaml, SpriteManager spriteManager)
 	{
-		TomlModel model;
+		List<YamlSpellModel> yamlSpells;
 		try
 		{
-			model = Toml.ToModel<TomlModel>(toml);
+			yamlSpells = new DeserializerBuilder()
+				.WithNamingConvention(UnderscoredNamingConvention.Instance)
+				.Build()
+				.Deserialize<List<YamlSpellModel>>(yaml);
 		}
 		catch (Exception e)
 		{
@@ -32,26 +36,21 @@ public class SimpleSpellItemTemplate : IItemTemplate
 		}
 
 		Dictionary<string, IItemTemplate> itemTemplates = new();
-		foreach (TomlItemModel itemModel in model.Items)
+		foreach (YamlSpellModel spellModel in yamlSpells)
 		{
-			if (itemModel.Id is null)
+			if (spellModel.Id is null)
 			{
 				Logger.LogWarning("Found spell with missing id");
 				continue;
 			}
 
-			itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate(spriteManager));
+			itemTemplates.Add(spellModel.Id, spellModel.ToItemTemplate(spriteManager));
 		}
 
 		return itemTemplates;
 	}
 
-	class TomlModel
-	{
-		[UsedImplicitly] public List<TomlItemModel> Items { get; set; } = new();
-	}
-
-	class TomlItemModel
+	class YamlSpellModel
 	{
 		[UsedImplicitly] public string? Id { get; set; }
 		[UsedImplicitly] public int WhiteAttack { get; set; }

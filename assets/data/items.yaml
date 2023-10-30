@@ -1,0 +1,124 @@
+﻿helmets:
+  - id: iron_helmet
+    white_defense: [ 10, 2 ]
+    black_defense: [ 10, 2 ]
+  - id: golden_helmet
+    white_defense: [ 20, 4 ]
+    black_defense: [ 20, 4 ]
+  - id: enchanted_helmet
+    white_defense: [ 30, 6 ]
+    black_defense: [ 30, 6 ]
+
+armors:
+  - id: iron_armor
+    white_defense: [ 10, 2 ]
+  - id: golden_armor
+    white_defense: [ 20, 4 ]
+  - id: enchanted_armor
+    white_defense: [ 30, 6 ]
+
+boots:
+  - id: iron_boots
+    white_defense: [ 10, 2 ]
+    black_defense: [ 10, 2 ]
+    agility: [ 1, 0 ]
+  - id: golden_boots
+    white_defense: [ 20, 4 ]
+    black_defense: [ 20, 4 ]
+    agility: [ 2, 0 ]
+  - id: enchanted_boots
+    white_defense: [ 30, 6 ]
+    black_defense: [ 30, 6 ]
+    agility: [ 3, 0 ]
+
+trinkets:
+  - id: crit_pendant
+    crit_chance: [ 5, 0 ]
+  - id: health_pendant
+    max_hp: [ 25, 0 ]
+  - id: greater_health_pendant
+    max_hp: [ 50, 0 ]
+  - id: agility_pendant
+    agility: [ 1, 0 ]
+
+shields:
+  - id: white_shield
+    white_defense: [ 10, 3 ]
+  - id: black_shield
+    black_defense: [ 10, 3 ]
+
+books:
+  - id: white_book_i
+    white_attack: [ 5, 1 ]
+  - id: white_book_ii
+    white_attack: [ 10, 2 ]
+    crit_chance: [ 3, 1 ]
+  - id: white_book_iii
+    white_attack: [ 15, 3 ]
+    crit_chance: [ 6, 2 ]
+  - id: black_book_i
+    black_attack: [ 5, 1 ]
+  - id: black_book_ii
+    black_attack: [ 10, 2 ]
+    crit_chance: [ 3, 1 ]
+  - id: black_book_iii
+    black_attack: [ 15, 3 ]
+    crit_chance: [ 6, 2 ]
+
+weapons:
+  - id: wooden_wand
+    white_attack: [ 5, 2 ]
+    crit_chance: [ 1, 1 ]
+  - id: iron_wand
+    white_attack: [ 30, 4 ]
+    crit_chance: [ 2, 1 ]
+  - id: golden_wand
+    white_attack: [ 60, 8 ]
+    crit_chance: [ 3, 1 ]
+  - id: enchanted_wand
+    white_attack: [ 120, 16 ]
+    crit_chance: [ 4, 1 ]
+  - id: wooden_sword
+    white_attack: [ 10, 2 ]
+    black_attack: [ 3, 1 ]
+    crit_chance: [ 1, 1 ]
+  - id: iron_sword
+    white_attack: [ 20, 4 ]
+    black_attack: [ 5, 2 ]
+    crit_chance: [ 2, 1 ]
+  - id: golden_sword
+    white_attack: [ 40, 8 ]
+    black_attack: [ 10, 4 ]
+    crit_chance: [ 3, 1 ]
+  - id: enchanted_sword
+    white_attack: [ 80, 16 ]
+    black_attack: [ 20, 8 ]
+    crit_chance: [ 4, 1 ]
+  - id: wooden_axe
+    white_attack: [ 3, 1 ]
+    black_attack: [ 10, 2 ]
+    crit_chance: [ 1, 1 ]
+  - id: iron_axe
+    white_attack: [ 6, 2 ]
+    black_attack: [ 20, 4 ]
+    crit_chance: [ 2, 1 ]
+  - id: golden_axe
+    white_attack: [ 12, 4 ]
+    black_attack: [ 40, 8 ]
+    crit_chance: [ 3, 1 ]
+  - id: enchanted_axe
+    white_attack: [ 24, 8 ]
+    black_attack: [ 80, 16 ]
+    crit_chance: [ 4, 1 ]
+  - id: wooden_staff
+    black_attack: [ 15, 2 ]
+    crit_chance: [ 1, 1 ]
+  - id: iron_staff
+    black_attack: [ 30, 4 ]
+    crit_chance: [ 2, 1 ]
+  - id: golden_staff
+    black_attack: [ 60, 8 ]
+    crit_chance: [ 3, 1 ]
+  - id: enchanted_staff
+    black_attack: [ 120, 16 ]
+    crit_chance: [ 4, 1 ]

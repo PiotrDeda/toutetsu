@@ -17,24 +17,12 @@ public class ItemRegister
 
 	public void LoadItemData()
 	{
-		// TODO: Switch to YAML files?
 		try
 		{
-			Dictionary<ItemType, string> types = new() {
-				{ ItemType.Weapon, "weapons" },
-				{ ItemType.Helmet, "helmets" },
-				{ ItemType.Armor, "armors" },
-				{ ItemType.Boots, "boots" },
-				{ ItemType.Trinket, "trinkets" },
-				{ ItemType.Shield, "shields" },
-				{ ItemType.Book, "books" }
-			};
+			SimpleEquippableItemTemplate.FromYaml(File.ReadAllText("assets/data/items.yaml"), SpriteManager, RNG)
+				.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
 
-			foreach (KeyValuePair<ItemType, string> t in types)
-				SimpleEquippableItemTemplate.FromToml(File.ReadAllText($"assets/data/items/{t.Value}.toml"), t.Key,
-					SpriteManager, RNG).ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
-
-			SimpleSpellItemTemplate.FromToml(File.ReadAllText("assets/data/items/spells.toml"), SpriteManager)
+			SimpleSpellItemTemplate.FromYaml(File.ReadAllText("assets/data/spells.yaml"), SpriteManager)
 				.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
 		}
 		catch (Exception e)

@@ -19,10 +19,9 @@ public class EnemyRegister
 
 	public void LoadEnemyData()
 	{
-		// TODO: Switch to YAML files?
 		try
 		{
-			EnemyData.FromToml(File.ReadAllText("assets/data/enemies/enemies.toml"), SpriteManager)
+			EnemyData.FromYaml(File.ReadAllText("assets/data/enemies.yaml"), SpriteManager)
 				.ToList().ForEach(x => Enemies.Add(x.Key, x.Value));
 		}
 		catch (Exception e)

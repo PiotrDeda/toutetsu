@@ -1,7 +1,8 @@
 using JetBrains.Annotations;
 using Rokuro.Core;
 using Rokuro.Graphics;
-using Tomlyn;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace Toutetsu.Items;
 
@@ -33,13 +34,15 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		RNG.NextStandardInt(Means.Agility, Deviations.Agility)
 	));
 
-	public static Dictionary<string, IItemTemplate> FromToml(string toml, ItemType type, SpriteManager spriteManager,
-		RNG rng)
+	public static Dictionary<string, IItemTemplate> FromYaml(string yaml, SpriteManager spriteManager, RNG rng)
 	{
-		TomlModel model;
+		YamlItemRegistryModel yamlItemRegistry;
 		try
 		{
-			model = Toml.ToModel<TomlModel>(toml);
+			yamlItemRegistry = new DeserializerBuilder()
+				.WithNamingConvention(UnderscoredNamingConvention.Instance)
+				.Build()
+				.Deserialize<YamlItemRegistryModel>(yaml);
 		}
 		catch (Exception e)
 		{
@@ -48,29 +51,47 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		}
 
 		Dictionary<string, IItemTemplate> itemTemplates = new();
-		foreach (TomlItemModel itemModel in model.Items)
-		{
-			if (itemModel.Id is null)
-			{
-				Logger.LogWarning("Found equippable item with missing id");
-				continue;
-			}
 
-			itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate(type, spriteManager, rng));
+		void LoadItems(List<YamlItemModel> yamlItems, ItemType type)
+		{
+			foreach (YamlItemModel itemModel in yamlItems)
+			{
+				if (itemModel.Id is null)
+				{
+					Logger.LogWarning("Found equippable item with missing id");
+					continue;
+				}
+
+				itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate(type, spriteManager, rng));
+			}
 		}
+
+		LoadItems(yamlItemRegistry.Helmets, ItemType.Helmet);
+		LoadItems(yamlItemRegistry.Armors, ItemType.Armor);
+		LoadItems(yamlItemRegistry.Boots, ItemType.Boots);
+		LoadItems(yamlItemRegistry.Trinkets, ItemType.Trinket);
+		LoadItems(yamlItemRegistry.Shields, ItemType.Shield);
+		LoadItems(yamlItemRegistry.Books, ItemType.Book);
+		LoadItems(yamlItemRegistry.Weapons, ItemType.Weapon);
 
 		return itemTemplates;
 	}
 
-	class TomlModel
+	class YamlItemRegistryModel
 	{
-		[UsedImplicitly] public List<TomlItemModel> Items { get; set; } = new();
+		[UsedImplicitly] public List<YamlItemModel> Helmets { get; set; } = new();
+		[UsedImplicitly] public List<YamlItemModel> Armors { get; set; } = new();
+		[UsedImplicitly] public List<YamlItemModel> Boots { get; set; } = new();
+		[UsedImplicitly] public List<YamlItemModel> Trinkets { get; set; } = new();
+		[UsedImplicitly] public List<YamlItemModel> Shields { get; set; } = new();
+		[UsedImplicitly] public List<YamlItemModel> Books { get; set; } = new();
+		[UsedImplicitly] public List<YamlItemModel> Weapons { get; set; } = new();
 	}
 
-	class TomlItemModel
+	class YamlItemModel
 	{
 		[UsedImplicitly] public string? Id { get; set; }
-		[UsedImplicitly] public List<int> MaxHP { get; set; } = new() { 0, 0 };
+		[UsedImplicitly] public List<int> MaxHp { get; set; } = new() { 0, 0 };
 		[UsedImplicitly] public List<int> WhiteAttack { get; set; } = new() { 0, 0 };
 		[UsedImplicitly] public List<int> BlackAttack { get; set; } = new() { 0, 0 };
 		[UsedImplicitly] public List<int> WhiteDefense { get; set; } = new() { 0, 0 };
@@ -81,8 +102,8 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type, SpriteManager spriteManager,
 			RNG rng) => new(
 			spriteManager.CreateSprite<StaticSprite>(Id ?? throw new InvalidOperationException()), type,
-			new(MaxHP[0], WhiteAttack[0], BlackAttack[0], WhiteDefense[0], BlackDefense[0], CritChance[0], Agility[0]),
-			new(MaxHP[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], CritChance[1], Agility[1]),
+			new(MaxHp[0], WhiteAttack[0], BlackAttack[0], WhiteDefense[0], BlackDefense[0], CritChance[0], Agility[0]),
+			new(MaxHp[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], CritChance[1], Agility[1]),
 			rng
 		);
 	}

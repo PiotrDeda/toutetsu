@@ -1,19 +1,23 @@
 using JetBrains.Annotations;
 using Rokuro.Core;
 using Rokuro.Graphics;
-using Tomlyn;
 using Toutetsu.Items;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace Toutetsu.Enemies;
 
 public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprite FightSprite, StatsSet Stats)
 {
-	public static Dictionary<string, EnemyData> FromToml(string toml, SpriteManager spriteManager)
+	public static Dictionary<string, EnemyData> FromYaml(string yaml, SpriteManager spriteManager)
 	{
-		TomlModel model;
+		List<YamlEnemyModel> yamlEnemies;
 		try
 		{
-			model = Toml.ToModel<TomlModel>(toml);
+			yamlEnemies = new DeserializerBuilder()
+				.WithNamingConvention(UnderscoredNamingConvention.Instance)
+				.Build()
+				.Deserialize<List<YamlEnemyModel>>(yaml);
 		}
 		catch (Exception e)
 		{
@@ -22,7 +26,7 @@ public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprit
 		}
 
 		Dictionary<string, EnemyData> enemies = new();
-		foreach (TomlEnemyModel enemyModel in model.Enemies)
+		foreach (YamlEnemyModel enemyModel in yamlEnemies)
 		{
 			if (enemyModel.Id is null)
 			{
@@ -36,18 +40,13 @@ public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprit
 		return enemies;
 	}
 
-	class TomlModel
-	{
-		[UsedImplicitly] public List<TomlEnemyModel> Enemies { get; set; } = new();
-	}
-
-	class TomlEnemyModel
+	class YamlEnemyModel
 	{
 		[UsedImplicitly] public string? Id { get; set; }
 		[UsedImplicitly] public string DisplayName { get; set; } = "";
 		[UsedImplicitly] public string? MapSprite { get; set; }
 		[UsedImplicitly] public string? FightSprite { get; set; }
-		[UsedImplicitly] public int MaxHP { get; set; }
+		[UsedImplicitly] public int MaxHp { get; set; }
 		[UsedImplicitly] public int WhiteAttack { get; set; }
 		[UsedImplicitly] public int BlackAttack { get; set; }
 		[UsedImplicitly] public int WhiteDefense { get; set; }
@@ -59,7 +58,7 @@ public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprit
 			Id!, DisplayName,
 			spriteManager.CreateSprite<StaticSprite>(MapSprite ?? Id ?? throw new InvalidOperationException()),
 			spriteManager.CreateSprite<StaticSprite>(FightSprite ?? Id ?? throw new InvalidOperationException()),
-			new(MaxHP, WhiteAttack, BlackAttack, WhiteDefense, BlackDefense, CritChance, Agility)
+			new(MaxHp, WhiteAttack, BlackAttack, WhiteDefense, BlackDefense, CritChance, Agility)
 		);
 	}
 }

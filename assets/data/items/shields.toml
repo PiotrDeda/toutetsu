@@ -1,7 +1,0 @@
-[[items]]
-id = "white_shield"
-white_defense = [10, 3]
-
-[[items]]
-id = "black_shield"
-black_defense = [10, 3]
