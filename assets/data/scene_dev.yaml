@@ -4,11 +4,11 @@
   y: 256
 
 - texture_name: green_slime
-  class: Rokuro.Objects.SimpleObject, RokuroEngine
+  class: Rokuro.Objects.SimpleObject, Rokuro
   x: 256
   y: 256
 
 - texture_name: quit_button
-  class: Rokuro.Objects.SimpleObject, RokuroEngine
+  class: Rokuro.Objects.SimpleObject, Rokuro
   x: 256
   y: 256
