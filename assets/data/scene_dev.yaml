@@ -1,0 +1,14 @@
+- texture_name: wall
+  class: Toutetsu.Components.StaticQuitButton
+  x: 128
+  y: 256
+
+- texture_name: green_slime
+  class: Rokuro.Objects.SimpleObject, RokuroEngine
+  x: 256
+  y: 256
+
+- texture_name: quit_button
+  class: Rokuro.Objects.SimpleObject, RokuroEngine
+  x: 256
+  y: 256

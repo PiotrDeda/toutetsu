@@ -24,6 +24,10 @@ public class SceneMainMenu : Scene
 		QuitButton quitButton = new(Camera, spriteManager, appQuittable);
 		quitButton.Position = new(482, 445);
 		RegisterGameObject(quitButton);
+
+		DevButton devButton = new(Camera, spriteManager, sceneManager);
+		devButton.Position = new(1160, 600);
+		RegisterGameObject(devButton);
 	}
 
 	UICamera Camera { get; }

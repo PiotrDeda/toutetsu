@@ -13,6 +13,7 @@ public class SpriteTemplateLoader
 		templates["title"] = new(texture("ui/title"));
 		templates["play_button"] = new(texture("ui/play_button"));
 		templates["quit_button"] = new(texture("ui/quit_button"));
+		templates["dev_button"] = new(texture("ui/dev_button"));
 		templates["equipment_bg"] = new(texture("ui/equipment_bg"));
 		templates["win_screen"] = new(texture("ui/win_screen"));
 		templates["lose_screen"] = new(texture("ui/lose_screen"));
