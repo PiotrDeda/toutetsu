@@ -33,8 +33,6 @@ public class SceneDev : Scene
 
 		public BaseObject ToObject(Camera camera, SpriteManager spriteManager)
 		{
-			var type = Type.GetType(Class!)!;
-			Logger.LogInfo(type.ToString());
 			var o = (BaseObject)Activator.CreateInstance(Type.GetType(Class!)!,
 				spriteManager.CreateSprite<StaticSprite>(TextureName!), camera)!;
 			o.Position = new(X, Y);
