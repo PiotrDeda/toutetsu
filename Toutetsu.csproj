@@ -9,7 +9,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Rokuro\Rokuro.csproj" />
+		<ProjectReference Include="..\Rokuro\Rokuro.csproj"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="JetBrains.Annotations" Version="2023.2.0"/>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -19,10 +23,6 @@
 		<Content Include="LICENSE">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="JetBrains.Annotations" Version="2023.2.0"/>
 	</ItemGroup>
 
 </Project>
