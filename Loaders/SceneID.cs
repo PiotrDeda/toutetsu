@@ -7,5 +7,5 @@ public enum SceneID
 	Fight,
 	Win,
 	Lose,
-	Dev
+	Debug
 }

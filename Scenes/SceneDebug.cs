@@ -7,11 +7,11 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Toutetsu.Scenes;
 
-public class SceneDev : Scene
+public class SceneDebug : Scene
 {
-	public SceneDev(SpriteManager spriteManager, Drawer drawer, WindowData windowData)
+	public SceneDebug(SpriteManager spriteManager, Drawer drawer, WindowData windowData)
 	{
-		Name = "SceneDev";
+		Name = "SceneDebug";
 		Camera = new(drawer, windowData);
 
 		var yamlObjects = new DeserializerBuilder()

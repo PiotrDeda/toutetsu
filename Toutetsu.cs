@@ -46,7 +46,7 @@ public class Toutetsu : App
 		scenes.Add(new SceneFight(SpriteManager, Input, Drawer, WindowData, player, fightManager, itemRegister));
 		scenes.Add(new SceneWin(SpriteManager, Drawer, WindowData, this));
 		scenes.Add(new SceneLose(SpriteManager, Drawer, WindowData, this));
-		scenes.Add(new SceneDev(SpriteManager, Drawer, WindowData));
+		scenes.Add(new SceneDebug(SpriteManager, Drawer, WindowData));
 
 		SceneManager.LoadScenes(scenes);
 
