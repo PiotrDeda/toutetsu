@@ -44,7 +44,7 @@ public class PlayerStats
 
 	public void UpdateStats(List<ItemData> items)
 	{
-		List<ItemData> sortedItems = items.OrderByDescending(o => o.Priority).ToList();
+		var sortedItems = items.OrderByDescending(o => o.Priority).ToList();
 		CurrentStats = BaseStats;
 		foreach (ItemData item in sortedItems)
 			CurrentStats = item.ApplyStatModifiers(CurrentStats);

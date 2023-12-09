@@ -27,7 +27,7 @@
   black_defense: 0
   crit_chance: 6
   agility: 1
-    
+
 - id: fire_slime
   display_name: Fire Slime
   max_hp: 150
@@ -37,7 +37,7 @@
   black_defense: 0
   crit_chance: 8
   agility: 2
-    
+
 - id: blue_beholder
   display_name: Blue Beholder
   max_hp: 40
@@ -47,7 +47,7 @@
   black_defense: 10
   crit_chance: 1
   agility: 1
-    
+
 - id: orange_beholder
   display_name: Orange Beholder
   max_hp: 80
@@ -57,7 +57,7 @@
   black_defense: 20
   crit_chance: 2
   agility: 1
-    
+
 - id: pink_beholder
   display_name: Pink Beholder
   max_hp: 130
@@ -67,7 +67,7 @@
   black_defense: 35
   crit_chance: 3
   agility: 1
-    
+
 - id: lava_beholder
   display_name: Lava Beholder
   max_hp: 180
@@ -77,7 +77,7 @@
   black_defense: 50
   crit_chance: 4
   agility: 2
-    
+
 - id: toutetsu
   display_name: Toutetsu
   map_sprite: toutetsu_map

@@ -92,7 +92,7 @@ public class RandomMapGenerator
 		}
 
 		// Detect room clusters
-		List<int> roomCluster = Enumerable.Repeat(-1, roomAmount).ToList();
+		var roomCluster = Enumerable.Repeat(-1, roomAmount).ToList();
 		int clusterCount = 0;
 		for (int i = 0; i < roomAmount; i++)
 		{
@@ -294,8 +294,15 @@ public class RandomMapGenerator
 		}
 	}
 
-	public record RandomMapParameters(int MinRoomAmount = 8, int MaxRoomAmount = 10, int MinRoomSize = 2,
-		int MaxRoomSize = 4, int TorchChance = 10, int ItemChance = 4, int EnemyChance = 4);
+	public record RandomMapParameters(
+		int MinRoomAmount = 8,
+		int MaxRoomAmount = 10,
+		int MinRoomSize = 2,
+		int MaxRoomSize = 4,
+		int TorchChance = 10,
+		int ItemChance = 4,
+		int EnemyChance = 4
+	);
 
 	record RoomConnection(int Room1, int Room2, int Distance);
 }

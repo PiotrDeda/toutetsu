@@ -7,7 +7,7 @@ public class SpriteTemplateLoader
 	public static Dictionary<string, SpriteTemplate> GetSpriteTemplates(SpriteManager spriteManager)
 	{
 		Dictionary<string, SpriteTemplate> templates = new();
-		Func<string, Texture> texture = spriteManager.LoadTexture;
+		var texture = spriteManager.LoadTexture;
 
 		// UI
 		templates["title"] = new(texture("ui/title"));
