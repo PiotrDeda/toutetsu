@@ -18,12 +18,6 @@ public class SpellButton : GameObject, IMouseInteractable
 
 	FightManager FightManager { get; }
 
-	public override void Draw()
-	{
-		if (Enabled && Spell != null && Camera != null)
-			Camera.Draw(Spell.Sprite, Position);
-	}
-
 	public bool WasMouseoverHandled { get; set; } = false;
 
 	public bool IsMouseOver(Vector2D mousePosition) =>
@@ -39,5 +33,11 @@ public class SpellButton : GameObject, IMouseInteractable
 	{
 		if (Enabled && Spell != null && FightManager.IsSpellCastingEnabled)
 			FightManager.DoPlayerAttack(Spell.GetSpellStats());
+	}
+
+	public override void Draw()
+	{
+		if (Enabled && Spell != null && Camera != null)
+			Camera.Draw(Spell.Sprite, Position);
 	}
 }
