@@ -4,7 +4,7 @@ using Rokuro.Objects;
 
 namespace Toutetsu.Map;
 
-public class Tile : BaseObject, IDrawable
+public class Tile : GameObject
 {
 	public Tile(Camera camera, Vector2D position)
 	{
@@ -12,12 +12,11 @@ public class Tile : BaseObject, IDrawable
 		Position = position;
 	}
 
-	public Camera Camera { get; set; }
 	public MapObject? MapObject { get; set; }
 
-	public void Draw()
+	public override void Draw()
 	{
-		if (Enabled && MapObject is not null)
+		if (Enabled && MapObject != null && Camera != null)
 			Camera.Draw(MapObject.Sprite, Position);
 	}
 }

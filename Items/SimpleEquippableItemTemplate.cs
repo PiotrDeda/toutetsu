@@ -56,7 +56,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		{
 			foreach (YamlItemModel itemModel in yamlItems)
 			{
-				if (itemModel.Id is null)
+				if (itemModel.Id == null)
 				{
 					Logger.LogWarning("Found equippable item with missing id");
 					continue;

@@ -28,7 +28,7 @@ public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprit
 		Dictionary<string, EnemyData> enemies = new();
 		foreach (YamlEnemyModel enemyModel in yamlEnemies)
 		{
-			if (enemyModel.Id is null)
+			if (enemyModel.Id == null)
 			{
 				Logger.LogWarning("Found enemy item with missing id");
 				continue;

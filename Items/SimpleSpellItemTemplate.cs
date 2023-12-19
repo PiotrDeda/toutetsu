@@ -38,7 +38,7 @@ public class SimpleSpellItemTemplate : IItemTemplate
 		Dictionary<string, IItemTemplate> itemTemplates = new();
 		foreach (YamlSpellModel spellModel in yamlSpells)
 		{
-			if (spellModel.Id is null)
+			if (spellModel.Id == null)
 			{
 				Logger.LogWarning("Found spell with missing id");
 				continue;

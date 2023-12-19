@@ -5,7 +5,7 @@ using Toutetsu.State;
 
 namespace Toutetsu.Map;
 
-public class GameMap : BaseObject, IDrawable
+public class GameMap : GameObject
 {
 	public static readonly int TileSize = 64;
 
@@ -37,9 +37,7 @@ public class GameMap : BaseObject, IDrawable
 	public Tile[,] InteractLayer { get; }
 	public Vector2D ExitPosition { get; set; }
 
-	Camera Camera { get; }
-
-	public void Draw()
+	public override void Draw()
 	{
 		foreach (Tile tile in FloorLayer)
 			tile.Draw();
@@ -61,15 +59,15 @@ public class GameMap : BaseObject, IDrawable
 		Vector2D dest = new(Player.Position.X + direction.X, Player.Position.Y + direction.Y);
 
 		if (dest.X >= 0 && dest.X < MapSize && dest.Y >= 0 && dest.Y < MapSize)
-			if (WallLayer[dest.X, dest.Y].MapObject is null &&
-				FloorLayer[dest.X, dest.Y].MapObject is not null)
+			if (WallLayer[dest.X, dest.Y].MapObject == null && FloorLayer[dest.X, dest.Y].MapObject != null)
 			{
 				MapObject? mapObject = InteractLayer[dest.X, dest.Y].MapObject;
-				if (mapObject is not null && mapObject.OnInteract(Player))
+				if (mapObject != null && mapObject.OnInteract(Player))
 					return;
 				MoveInteract(Player.Position, dest);
 				Player.Position += direction;
-				Camera.Position += direction * TileSize;
+				if (Camera != null)
+					Camera.Position += direction * TileSize;
 			}
 
 		var playerSprite = (AnimatedSprite)InteractLayer[Player.Position.X, Player.Position.Y].MapObject!.Sprite;

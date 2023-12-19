@@ -1,13 +1,14 @@
 using Rokuro.Core;
 using Rokuro.Graphics;
+using Rokuro.MathUtils;
 using Rokuro.Objects;
 
 namespace Toutetsu.Components;
 
 public class QuitButton : InteractableObject
 {
-	public QuitButton(Camera camera, SpriteManager spriteManager, IQuittable quittable) :
-		base(spriteManager.CreateSprite<StaticSprite>("quit_button"), camera)
+	public QuitButton(Vector2D position, Camera camera, SpriteManager spriteManager, IQuittable quittable) :
+		base(position, spriteManager.CreateSprite<StaticSprite>("quit_button"), camera)
 	{
 		Quittable = quittable;
 	}

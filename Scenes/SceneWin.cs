@@ -12,11 +12,10 @@ public class SceneWin : Scene
 		Name = "SceneWin";
 		Camera = new(drawer, windowData);
 
-		SimpleObject winScreen = new(spriteManager.CreateSprite<StaticSprite>("win_screen"), Camera);
+		GameObject winScreen = new(new(0, 0), spriteManager.CreateSprite<StaticSprite>("win_screen"), Camera);
 		RegisterGameObject(winScreen);
 
-		QuitButton quitButton = new(Camera, spriteManager, appQuittable);
-		quitButton.Position = new(482, 445);
+		QuitButton quitButton = new(new(482, 445), Camera, spriteManager, appQuittable);
 		RegisterGameObject(quitButton);
 	}
 

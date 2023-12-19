@@ -1,4 +1,5 @@
 using Rokuro.Graphics;
+using Rokuro.MathUtils;
 using Rokuro.Objects;
 using Toutetsu.Loaders;
 
@@ -6,8 +7,8 @@ namespace Toutetsu.Components;
 
 public class PlayButton : InteractableObject
 {
-	public PlayButton(Camera camera, SpriteManager spriteManager, SceneManager sceneManager) :
-		base(spriteManager.CreateSprite<StaticSprite>("play_button"), camera)
+	public PlayButton(Vector2D position, Camera camera, SpriteManager spriteManager, SceneManager sceneManager) :
+		base(position, spriteManager.CreateSprite<StaticSprite>("play_button"), camera)
 	{
 		SceneManager = sceneManager;
 	}

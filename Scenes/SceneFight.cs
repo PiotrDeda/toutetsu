@@ -23,12 +23,12 @@ public class SceneFight : Scene
 		FightManager = fightManager;
 
 		// Background
-		SimpleObject background = new(spriteManager.CreateSprite<StaticSprite>("fight_bg"), Camera);
+		GameObject background = new(new(0, 0), spriteManager.CreateSprite<StaticSprite>("fight_bg"), Camera);
 		RegisterGameObject(background);
 
 		// Inventory
-		SimpleObject inventoryBackground = new(spriteManager.CreateSprite<StaticSprite>("equipment_bg"), Camera);
-		inventoryBackground.Position = new(912, 0);
+		GameObject inventoryBackground = new(new(912, 0),
+			spriteManager.CreateSprite<StaticSprite>("equipment_bg"), Camera);
 		RegisterGameObject(inventoryBackground);
 
 		InventoryView inventoryView = new(Player.Inventory, Camera, input);
@@ -37,44 +37,41 @@ public class SceneFight : Scene
 		RegisterGameObject(inventoryView);
 
 		// Stats
-		TextObject statsTextLeft = new(Camera, "StatsLeft", new(255, 255, 255), spriteManager.DefaultFont);
-		statsTextLeft.Position = new(970, 240);
+		TextObject statsTextLeft = new(new(970, 240), Camera, "StatsLeft",
+			new(255, 255, 255), spriteManager.DefaultFont);
 		RegisterGameObject(statsTextLeft);
 
-		TextObject statsTextRight = new(Camera, "StatsRight", new(255, 255, 255), spriteManager.DefaultFont);
-		statsTextRight.Position = new(1082, 264);
+		TextObject statsTextRight = new(new(1082, 264), Camera, "StatsRight",
+			new(255, 255, 255), spriteManager.DefaultFont);
 		RegisterGameObject(statsTextRight);
 
 		Player.Stats.AddViewSprites(statsTextLeft, statsTextRight);
 
 		// Player sprite
-		SimpleObject playerSpriteObject = new(spriteManager.CreateSprite<AnimatedSprite>("player_fight"), Camera);
-		playerSpriteObject.Position = new(150, 480);
-		((AnimatedSprite)playerSpriteObject.Sprite).State = 3;
+		GameObject playerSpriteObject = new(new(150, 480),
+			spriteManager.CreateSprite<AnimatedSprite>("player_fight"), Camera);
+		((AnimatedSprite)playerSpriteObject.Sprite!).State = 3;
 		RegisterGameObject(playerSpriteObject);
 
 		// Enemy sprite
-		EnemySpriteObject = new(spriteManager.CreateSprite<StaticSprite>("blank_item"), Camera);
-		EnemySpriteObject.Position = new(EnemySpriteX, EnemySpriteY);
+		EnemySpriteObject = new(new(EnemySpriteX, EnemySpriteY),
+			spriteManager.CreateSprite<StaticSprite>("blank_item"), Camera);
 		RegisterGameObject(EnemySpriteObject);
 
 		// Attack animations
-		SimpleObject playerAttackAnimationObject =
-			new(spriteManager.CreateSprite<PlayableSprite>("attack_animation_player"), Camera);
-		playerAttackAnimationObject.Position = new(150, 480);
+		GameObject playerAttackAnimationObject = new(new(150, 480),
+			spriteManager.CreateSprite<PlayableSprite>("attack_animation_player"), Camera);
 		RegisterGameObject(playerAttackAnimationObject);
 
-		SimpleObject enemyAttackAnimationObject =
-			new(spriteManager.CreateSprite<PlayableSprite>("attack_animation_enemy"), Camera);
-		enemyAttackAnimationObject.Position = new(EnemySpriteX - 32, EnemySpriteY - 64);
+		GameObject enemyAttackAnimationObject = new(new(EnemySpriteX - 32, EnemySpriteY - 64),
+			spriteManager.CreateSprite<PlayableSprite>("attack_animation_enemy"), Camera);
 		RegisterGameObject(enemyAttackAnimationObject);
 
-		FightManager.PlayerAttackAnimation = (PlayableSprite)playerAttackAnimationObject.Sprite;
-		FightManager.EnemyAttackAnimation = (PlayableSprite)enemyAttackAnimationObject.Sprite;
+		FightManager.PlayerAttackAnimation = (PlayableSprite)playerAttackAnimationObject.Sprite!;
+		FightManager.EnemyAttackAnimation = (PlayableSprite)enemyAttackAnimationObject.Sprite!;
 
 		// Enemy display name
-		EnemyDisplayName = new(Camera, "NULL", new(255, 255, 255), spriteManager.DefaultFont);
-		EnemyDisplayName.Position = new(700, 10);
+		EnemyDisplayName = new(new(700, 10), Camera, "NULL", new(255, 255, 255), spriteManager.DefaultFont);
 		RegisterGameObject(EnemyDisplayName);
 
 		// Spell buttons
@@ -91,7 +88,7 @@ public class SceneFight : Scene
 	UICamera Camera { get; }
 	Player Player { get; }
 	FightManager FightManager { get; }
-	SimpleObject EnemySpriteObject { get; }
+	GameObject EnemySpriteObject { get; }
 	TextObject EnemyDisplayName { get; }
 	List<SpellButton> SpellButtons { get; } = new();
 

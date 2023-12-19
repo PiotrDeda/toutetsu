@@ -25,7 +25,7 @@ public class SceneGameMap : Scene, ILevelHandler
 		RandomMapGenerator = new(spriteManager, rng, randomItemGenerator, randomEnemyGenerator, fightManager, this);
 		FightManager = fightManager;
 		Player = player;
-		LevelText = new(UICamera, "Level 1", new(255, 255, 255), spriteManager.DefaultFont);
+		LevelText = new(new(800, 10), UICamera, "Level 1", new(255, 255, 255), spriteManager.DefaultFont);
 		Map = new(Camera, Player, 40);
 
 		// Camera boundaries
@@ -37,8 +37,8 @@ public class SceneGameMap : Scene, ILevelHandler
 		RegisterGameObject(Map);
 
 		// Inventory
-		SimpleObject inventoryBackground = new(spriteManager.CreateSprite<StaticSprite>("equipment_bg"), UICamera);
-		inventoryBackground.Position = new(912, 0);
+		GameObject inventoryBackground = new(new(912, 0),
+			spriteManager.CreateSprite<StaticSprite>("equipment_bg"), UICamera);
 		RegisterGameObject(inventoryBackground);
 
 		InventoryView inventoryView = new(Player.Inventory, UICamera, input);
@@ -51,18 +51,17 @@ public class SceneGameMap : Scene, ILevelHandler
 			Inventory.SpellStartIndex);
 
 		// Stats
-		TextObject statsTextLeft = new(UICamera, "StatsLeft", new(255, 255, 255), spriteManager.DefaultFont);
-		statsTextLeft.Position = new(970, 240);
+		TextObject statsTextLeft = new(new(970, 240), UICamera, "StatsLeft",
+			new(255, 255, 255), spriteManager.DefaultFont);
 		RegisterGameObject(statsTextLeft);
 
-		TextObject statsTextRight = new(UICamera, "StatsRight", new(255, 255, 255), spriteManager.DefaultFont);
-		statsTextRight.Position = new(1082, 264);
+		TextObject statsTextRight = new(new(1082, 264), UICamera, "StatsRight",
+			new(255, 255, 255), spriteManager.DefaultFont);
 		RegisterGameObject(statsTextRight);
 
 		Player.Stats.AddViewSprites(statsTextLeft, statsTextRight);
 
 		// Level text
-		LevelText.Position = new(800, 10);
 		RegisterGameObject(LevelText);
 	}
 

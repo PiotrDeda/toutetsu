@@ -13,20 +13,16 @@ public class SceneMainMenu : Scene
 		Name = "SceneMainMenu";
 		Camera = new(drawer, windowData);
 
-		SimpleObject title = new(spriteManager.CreateSprite<StaticSprite>("title"), Camera);
-		title.Position = new(482, 64);
+		GameObject title = new(new(482, 64), spriteManager.CreateSprite<StaticSprite>("title"), Camera);
 		RegisterGameObject(title);
 
-		PlayButton playButton = new(Camera, spriteManager, sceneManager);
-		playButton.Position = new(482, 317);
+		PlayButton playButton = new(new(482, 317), Camera, spriteManager, sceneManager);
 		RegisterGameObject(playButton);
 
-		QuitButton quitButton = new(Camera, spriteManager, appQuittable);
-		quitButton.Position = new(482, 445);
+		QuitButton quitButton = new(new(482, 445), Camera, spriteManager, appQuittable);
 		RegisterGameObject(quitButton);
 
-		DevButton devButton = new(Camera, spriteManager, sceneManager);
-		devButton.Position = new(1160, 600);
+		DevButton devButton = new(new(1160, 600), Camera, spriteManager, sceneManager);
 		RegisterGameObject(devButton);
 	}
 
