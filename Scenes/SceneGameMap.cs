@@ -13,14 +13,14 @@ namespace Toutetsu.Scenes;
 
 public class SceneGameMap : Scene, ILevelHandler
 {
-	public SceneGameMap(SpriteManager spriteManager, Input input, Drawer drawer, WindowData windowData,
+	public SceneGameMap(SpriteManager spriteManager, Input input, Drawer drawer,
 		RNG rng, RandomItemGenerator randomItemGenerator, RandomEnemyGenerator randomEnemyGenerator,
 		Player player, FightManager fightManager)
 	{
 		// Variable init
 		Name = "Game Map";
-		Camera = new("Camera", drawer, windowData);
-		UICamera = new("UI Camera", drawer, windowData);
+		Camera = new("Camera", drawer);
+		UICamera = new("UI Camera", drawer);
 		RandomEnemyGenerator = randomEnemyGenerator;
 		RandomMapGenerator = new(spriteManager, rng, randomItemGenerator, randomEnemyGenerator, fightManager, this);
 		FightManager = fightManager;

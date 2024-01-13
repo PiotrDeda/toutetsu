@@ -7,11 +7,10 @@ namespace Toutetsu.Scenes;
 
 public class SceneMainMenu : Scene
 {
-	public SceneMainMenu(SpriteManager spriteManager, SceneManager sceneManager, Drawer drawer, WindowData windowData,
-		IQuittable appQuittable)
+	public SceneMainMenu(SpriteManager spriteManager, SceneManager sceneManager, Drawer drawer, IQuittable appQuittable)
 	{
 		Name = "Main Menu";
-		Camera = new("Camera", drawer, windowData);
+		Camera = new("Camera", drawer);
 
 		GameObject title = new(new(482, 64), spriteManager.CreateSprite<StaticSprite>("title"), Camera);
 		RegisterGameObject(title);

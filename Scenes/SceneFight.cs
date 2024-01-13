@@ -1,4 +1,3 @@
-using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Inputs;
 using Rokuro.Objects;
@@ -13,12 +12,12 @@ public class SceneFight : Scene
 	static readonly int EnemySpriteX = 732;
 	static readonly int EnemySpriteY = 544;
 
-	public SceneFight(SpriteManager spriteManager, Input input, Drawer drawer,
-		WindowData windowData, Player player, FightManager fightManager, ItemRegister itemRegister)
+	public SceneFight(SpriteManager spriteManager, Input input, Drawer drawer, Player player, FightManager fightManager,
+		ItemRegister itemRegister)
 	{
 		// Variable init
 		Name = "Fight";
-		Camera = new("Camera", drawer, windowData);
+		Camera = new("Camera", drawer);
 		Player = player;
 		FightManager = fightManager;
 

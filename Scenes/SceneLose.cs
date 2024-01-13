@@ -7,10 +7,10 @@ namespace Toutetsu.Scenes;
 
 public class SceneLose : Scene
 {
-	public SceneLose(SpriteManager spriteManager, Drawer drawer, WindowData windowData, IQuittable appQuittable)
+	public SceneLose(SpriteManager spriteManager, Drawer drawer, IQuittable appQuittable)
 	{
 		Name = "Lose";
-		Camera = new("Camera", drawer, windowData);
+		Camera = new("Camera", drawer);
 
 		GameObject loseScreen = new(new(0, 0), spriteManager.CreateSprite<StaticSprite>("lose_screen"), Camera);
 		RegisterGameObject(loseScreen);

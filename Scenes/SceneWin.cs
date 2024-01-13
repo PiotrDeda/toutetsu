@@ -7,10 +7,10 @@ namespace Toutetsu.Scenes;
 
 public class SceneWin : Scene
 {
-	public SceneWin(SpriteManager spriteManager, Drawer drawer, WindowData windowData, IQuittable appQuittable)
+	public SceneWin(SpriteManager spriteManager, Drawer drawer, IQuittable appQuittable)
 	{
 		Name = "Win";
-		Camera = new("Camera", drawer, windowData);
+		Camera = new("Camera", drawer);
 
 		GameObject winScreen = new(new(0, 0), spriteManager.CreateSprite<StaticSprite>("win_screen"), Camera);
 		RegisterGameObject(winScreen);
