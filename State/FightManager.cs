@@ -1,7 +1,6 @@
 using Rokuro.Graphics;
 using Toutetsu.Enemies;
 using Toutetsu.Items;
-using Toutetsu.Loaders;
 
 namespace Toutetsu.State;
 

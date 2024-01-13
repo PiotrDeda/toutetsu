@@ -1,7 +1,6 @@
 using Rokuro.Graphics;
 using Rokuro.MathUtils;
 using Rokuro.Objects;
-using Toutetsu.Loaders;
 
 namespace Toutetsu.Components;
 
