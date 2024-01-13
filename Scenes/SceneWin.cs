@@ -9,8 +9,8 @@ public class SceneWin : Scene
 {
 	public SceneWin(SpriteManager spriteManager, Drawer drawer, WindowData windowData, IQuittable appQuittable)
 	{
-		Name = "SceneWin";
-		Camera = new(drawer, windowData);
+		Name = "Win";
+		Camera = new("Camera", drawer, windowData);
 
 		GameObject winScreen = new(new(0, 0), spriteManager.CreateSprite<StaticSprite>("win_screen"), Camera);
 		RegisterGameObject(winScreen);

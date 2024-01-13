@@ -15,5 +15,5 @@ public class DevButton : InteractableObject
 
 	SceneManager SceneManager { get; }
 
-	public override void OnClick() => SceneManager.SetNextScene((int)SceneID.Debug);
+	public override void OnClick() => SceneManager.SetNextScene("Debug");
 }

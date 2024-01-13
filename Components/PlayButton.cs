@@ -15,5 +15,5 @@ public class PlayButton : InteractableObject
 
 	SceneManager SceneManager { get; }
 
-	public override void OnClick() => SceneManager.SetNextScene((int)SceneID.GameMap);
+	public override void OnClick() => SceneManager.SetNextScene("Game Map");
 }

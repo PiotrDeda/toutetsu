@@ -32,7 +32,7 @@ public class FightManager
 		IsBossFight = isBossFight;
 		EnemyHP = Enemy.Stats.MaxHP;
 		PlayerTurnCount = Player.Stats.CurrentStats.Agility;
-		SceneManager.SetNextScene((int)SceneID.Fight);
+		SceneManager.SetNextScene("Fight");
 		DoPlayerTurn();
 	}
 
@@ -53,16 +53,16 @@ public class FightManager
 	{
 		if (Player.Stats.CurrentHP <= 0)
 		{
-			SceneManager.SetNextScene((int)SceneID.Lose);
+			SceneManager.SetNextScene("Lose");
 			return;
 		}
 
 		if (EnemyHP <= 0)
 		{
 			// TODO: Generate random item
-			SceneManager.SetNextScene((int)SceneID.GameMap);
+			SceneManager.SetNextScene("Game Map");
 			if (IsBossFight)
-				SceneManager.SetNextScene((int)SceneID.Win);
+				SceneManager.SetNextScene("Win");
 			return;
 		}
 

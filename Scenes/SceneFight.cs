@@ -17,8 +17,8 @@ public class SceneFight : Scene
 		WindowData windowData, Player player, FightManager fightManager, ItemRegister itemRegister)
 	{
 		// Variable init
-		Name = "SceneFight";
-		Camera = new(drawer, windowData);
+		Name = "Fight";
+		Camera = new("Camera", drawer, windowData);
 		Player = player;
 		FightManager = fightManager;
 

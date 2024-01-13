@@ -18,9 +18,9 @@ public class SceneGameMap : Scene, ILevelHandler
 		Player player, FightManager fightManager)
 	{
 		// Variable init
-		Name = "SceneGameMap";
-		Camera = new(drawer, windowData);
-		UICamera = new(drawer, windowData);
+		Name = "Game Map";
+		Camera = new("Camera", drawer, windowData);
+		UICamera = new("UI Camera", drawer, windowData);
 		RandomEnemyGenerator = randomEnemyGenerator;
 		RandomMapGenerator = new(spriteManager, rng, randomItemGenerator, randomEnemyGenerator, fightManager, this);
 		FightManager = fightManager;
