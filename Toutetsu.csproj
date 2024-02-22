@@ -20,9 +20,11 @@
 	<ItemGroup>
 		<Content Include="assets\**\*.*">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</Content>
 		<Content Include="LICENSE">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</Content>
 	</ItemGroup>
 
