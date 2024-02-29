@@ -5,15 +5,13 @@ namespace Toutetsu.Enemies;
 
 public class EnemyRegister
 {
-	public EnemyRegister(SpriteManager spriteManager)
+	public EnemyRegister()
 	{
-		SpriteManager = spriteManager;
-		BlankEnemy = new("blank_enemy", "NULL", spriteManager.CreateSprite<StaticSprite>("blank_item"),
-			spriteManager.CreateSprite<StaticSprite>("blank_item"), new());
+		BlankEnemy = new("blank_enemy", "NULL", SpriteManager.CreateSprite<StaticSprite>("blank_item"),
+			SpriteManager.CreateSprite<StaticSprite>("blank_item"), new());
 		Enemies.Add("blank_enemy", BlankEnemy);
 	}
 
-	SpriteManager SpriteManager { get; }
 	Dictionary<string, EnemyData> Enemies { get; } = new();
 	EnemyData BlankEnemy { get; }
 
@@ -21,7 +19,7 @@ public class EnemyRegister
 	{
 		try
 		{
-			EnemyData.FromYaml(File.ReadAllText("assets/data/enemies.yaml"), SpriteManager)
+			EnemyData.FromYaml(File.ReadAllText("assets/data/enemies.yaml"))
 				.ToList().ForEach(x => Enemies.Add(x.Key, x.Value));
 		}
 		catch (Exception e)

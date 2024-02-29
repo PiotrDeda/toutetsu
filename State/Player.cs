@@ -1,13 +1,12 @@
-using Rokuro.Graphics;
 using Rokuro.MathUtils;
 
 namespace Toutetsu.State;
 
 public class Player
 {
-	public Player(SpriteManager spriteManager)
+	public Player()
 	{
-		Inventory = new(spriteManager, Stats);
+		Inventory = new(Stats);
 	}
 
 	public Vector2D Position { get; set; }

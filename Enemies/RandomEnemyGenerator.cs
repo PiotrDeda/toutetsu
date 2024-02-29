@@ -14,14 +14,12 @@ public class RandomEnemyGenerator
 		Boss
 	}
 
-	public RandomEnemyGenerator(EnemyRegister enemyRegister, RNG rng)
+	public RandomEnemyGenerator(EnemyRegister enemyRegister)
 	{
 		EnemyRegister = enemyRegister;
-		RNG = rng;
 	}
 
 	EnemyRegister EnemyRegister { get; }
-	RNG RNG { get; }
 
 	Dictionary<Type, List<string>> Enemies { get; } = new() {
 		{

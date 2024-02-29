@@ -6,9 +6,8 @@ namespace Toutetsu.State;
 
 public class FightManager
 {
-	public FightManager(SceneManager sceneManager, Player player)
+	public FightManager(Player player)
 	{
-		SceneManager = sceneManager;
 		Player = player;
 	}
 
@@ -18,7 +17,6 @@ public class FightManager
 	public bool IsPlayerTurn { get; private set; } = true;
 	public bool IsSpellCastingEnabled { get; set; } = true;
 
-	SceneManager SceneManager { get; }
 	Player Player { get; }
 	bool IsBossFight { get; set; }
 	int EnemyHP { get; set; }

@@ -9,7 +9,7 @@ namespace Toutetsu.Enemies;
 
 public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprite FightSprite, StatsSet Stats)
 {
-	public static Dictionary<string, EnemyData> FromYaml(string yaml, SpriteManager spriteManager)
+	public static Dictionary<string, EnemyData> FromYaml(string yaml)
 	{
 		List<YamlEnemyModel> yamlEnemies;
 		try
@@ -34,7 +34,7 @@ public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprit
 				continue;
 			}
 
-			enemies.Add(enemyModel.Id, enemyModel.ToEnemyData(spriteManager));
+			enemies.Add(enemyModel.Id, enemyModel.ToEnemyData());
 		}
 
 		return enemies;
@@ -54,10 +54,10 @@ public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprit
 		[UsedImplicitly] public int CritChance { get; set; }
 		[UsedImplicitly] public int Agility { get; set; }
 
-		public EnemyData ToEnemyData(SpriteManager spriteManager) => new(
+		public EnemyData ToEnemyData() => new(
 			Id!, DisplayName,
-			spriteManager.CreateSprite<StaticSprite>(MapSprite ?? Id ?? throw new InvalidOperationException()),
-			spriteManager.CreateSprite<StaticSprite>(FightSprite ?? Id ?? throw new InvalidOperationException()),
+			SpriteManager.CreateSprite<StaticSprite>(MapSprite ?? Id ?? throw new InvalidOperationException()),
+			SpriteManager.CreateSprite<StaticSprite>(FightSprite ?? Id ?? throw new InvalidOperationException()),
 			new(MaxHp, WhiteAttack, BlackAttack, WhiteDefense, BlackDefense, CritChance, Agility)
 		);
 	}

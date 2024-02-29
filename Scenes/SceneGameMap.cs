@@ -1,4 +1,3 @@
-using Rokuro.Core;
 using Rokuro.Graphics;
 using Rokuro.Inputs;
 using Rokuro.MathUtils;
@@ -13,19 +12,18 @@ namespace Toutetsu.Scenes;
 
 public class SceneGameMap : Scene, ILevelHandler
 {
-	public SceneGameMap(SpriteManager spriteManager, Input input, Drawer drawer,
-		RNG rng, RandomItemGenerator randomItemGenerator, RandomEnemyGenerator randomEnemyGenerator,
+	public SceneGameMap(RandomItemGenerator randomItemGenerator, RandomEnemyGenerator randomEnemyGenerator,
 		Player player, FightManager fightManager)
 	{
 		// Variable init
 		Name = "Game Map";
-		Camera = new("Camera", drawer);
-		UICamera = new("UI Camera", drawer);
+		Camera = new("Camera");
+		UICamera = new("UI Camera");
 		RandomEnemyGenerator = randomEnemyGenerator;
-		RandomMapGenerator = new(spriteManager, rng, randomItemGenerator, randomEnemyGenerator, fightManager, this);
+		RandomMapGenerator = new(randomItemGenerator, randomEnemyGenerator, fightManager, this);
 		FightManager = fightManager;
 		Player = player;
-		LevelText = new(new(800, 10), UICamera, "Level 1", new(255, 255, 255), spriteManager.DefaultFont);
+		LevelText = new(new(800, 10), UICamera, "Level 1", new(255, 255, 255), SpriteManager.DefaultFont);
 		Map = new(Camera, Player, 40);
 
 		// Camera boundaries
@@ -38,10 +36,10 @@ public class SceneGameMap : Scene, ILevelHandler
 
 		// Inventory
 		GameObject inventoryBackground = new(new(912, 0),
-			spriteManager.CreateSprite<StaticSprite>("equipment_bg"), UICamera);
+			SpriteManager.CreateSprite<StaticSprite>("equipment_bg"), UICamera);
 		RegisterGameObject(inventoryBackground);
 
-		InventoryView inventoryView = new(Player.Inventory, UICamera, input);
+		InventoryView inventoryView = new(Player.Inventory, UICamera);
 		inventoryView.Position = new(912, 0);
 		RegisterGameObject(inventoryView);
 
@@ -52,11 +50,11 @@ public class SceneGameMap : Scene, ILevelHandler
 
 		// Stats
 		TextObject statsTextLeft = new(new(970, 240), UICamera, "StatsLeft",
-			new(255, 255, 255), spriteManager.DefaultFont);
+			new(255, 255, 255), SpriteManager.DefaultFont);
 		RegisterGameObject(statsTextLeft);
 
 		TextObject statsTextRight = new(new(1082, 264), UICamera, "StatsRight",
-			new(255, 255, 255), spriteManager.DefaultFont);
+			new(255, 255, 255), SpriteManager.DefaultFont);
 		RegisterGameObject(statsTextRight);
 
 		Player.Stats.AddViewSprites(statsTextLeft, statsTextRight);

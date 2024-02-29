@@ -1,5 +1,4 @@
 using Rokuro.Graphics;
-using Rokuro.Inputs;
 using Rokuro.Objects;
 using Toutetsu.Components;
 using Toutetsu.Items;
@@ -12,65 +11,64 @@ public class SceneFight : Scene
 	static readonly int EnemySpriteX = 732;
 	static readonly int EnemySpriteY = 544;
 
-	public SceneFight(SpriteManager spriteManager, Input input, Drawer drawer, Player player, FightManager fightManager,
-		ItemRegister itemRegister)
+	public SceneFight(Player player, FightManager fightManager, ItemRegister itemRegister)
 	{
 		// Variable init
 		Name = "Fight";
-		Camera = new("Camera", drawer);
+		Camera = new("Camera");
 		Player = player;
 		FightManager = fightManager;
 
 		// Background
-		GameObject background = new(new(0, 0), spriteManager.CreateSprite<StaticSprite>("fight_bg"), Camera);
+		GameObject background = new(new(0, 0), SpriteManager.CreateSprite<StaticSprite>("fight_bg"), Camera);
 		RegisterGameObject(background);
 
 		// Inventory
 		GameObject inventoryBackground = new(new(912, 0),
-			spriteManager.CreateSprite<StaticSprite>("equipment_bg"), Camera);
+			SpriteManager.CreateSprite<StaticSprite>("equipment_bg"), Camera);
 		RegisterGameObject(inventoryBackground);
 
-		InventoryView inventoryView = new(Player.Inventory, Camera, input);
+		InventoryView inventoryView = new(Player.Inventory, Camera);
 		inventoryView.Position = new(912, 0);
 		inventoryView.EquipmentLocked = true;
 		RegisterGameObject(inventoryView);
 
 		// Stats
 		TextObject statsTextLeft = new(new(970, 240), Camera, "StatsLeft",
-			new(255, 255, 255), spriteManager.DefaultFont);
+			new(255, 255, 255), SpriteManager.DefaultFont);
 		RegisterGameObject(statsTextLeft);
 
 		TextObject statsTextRight = new(new(1082, 264), Camera, "StatsRight",
-			new(255, 255, 255), spriteManager.DefaultFont);
+			new(255, 255, 255), SpriteManager.DefaultFont);
 		RegisterGameObject(statsTextRight);
 
 		Player.Stats.AddViewSprites(statsTextLeft, statsTextRight);
 
 		// Player sprite
 		GameObject playerSpriteObject = new(new(150, 480),
-			spriteManager.CreateSprite<AnimatedSprite>("player_fight"), Camera);
+			SpriteManager.CreateSprite<AnimatedSprite>("player_fight"), Camera);
 		((AnimatedSprite)playerSpriteObject.Sprite!).State = 3;
 		RegisterGameObject(playerSpriteObject);
 
 		// Enemy sprite
 		EnemySpriteObject = new(new(EnemySpriteX, EnemySpriteY),
-			spriteManager.CreateSprite<StaticSprite>("blank_item"), Camera);
+			SpriteManager.CreateSprite<StaticSprite>("blank_item"), Camera);
 		RegisterGameObject(EnemySpriteObject);
 
 		// Attack animations
 		GameObject playerAttackAnimationObject = new(new(150, 480),
-			spriteManager.CreateSprite<PlayableSprite>("attack_animation_player"), Camera);
+			SpriteManager.CreateSprite<PlayableSprite>("attack_animation_player"), Camera);
 		RegisterGameObject(playerAttackAnimationObject);
 
 		GameObject enemyAttackAnimationObject = new(new(EnemySpriteX - 32, EnemySpriteY - 64),
-			spriteManager.CreateSprite<PlayableSprite>("attack_animation_enemy"), Camera);
+			SpriteManager.CreateSprite<PlayableSprite>("attack_animation_enemy"), Camera);
 		RegisterGameObject(enemyAttackAnimationObject);
 
 		FightManager.PlayerAttackAnimation = (PlayableSprite)playerAttackAnimationObject.Sprite!;
 		FightManager.EnemyAttackAnimation = (PlayableSprite)enemyAttackAnimationObject.Sprite!;
 
 		// Enemy display name
-		EnemyDisplayName = new(new(700, 10), Camera, "NULL", new(255, 255, 255), spriteManager.DefaultFont);
+		EnemyDisplayName = new(new(700, 10), Camera, "NULL", new(255, 255, 255), SpriteManager.DefaultFont);
 		RegisterGameObject(EnemyDisplayName);
 
 		// Spell buttons

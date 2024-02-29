@@ -1,5 +1,4 @@
 using Rokuro.Core;
-using Rokuro.Graphics;
 using Rokuro.MathUtils;
 using Toutetsu.Enemies;
 using Toutetsu.Items;
@@ -24,19 +23,15 @@ public class RandomMapGenerator
 		ReservedFloor = '$'
 	}
 
-	public RandomMapGenerator(SpriteManager spriteManager, RNG rng, RandomItemGenerator randomItemGenerator,
-		RandomEnemyGenerator randomEnemyGenerator, FightManager fightManager, ILevelHandler levelHandler)
+	public RandomMapGenerator(RandomItemGenerator randomItemGenerator, RandomEnemyGenerator randomEnemyGenerator,
+		FightManager fightManager, ILevelHandler levelHandler)
 	{
-		SpriteManager = spriteManager;
-		RNG = rng;
 		RandomItemGenerator = randomItemGenerator;
 		RandomEnemyGenerator = randomEnemyGenerator;
 		FightManager = fightManager;
 		LevelHandler = levelHandler;
 	}
 
-	SpriteManager SpriteManager { get; }
-	RNG RNG { get; }
 	RandomItemGenerator RandomItemGenerator { get; }
 	RandomEnemyGenerator RandomEnemyGenerator { get; }
 	FightManager FightManager { get; }
@@ -253,40 +248,40 @@ public class RandomMapGenerator
 				switch (valueMap[x, y])
 				{
 					case TileWall:
-						objectMap.WallLayer[x, y].MapObject = new Wall(SpriteManager);
+						objectMap.WallLayer[x, y].MapObject = new Wall();
 						break;
 					case TileWallTorch:
-						objectMap.WallLayer[x, y].MapObject = new WallTorch(SpriteManager);
+						objectMap.WallLayer[x, y].MapObject = new WallTorch();
 						break;
 					case TileWallRandom:
 						if (RNG.Rand.Next(100) < p.TorchChance)
-							objectMap.WallLayer[x, y].MapObject = new WallTorch(SpriteManager);
+							objectMap.WallLayer[x, y].MapObject = new WallTorch();
 						else
-							objectMap.WallLayer[x, y].MapObject = new Wall(SpriteManager);
+							objectMap.WallLayer[x, y].MapObject = new Wall();
 						break;
 					case TileFloor:
-						objectMap.FloorLayer[x, y].MapObject = new Floor(SpriteManager);
+						objectMap.FloorLayer[x, y].MapObject = new Floor();
 						break;
 					case TileEntrance:
 					{
-						objectMap.FloorLayer[x, y].MapObject = new Floor(SpriteManager);
-						objectMap.InteractLayer[x, y].MapObject = new PlayerPuppet(SpriteManager);
+						objectMap.FloorLayer[x, y].MapObject = new Floor();
+						objectMap.InteractLayer[x, y].MapObject = new PlayerPuppet();
 						objectMap.Player.Position = new(x, y);
 						break;
 					}
 					case TileExit:
-						objectMap.FloorLayer[x, y].MapObject = new Floor(SpriteManager);
-						objectMap.InteractLayer[x, y].MapObject = new LevelExit(SpriteManager, LevelHandler);
+						objectMap.FloorLayer[x, y].MapObject = new Floor();
+						objectMap.InteractLayer[x, y].MapObject = new LevelExit(LevelHandler);
 						objectMap.ExitPosition = new(x, y);
 						break;
 					case TileItem:
-						objectMap.FloorLayer[x, y].MapObject = new Floor(SpriteManager);
+						objectMap.FloorLayer[x, y].MapObject = new Floor();
 						objectMap.InteractLayer[x, y].MapObject = new PickupItem(RandomItemGenerator.Generate(
 							RandomItemGenerator.GetTypeFromLevel(currentLevel)));
 						break;
 					case TileEnemy:
-						objectMap.FloorLayer[x, y].MapObject = new Floor(SpriteManager);
-						objectMap.InteractLayer[x, y].MapObject = new LevelExit(SpriteManager, LevelHandler);
+						objectMap.FloorLayer[x, y].MapObject = new Floor();
+						objectMap.InteractLayer[x, y].MapObject = new LevelExit(LevelHandler);
 						objectMap.InteractLayer[x, y].MapObject = new Unit(RandomEnemyGenerator.Generate(
 							RandomEnemyGenerator.GetTypeFromLevel(currentLevel)), FightManager);
 						break;

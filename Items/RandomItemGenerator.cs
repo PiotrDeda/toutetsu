@@ -15,14 +15,12 @@ public class RandomItemGenerator
 		StartingSpell
 	}
 
-	public RandomItemGenerator(ItemRegister itemRegister, RNG rng)
+	public RandomItemGenerator(ItemRegister itemRegister)
 	{
 		ItemRegister = itemRegister;
-		RNG = rng;
 	}
 
 	ItemRegister ItemRegister { get; }
-	RNG RNG { get; }
 
 	Dictionary<Type, List<string>> Items { get; } = new() {
 		{

@@ -7,13 +7,9 @@ namespace Toutetsu.Components;
 
 public class QuitButton : InteractableObject
 {
-	public QuitButton(Vector2D position, Camera camera, SpriteManager spriteManager, IQuittable quittable) :
-		base(position, spriteManager.CreateSprite<StaticSprite>("quit_button"), camera)
-	{
-		Quittable = quittable;
-	}
+	public QuitButton(Vector2D position, Camera camera) :
+		base(position, SpriteManager.CreateSprite<StaticSprite>("quit_button"), camera) {}
 
-	IQuittable Quittable { get; }
 
-	public override void OnClick() => Quittable.Quit();
+	public override void OnClick() => App.Quit();
 }

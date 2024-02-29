@@ -8,17 +8,14 @@ namespace Toutetsu.Items;
 
 public class SimpleEquippableItemTemplate : IItemTemplate
 {
-	public SimpleEquippableItemTemplate(ISprite sprite, ItemType type, StatsSet means, StatsSet deviations,
-		RNG rng)
+	public SimpleEquippableItemTemplate(ISprite sprite, ItemType type, StatsSet means, StatsSet deviations)
 	{
 		Sprite = sprite;
 		Type = type;
 		Means = means;
 		Deviations = deviations;
-		RNG = rng;
 	}
 
-	RNG RNG { get; }
 	ISprite Sprite { get; }
 	ItemType Type { get; }
 	StatsSet Means { get; }
@@ -34,7 +31,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		RNG.NextStandardInt(Means.Agility, Deviations.Agility)
 	));
 
-	public static Dictionary<string, IItemTemplate> FromYaml(string yaml, SpriteManager spriteManager, RNG rng)
+	public static Dictionary<string, IItemTemplate> FromYaml(string yaml)
 	{
 		YamlItemRegistryModel yamlItemRegistry;
 		try
@@ -62,7 +59,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 					continue;
 				}
 
-				itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate(type, spriteManager, rng));
+				itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate(type));
 			}
 		}
 
@@ -99,12 +96,10 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		[UsedImplicitly] public List<int> CritChance { get; set; } = new() { 0, 0 };
 		[UsedImplicitly] public List<int> Agility { get; set; } = new() { 0, 0 };
 
-		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type, SpriteManager spriteManager,
-			RNG rng) => new(
-			spriteManager.CreateSprite<StaticSprite>(Id ?? throw new InvalidOperationException()), type,
+		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type) => new(
+			SpriteManager.CreateSprite<StaticSprite>(Id ?? throw new InvalidOperationException()), type,
 			new(MaxHp[0], WhiteAttack[0], BlackAttack[0], WhiteDefense[0], BlackDefense[0], CritChance[0], Agility[0]),
-			new(MaxHp[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], CritChance[1], Agility[1]),
-			rng
+			new(MaxHp[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], CritChance[1], Agility[1])
 		);
 	}
 }

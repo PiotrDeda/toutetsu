@@ -8,17 +8,15 @@ namespace Toutetsu.Components;
 
 public class InventoryView : GameObject, IMouseInteractable
 {
-	public InventoryView(Inventory inventory, Camera camera, Input input)
+	public InventoryView(Inventory inventory, Camera camera)
 	{
 		Inventory = inventory;
 		Camera = camera;
-		Input = input;
 	}
 
 	public bool EquipmentLocked { get; set; } = false;
 
 	Inventory Inventory { get; }
-	Input Input { get; }
 	int LastClickedIndex { get; set; }
 
 	public bool WasMouseoverHandled { get; set; } = false;

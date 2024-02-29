@@ -9,43 +9,40 @@ using Toutetsu.State;
 
 namespace Toutetsu;
 
-public class Toutetsu : App
+public class Toutetsu : Project
 {
-	public Toutetsu(AppProperties properties) : base(properties) {}
-
 	static void Main()
 	{
-		new Toutetsu(new("Toutetsu", new(46, 48, 48), 1280, 720)).Run();
+		App.SetupAndRun(new Toutetsu(), new("Toutetsu", new(46, 48, 48), 1280, 720));
 	}
 
 	public override void Init()
 	{
 		// Sprites
-		SpriteManager.LoadSpriteTemplates(SpriteTemplateLoader.GetSpriteTemplates(SpriteManager));
+		SpriteManager.LoadSpriteTemplates(SpriteTemplateLoader.GetSpriteTemplates());
 
 		// Items
-		ItemRegister itemRegister = new(SpriteManager, RNG);
+		ItemRegister itemRegister = new();
 		itemRegister.LoadItemData();
-		RandomItemGenerator randomItemGenerator = new(itemRegister, RNG);
+		RandomItemGenerator randomItemGenerator = new(itemRegister);
 
 		// Enemies
-		EnemyRegister enemyRegister = new(SpriteManager);
+		EnemyRegister enemyRegister = new();
 		enemyRegister.LoadEnemyData();
-		RandomEnemyGenerator randomEnemyGenerator = new(enemyRegister, RNG);
+		RandomEnemyGenerator randomEnemyGenerator = new(enemyRegister);
 
 		// Misc
-		Player player = new(SpriteManager);
-		FightManager fightManager = new(SceneManager, player);
+		Player player = new();
+		FightManager fightManager = new(player);
 
 		// Scenes
 		List<Scene> scenes = new();
 
-		scenes.Add(new SceneMainMenu(SpriteManager, SceneManager, Drawer, this));
-		scenes.Add(new SceneGameMap(SpriteManager, Input, Drawer, RNG, randomItemGenerator, randomEnemyGenerator,
-			player, fightManager));
-		scenes.Add(new SceneFight(SpriteManager, Input, Drawer, player, fightManager, itemRegister));
-		scenes.Add(new SceneWin(SpriteManager, Drawer, this));
-		scenes.Add(new SceneLose(SpriteManager, Drawer, this));
+		scenes.Add(new SceneMainMenu());
+		scenes.Add(new SceneGameMap(randomItemGenerator, randomEnemyGenerator, player, fightManager));
+		scenes.Add(new SceneFight(player, fightManager, itemRegister));
+		scenes.Add(new SceneWin());
+		scenes.Add(new SceneLose());
 
 		SceneManager.LoadScenes(scenes);
 

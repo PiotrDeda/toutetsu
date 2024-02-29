@@ -19,7 +19,7 @@ public class SimpleSpellItemTemplate : IItemTemplate
 
 	public ItemData Create() => new SimpleSpellItem(Sprite, SpellStats);
 
-	public static Dictionary<string, IItemTemplate> FromYaml(string yaml, SpriteManager spriteManager)
+	public static Dictionary<string, IItemTemplate> FromYaml(string yaml)
 	{
 		List<YamlSpellModel> yamlSpells;
 		try
@@ -44,7 +44,7 @@ public class SimpleSpellItemTemplate : IItemTemplate
 				continue;
 			}
 
-			itemTemplates.Add(spellModel.Id, spellModel.ToItemTemplate(spriteManager));
+			itemTemplates.Add(spellModel.Id, spellModel.ToItemTemplate());
 		}
 
 		return itemTemplates;
@@ -57,8 +57,8 @@ public class SimpleSpellItemTemplate : IItemTemplate
 		[UsedImplicitly] public int BlackAttack { get; set; }
 		[UsedImplicitly] public int CritChance { get; set; }
 
-		public SimpleSpellItemTemplate ToItemTemplate(SpriteManager spriteManager) =>
-			new(spriteManager.CreateSprite<StaticSprite>(Id ?? throw new InvalidOperationException()),
+		public SimpleSpellItemTemplate ToItemTemplate() =>
+			new(SpriteManager.CreateSprite<StaticSprite>(Id ?? throw new InvalidOperationException()),
 				StatsSet.SpellStats(WhiteAttack, BlackAttack, CritChance));
 	}
 }

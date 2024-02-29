@@ -6,13 +6,8 @@ namespace Toutetsu.Components;
 
 public class PlayButton : InteractableObject
 {
-	public PlayButton(Vector2D position, Camera camera, SpriteManager spriteManager, SceneManager sceneManager) :
-		base(position, spriteManager.CreateSprite<StaticSprite>("play_button"), camera)
-	{
-		SceneManager = sceneManager;
-	}
-
-	SceneManager SceneManager { get; }
+	public PlayButton(Vector2D position, Camera camera) :
+		base(position, SpriteManager.CreateSprite<StaticSprite>("play_button"), camera) {}
 
 	public override void OnClick() => SceneManager.SetNextScene("Game Map");
 }

@@ -6,13 +6,8 @@ namespace Toutetsu.Components;
 
 public class DevButton : InteractableObject
 {
-	public DevButton(Vector2D position, Camera camera, SpriteManager spriteManager, SceneManager sceneManager) :
-		base(position, spriteManager.CreateSprite<StaticSprite>("dev_button"), camera)
-	{
-		SceneManager = sceneManager;
-	}
-
-	SceneManager SceneManager { get; }
+	public DevButton(Vector2D position, Camera camera) :
+		base(position, SpriteManager.CreateSprite<StaticSprite>("dev_button"), camera) {}
 
 	public override void OnClick() => SceneManager.SetNextScene("Debug");
 }

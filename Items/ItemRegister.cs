@@ -1,28 +1,19 @@
 using Rokuro.Core;
-using Rokuro.Graphics;
 
 namespace Toutetsu.Items;
 
 public class ItemRegister
 {
-	public ItemRegister(SpriteManager spriteManager, RNG rng)
-	{
-		SpriteManager = spriteManager;
-		RNG = rng;
-	}
-
-	SpriteManager SpriteManager { get; }
-	RNG RNG { get; }
 	Dictionary<string, IItemTemplate> ItemTemplates { get; } = new();
 
 	public void LoadItemData()
 	{
 		try
 		{
-			SimpleEquippableItemTemplate.FromYaml(File.ReadAllText("assets/data/items.yaml"), SpriteManager, RNG)
+			SimpleEquippableItemTemplate.FromYaml(File.ReadAllText("assets/data/items.yaml"))
 				.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
 
-			SimpleSpellItemTemplate.FromYaml(File.ReadAllText("assets/data/spells.yaml"), SpriteManager)
+			SimpleSpellItemTemplate.FromYaml(File.ReadAllText("assets/data/spells.yaml"))
 				.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
 		}
 		catch (Exception e)
@@ -37,6 +28,6 @@ public class ItemRegister
 			return template.Create();
 
 		Logger.LogWarning($"Item \"{id}\" not found");
-		return new BlankItem(SpriteManager);
+		return new BlankItem();
 	}
 }

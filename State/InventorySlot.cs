@@ -1,4 +1,3 @@
-using Rokuro.Graphics;
 using Rokuro.MathUtils;
 using Toutetsu.Items;
 
@@ -6,12 +5,12 @@ namespace Toutetsu.State;
 
 public class InventorySlot
 {
-	public InventorySlot(int index, Vector2D offset, ItemType type, SpriteManager spriteManager)
+	public InventorySlot(int index, Vector2D offset, ItemType type)
 	{
 		Index = index;
 		Offset = offset;
 		Type = type;
-		Item = new BlankItem(spriteManager);
+		Item = new BlankItem();
 	}
 
 	public int Index { get; set; }

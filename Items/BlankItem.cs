@@ -4,9 +4,9 @@ namespace Toutetsu.Items;
 
 public class BlankItem : ItemData
 {
-	public BlankItem(SpriteManager spriteManager)
+	public BlankItem()
 	{
-		Sprite = spriteManager.CreateSprite<StaticSprite>("blank_item");
+		Sprite = SpriteManager.CreateSprite<StaticSprite>("blank_item");
 		Type = ItemType.Blank;
 	}
 }

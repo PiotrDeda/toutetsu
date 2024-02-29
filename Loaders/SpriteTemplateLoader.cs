@@ -4,10 +4,10 @@ namespace Toutetsu.Loaders;
 
 public class SpriteTemplateLoader
 {
-	public static Dictionary<string, SpriteTemplate> GetSpriteTemplates(SpriteManager spriteManager)
+	public static Dictionary<string, SpriteTemplate> GetSpriteTemplates()
 	{
 		Dictionary<string, SpriteTemplate> templates = new();
-		var texture = spriteManager.LoadTexture;
+		var texture = SpriteManager.LoadTexture;
 
 		// UI
 		templates["title"] = new(texture("ui/title"));

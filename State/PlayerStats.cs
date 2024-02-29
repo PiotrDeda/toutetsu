@@ -31,7 +31,6 @@ public class PlayerStats
 		}
 	}
 
-	RNG RNG { get; } = new();
 	List<TextObject> SpritesLeft { get; } = new();
 	List<TextObject> SpritesRight { get; } = new();
 
