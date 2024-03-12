@@ -8,7 +8,7 @@ namespace Toutetsu.Items;
 
 public class SimpleEquippableItemTemplate : IItemTemplate
 {
-	public SimpleEquippableItemTemplate(ISprite sprite, ItemType type, StatsSet means, StatsSet deviations)
+	public SimpleEquippableItemTemplate(Sprite sprite, ItemType type, StatsSet means, StatsSet deviations)
 	{
 		Sprite = sprite;
 		Type = type;
@@ -16,7 +16,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		Deviations = deviations;
 	}
 
-	ISprite Sprite { get; }
+	Sprite Sprite { get; }
 	ItemType Type { get; }
 	StatsSet Means { get; }
 	StatsSet Deviations { get; }
@@ -53,12 +53,8 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		{
 			foreach (YamlItemModel itemModel in yamlItems)
 			{
-				if (itemModel.Id == null)
-				{
-					Logger.LogWarning("Found equippable item with missing id");
-					continue;
-				}
-
+				if (string.IsNullOrEmpty(itemModel.Id))
+					throw new InvalidOperationException("Found equippable item with missing id");
 				itemTemplates.Add(itemModel.Id, itemModel.ToItemTemplate(type));
 			}
 		}
@@ -97,7 +93,7 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 		[UsedImplicitly] public List<int> Agility { get; set; } = new() { 0, 0 };
 
 		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type) => new(
-			SpriteManager.CreateSprite<StaticSprite>(Id ?? throw new InvalidOperationException()), type,
+			SpriteManager.CreateSprite<StaticSprite>($"items/{Id}"), type,
 			new(MaxHp[0], WhiteAttack[0], BlackAttack[0], WhiteDefense[0], BlackDefense[0], CritChance[0], Agility[0]),
 			new(MaxHp[1], WhiteAttack[1], BlackAttack[1], WhiteDefense[1], BlackDefense[1], CritChance[1], Agility[1])
 		);

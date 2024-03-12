@@ -4,7 +4,7 @@ namespace Toutetsu.Items;
 
 public class ItemData
 {
-	public ISprite Sprite { get; set; } = null!;
+	public Sprite Sprite { get; set; } = null!;
 	public ItemType Type { get; set; } = ItemType.General;
 	public int Priority { get; set; } = 1;
 

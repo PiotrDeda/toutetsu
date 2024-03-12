@@ -7,7 +7,7 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Toutetsu.Enemies;
 
-public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprite FightSprite, StatsSet Stats)
+public record EnemyData(string Id, string DisplayName, Sprite MapSprite, Sprite FightSprite, StatsSet Stats)
 {
 	public static Dictionary<string, EnemyData> FromYaml(string yaml)
 	{
@@ -28,12 +28,8 @@ public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprit
 		Dictionary<string, EnemyData> enemies = new();
 		foreach (YamlEnemyModel enemyModel in yamlEnemies)
 		{
-			if (enemyModel.Id == null)
-			{
-				Logger.LogWarning("Found enemy item with missing id");
-				continue;
-			}
-
+			if (string.IsNullOrEmpty(enemyModel.Id))
+				throw new InvalidOperationException("Found enemy with missing id");
 			enemies.Add(enemyModel.Id, enemyModel.ToEnemyData());
 		}
 
@@ -56,8 +52,8 @@ public record EnemyData(string Id, string DisplayName, ISprite MapSprite, ISprit
 
 		public EnemyData ToEnemyData() => new(
 			Id!, DisplayName,
-			SpriteManager.CreateSprite<StaticSprite>(MapSprite ?? Id ?? throw new InvalidOperationException()),
-			SpriteManager.CreateSprite<StaticSprite>(FightSprite ?? Id ?? throw new InvalidOperationException()),
+			SpriteManager.CreateSprite<StaticSprite>(MapSprite ?? $"enemies/{Id}"),
+			SpriteManager.CreateSprite<StaticSprite>(FightSprite ?? $"enemies/{Id}"),
 			new(MaxHp, WhiteAttack, BlackAttack, WhiteDefense, BlackDefense, CritChance, Agility)
 		);
 	}

@@ -4,5 +4,5 @@ namespace Toutetsu.Map;
 
 public class Wall : MapObject
 {
-	public Wall() : base(SpriteManager.CreateSprite<StaticSprite>("wall")) {}
+	public Wall() : base(SpriteManager.CreateSprite<StaticSprite>("tiles/wall")) {}
 }

@@ -4,5 +4,5 @@ namespace Toutetsu.Map;
 
 public class PlayerPuppet : MapObject
 {
-	public PlayerPuppet() : base(SpriteManager.CreateSprite<AnimatedSprite>("player")) {}
+	public PlayerPuppet() : base(SpriteManager.CreateSprite<AnimatedSprite>("tiles/player")) {}
 }

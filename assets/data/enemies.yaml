@@ -80,8 +80,8 @@
 
 - id: toutetsu
   display_name: Toutetsu
-  map_sprite: toutetsu_map
-  fight_sprite: toutetsu_fight
+  map_sprite: enemies/toutetsu_map
+  fight_sprite: enemies/toutetsu_fight
   max_hp: 400
   white_attack: 50
   black_attack: 50

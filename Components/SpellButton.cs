@@ -23,9 +23,9 @@ public class SpellButton : GameObject, IMouseInteractable
 	public bool IsMouseOver(Vector2D mousePosition) =>
 		Enabled && Spell != null && Camera != null &&
 		mousePosition.X >= Camera.GetScreenPosition(Position).X &&
-		mousePosition.X <= Camera.GetScreenPosition(Position).X + Spell.Sprite.GetWidth() * Camera.Scale &&
+		mousePosition.X <= Camera.GetScreenPosition(Position).X + Spell.Sprite.Width * Camera.Scale &&
 		mousePosition.Y >= Camera.GetScreenPosition(Position).Y &&
-		mousePosition.Y <= Camera.GetScreenPosition(Position).Y + Spell.Sprite.GetHeight() * Camera.Scale;
+		mousePosition.Y <= Camera.GetScreenPosition(Position).Y + Spell.Sprite.Height * Camera.Scale;
 
 	public void OnMouseover() {}
 

@@ -14,7 +14,7 @@ public class InventoryView : GameObject, IMouseInteractable
 		Camera = camera;
 	}
 
-	public bool EquipmentLocked { get; set; } = false;
+	public bool EquipmentLocked { get; set; }
 
 	Inventory Inventory { get; }
 	int LastClickedIndex { get; set; }
@@ -29,9 +29,9 @@ public class InventoryView : GameObject, IMouseInteractable
 				Vector2D screenPosition = Camera.GetScreenPosition(Position + slot.Offset);
 				if (slot.Index != Inventory.CursorIndex &&
 					mousePosition.X >= screenPosition.X &&
-					mousePosition.X <= screenPosition.X + slot.Item.Sprite.GetWidth() * Camera.Scale &&
+					mousePosition.X <= screenPosition.X + slot.Item.Sprite.Width * Camera.Scale &&
 					mousePosition.Y >= screenPosition.Y &&
-					mousePosition.Y <= screenPosition.Y + slot.Item.Sprite.GetHeight() * Camera.Scale)
+					mousePosition.Y <= screenPosition.Y + slot.Item.Sprite.Height * Camera.Scale)
 				{
 					LastClickedIndex = slot.Index;
 					return true;
@@ -57,9 +57,9 @@ public class InventoryView : GameObject, IMouseInteractable
 			if (slot.Index != Inventory.CursorIndex)
 				Camera.Draw(slot.Item.Sprite, Position + slot.Offset);
 
-		ISprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
+		Sprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
 		Vector2D cursorPosition = Input.GetMousePosition() -
-								  new Vector2D(cursorSprite.GetWidth(), cursorSprite.GetHeight()) * Camera.Scale / 2;
+								  new Vector2D(cursorSprite.Width, cursorSprite.Height) * Camera.Scale / 2;
 		Camera.Draw(cursorSprite, cursorPosition);
 	}
 }

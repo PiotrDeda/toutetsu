@@ -3,24 +3,22 @@ using Rokuro.Graphics;
 using Rokuro.Inputs;
 using Toutetsu.Enemies;
 using Toutetsu.Items;
-using Toutetsu.Loaders;
 using Toutetsu.Scenes;
 using Toutetsu.State;
 
 namespace Toutetsu;
 
-public class Toutetsu : Project
+public class Toutetsu
 {
 	static void Main()
 	{
-		App.SetupAndRun(new Toutetsu(), new("Toutetsu", new(46, 48, 48), 1280, 720));
+		App.Setup(new("Toutetsu", new(46, 48, 48), 1280, 720));
+		Init();
+		App.Run();
 	}
 
-	public override void Init()
+	static void Init()
 	{
-		// Sprites
-		SpriteManager.LoadSpriteTemplates(SpriteTemplateLoader.GetSpriteTemplates());
-
 		// Items
 		ItemRegister itemRegister = new();
 		itemRegister.LoadItemData();
@@ -45,6 +43,7 @@ public class Toutetsu : Project
 		scenes.Add(new SceneLose());
 
 		SceneManager.LoadScenes(scenes);
+		SceneManager.SetNextScene("Main Menu");
 
 		// Input
 		Input.SetKeyEvent(Keycode.SDLK_s, KeyEvents.MoveDown);

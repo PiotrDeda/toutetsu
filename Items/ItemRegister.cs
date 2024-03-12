@@ -27,7 +27,7 @@ public class ItemRegister
 		if (ItemTemplates.TryGetValue(id, out IItemTemplate? template))
 			return template.Create();
 
-		Logger.LogWarning($"Item \"{id}\" not found");
+		Logger.ThrowError($"Item \"{id}\" not found");
 		return new BlankItem();
 	}
 }

@@ -8,13 +8,13 @@ namespace Toutetsu.Items;
 
 public class SimpleSpellItemTemplate : IItemTemplate
 {
-	public SimpleSpellItemTemplate(ISprite sprite, StatsSet spellStats)
+	public SimpleSpellItemTemplate(Sprite sprite, StatsSet spellStats)
 	{
 		Sprite = sprite;
 		SpellStats = spellStats;
 	}
 
-	ISprite Sprite { get; }
+	Sprite Sprite { get; }
 	StatsSet SpellStats { get; }
 
 	public ItemData Create() => new SimpleSpellItem(Sprite, SpellStats);
@@ -38,12 +38,8 @@ public class SimpleSpellItemTemplate : IItemTemplate
 		Dictionary<string, IItemTemplate> itemTemplates = new();
 		foreach (YamlSpellModel spellModel in yamlSpells)
 		{
-			if (spellModel.Id == null)
-			{
-				Logger.LogWarning("Found spell with missing id");
-				continue;
-			}
-
+			if (string.IsNullOrEmpty(spellModel.Id))
+				throw new InvalidOperationException("Found spell with missing id");
 			itemTemplates.Add(spellModel.Id, spellModel.ToItemTemplate());
 		}
 
@@ -58,7 +54,7 @@ public class SimpleSpellItemTemplate : IItemTemplate
 		[UsedImplicitly] public int CritChance { get; set; }
 
 		public SimpleSpellItemTemplate ToItemTemplate() =>
-			new(SpriteManager.CreateSprite<StaticSprite>(Id ?? throw new InvalidOperationException()),
+			new(SpriteManager.CreateSprite<StaticSprite>($"items/{Id}"),
 				StatsSet.SpellStats(WhiteAttack, BlackAttack, CritChance));
 	}
 }

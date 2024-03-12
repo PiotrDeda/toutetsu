@@ -4,7 +4,7 @@ namespace Toutetsu.Items;
 
 public class SimpleSpellItem : ItemData
 {
-	public SimpleSpellItem(ISprite sprite, StatsSet spellStats)
+	public SimpleSpellItem(Sprite sprite, StatsSet spellStats)
 	{
 		Sprite = sprite;
 		Type = ItemType.Spell;

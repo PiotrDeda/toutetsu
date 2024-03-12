@@ -11,7 +11,7 @@ public class SceneMainMenu : Scene
 		Name = "Main Menu";
 		Camera = new("Camera");
 
-		GameObject title = new(new(482, 64), SpriteManager.CreateSprite<StaticSprite>("title"), Camera);
+		GameObject title = new(new(482, 64), SpriteManager.CreateSprite<StaticSprite>("ui/title"), Camera);
 		RegisterGameObject(title);
 
 		PlayButton playButton = new(new(482, 317), Camera);

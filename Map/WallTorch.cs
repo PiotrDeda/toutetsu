@@ -4,5 +4,5 @@ namespace Toutetsu.Map;
 
 public class WallTorch : MapObject
 {
-	public WallTorch() : base(SpriteManager.CreateSprite<AnimatedSprite>("wall_torch")) {}
+	public WallTorch() : base(SpriteManager.CreateSprite<AnimatedSprite>("tiles/wall_torch")) {}
 }

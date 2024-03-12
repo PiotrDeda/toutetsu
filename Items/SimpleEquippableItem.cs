@@ -4,7 +4,7 @@ namespace Toutetsu.Items;
 
 public class SimpleEquippableItem : ItemData
 {
-	public SimpleEquippableItem(ISprite sprite, ItemType type, StatsSet stats)
+	public SimpleEquippableItem(Sprite sprite, ItemType type, StatsSet stats)
 	{
 		Sprite = sprite;
 		Type = type;

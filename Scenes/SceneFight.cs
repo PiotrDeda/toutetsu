@@ -20,12 +20,12 @@ public class SceneFight : Scene
 		FightManager = fightManager;
 
 		// Background
-		GameObject background = new(new(0, 0), SpriteManager.CreateSprite<StaticSprite>("fight_bg"), Camera);
+		GameObject background = new(new(0, 0), SpriteManager.CreateSprite<StaticSprite>("ui/fight_bg"), Camera);
 		RegisterGameObject(background);
 
 		// Inventory
 		GameObject inventoryBackground = new(new(912, 0),
-			SpriteManager.CreateSprite<StaticSprite>("equipment_bg"), Camera);
+			SpriteManager.CreateSprite<StaticSprite>("ui/equipment_bg"), Camera);
 		RegisterGameObject(inventoryBackground);
 
 		InventoryView inventoryView = new(Player.Inventory, Camera);
@@ -46,22 +46,22 @@ public class SceneFight : Scene
 
 		// Player sprite
 		GameObject playerSpriteObject = new(new(150, 480),
-			SpriteManager.CreateSprite<AnimatedSprite>("player_fight"), Camera);
+			SpriteManager.CreateSprite<AnimatedSprite>("tiles/player"), Camera);
 		((AnimatedSprite)playerSpriteObject.Sprite!).State = 3;
 		RegisterGameObject(playerSpriteObject);
 
 		// Enemy sprite
 		EnemySpriteObject = new(new(EnemySpriteX, EnemySpriteY),
-			SpriteManager.CreateSprite<StaticSprite>("blank_item"), Camera);
+			SpriteManager.CreateSprite<StaticSprite>("items/blank_item"), Camera);
 		RegisterGameObject(EnemySpriteObject);
 
 		// Attack animations
 		GameObject playerAttackAnimationObject = new(new(150, 480),
-			SpriteManager.CreateSprite<PlayableSprite>("attack_animation_player"), Camera);
+			SpriteManager.CreateSprite<PlayableSprite>("ui/attack_animation"), Camera);
 		RegisterGameObject(playerAttackAnimationObject);
 
 		GameObject enemyAttackAnimationObject = new(new(EnemySpriteX - 32, EnemySpriteY - 64),
-			SpriteManager.CreateSprite<PlayableSprite>("attack_animation_enemy"), Camera);
+			SpriteManager.CreateSprite<PlayableSprite>("ui/attack_animation"), Camera);
 		RegisterGameObject(enemyAttackAnimationObject);
 
 		FightManager.PlayerAttackAnimation = (PlayableSprite)playerAttackAnimationObject.Sprite!;
@@ -93,8 +93,8 @@ public class SceneFight : Scene
 	{
 		EnemyDisplayName.Text = FightManager.Enemy.DisplayName;
 		EnemySpriteObject.Sprite = FightManager.Enemy.FightSprite;
-		EnemySpriteObject.Position = new(EnemySpriteX - EnemySpriteObject.Sprite.GetWidth() / 2,
-			EnemySpriteY - EnemySpriteObject.Sprite.GetHeight());
+		EnemySpriteObject.Position = new(EnemySpriteX - EnemySpriteObject.Sprite.Width / 2,
+			EnemySpriteY - EnemySpriteObject.Sprite.Height);
 		for (int i = 1; i < 5; i++)
 			if (Player.Inventory.Slots[Inventory.SpellStartIndex + i - 1].Item.Type == ItemType.Spell)
 				SpellButtons[i].Spell = Player.Inventory.Slots[Inventory.SpellStartIndex + i - 1].Item;

@@ -7,8 +7,8 @@ public class EnemyRegister
 {
 	public EnemyRegister()
 	{
-		BlankEnemy = new("blank_enemy", "NULL", SpriteManager.CreateSprite<StaticSprite>("blank_item"),
-			SpriteManager.CreateSprite<StaticSprite>("blank_item"), new());
+		BlankEnemy = new("blank_enemy", "NULL", SpriteManager.CreateSprite<StaticSprite>("items/blank_item"),
+			SpriteManager.CreateSprite<StaticSprite>("items/blank_item"), new());
 		Enemies.Add("blank_enemy", BlankEnemy);
 	}
 
@@ -33,7 +33,7 @@ public class EnemyRegister
 		if (Enemies.TryGetValue(id, out EnemyData? enemy))
 			return enemy;
 
-		Logger.LogWarning($"Enemy \"{id}\" not found");
+		Logger.ThrowError($"Enemy \"{id}\" not found");
 		return BlankEnemy;
 	}
 }

@@ -7,7 +7,7 @@ namespace Toutetsu.Components;
 
 public class StaticQuitButton : InteractableObject
 {
-	public StaticQuitButton(Vector2D position, ISprite sprite, Camera camera) : base(position, sprite, camera) {}
+	public StaticQuitButton(Vector2D position, Sprite sprite, Camera camera) : base(position, sprite, camera) {}
 
 	public override void OnClick() => App.Quit();
 }

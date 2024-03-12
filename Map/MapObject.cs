@@ -5,12 +5,12 @@ namespace Toutetsu.Map;
 
 public class MapObject
 {
-	public MapObject(ISprite sprite)
+	public MapObject(Sprite sprite)
 	{
 		Sprite = sprite;
 	}
 
-	public ISprite Sprite { get; set; }
+	public Sprite Sprite { get; set; }
 
 	public virtual bool OnInteract(Player player) => false;
 }
