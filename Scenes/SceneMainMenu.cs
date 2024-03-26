@@ -22,15 +22,6 @@ public class SceneMainMenu : Scene
 
 		DevButton devButton = new(new(1160, 600), Camera);
 		RegisterGameObject(devButton);
-		
-		// TODO: Remove test code
-		playButton.Sprite!.Rotation = 45;
-		playButton.Sprite.FlipX = true;
-		playButton.Sprite.FlipY = true;
-		quitButton.Sprite!.Rotation = 90;
-		quitButton.Sprite.Origin = new(0, 0);
-		devButton.Sprite!.ScaleX = 0.5;
-		devButton.Sprite.ScaleY = 3;
 	}
 
 	UICamera Camera { get; }
