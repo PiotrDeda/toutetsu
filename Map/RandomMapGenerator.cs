@@ -128,8 +128,8 @@ public class RandomMapGenerator
 				{
 					int distance = Math.Abs(roomCenters[j].X - roomCenters[k].X) +
 								   Math.Abs(roomCenters[j].Y - roomCenters[k].Y);
-					if (distance < minDistance && ((roomCluster[j] == i && roomCluster[k] == i - 1) ||
-												   (roomCluster[j] == i - 1 && roomCluster[k] == i)))
+					if (distance < minDistance && (roomCluster[j] == i && roomCluster[k] == i - 1 ||
+												   roomCluster[j] == i - 1 && roomCluster[k] == i))
 					{
 						room1 = j;
 						room2 = k;
