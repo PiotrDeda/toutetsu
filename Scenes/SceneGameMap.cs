@@ -17,13 +17,22 @@ public class SceneGameMap : Scene, ILevelHandler
 	{
 		// Variable init
 		Name = "Game Map";
-		Camera = new("Camera");
-		UICamera = new("UI Camera");
+		Camera = new() {
+			Name = "Camera"
+		};
+		UICamera = new() {
+			Name = "UI Camera"
+		};
 		RandomEnemyGenerator = randomEnemyGenerator;
 		RandomMapGenerator = new(randomItemGenerator, randomEnemyGenerator, fightManager, this);
 		FightManager = fightManager;
 		Player = player;
-		LevelText = new(new(800, 10), UICamera, "Level 1", new(255, 255, 255), SpriteManager.DefaultFont);
+		LevelText = new() {
+			Position = new(800, 10),
+			Camera = UICamera,
+			Text = "Level 1",
+			Color = new(255, 255, 255)
+		};
 		Map = new(Camera, Player, 40);
 
 		// Camera boundaries
@@ -35,8 +44,11 @@ public class SceneGameMap : Scene, ILevelHandler
 		RegisterGameObject(Map);
 
 		// Inventory
-		GameObject inventoryBackground = new(new(912, 0),
-			SpriteManager.CreateSprite<StaticSprite>("ui/equipment_bg"), UICamera);
+		GameObject inventoryBackground = new() {
+			Position = new(912, 0),
+			Camera = UICamera,
+			Sprite = SpriteManager.CreateSprite<StaticSprite>("ui/equipment_bg")
+		};
 		RegisterGameObject(inventoryBackground);
 
 		InventoryView inventoryView = new(Player.Inventory, UICamera);
@@ -49,12 +61,20 @@ public class SceneGameMap : Scene, ILevelHandler
 			Inventory.SpellStartIndex);
 
 		// Stats
-		TextObject statsTextLeft = new(new(970, 240), UICamera, "StatsLeft",
-			new(255, 255, 255), SpriteManager.DefaultFont);
+		TextObject statsTextLeft = new() {
+			Position = new(970, 240),
+			Camera = UICamera,
+			Text = "StatsLeft",
+			Color = new(255, 255, 255)
+		};
 		RegisterGameObject(statsTextLeft);
 
-		TextObject statsTextRight = new(new(1082, 264), UICamera, "StatsRight",
-			new(255, 255, 255), SpriteManager.DefaultFont);
+		TextObject statsTextRight = new() {
+			Position = new(1082, 264),
+			Camera = UICamera,
+			Text = "StatsRight",
+			Color = new(255, 255, 255)
+		};
 		RegisterGameObject(statsTextRight);
 
 		Player.Stats.AddViewSprites(statsTextLeft, statsTextRight);

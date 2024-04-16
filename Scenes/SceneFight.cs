@@ -15,17 +15,25 @@ public class SceneFight : Scene
 	{
 		// Variable init
 		Name = "Fight";
-		Camera = new("Camera");
+		Camera = new() {
+			Name = "Camera"
+		};
 		Player = player;
 		FightManager = fightManager;
 
 		// Background
-		GameObject background = new(new(0, 0), SpriteManager.CreateSprite<StaticSprite>("ui/fight_bg"), Camera);
+		GameObject background = new() {
+			Camera = Camera,
+			Sprite = SpriteManager.CreateSprite<StaticSprite>("ui/fight_bg")
+		};
 		RegisterGameObject(background);
 
 		// Inventory
-		GameObject inventoryBackground = new(new(912, 0),
-			SpriteManager.CreateSprite<StaticSprite>("ui/equipment_bg"), Camera);
+		GameObject inventoryBackground = new() {
+			Position = new(912, 0),
+			Camera = Camera,
+			Sprite = SpriteManager.CreateSprite<StaticSprite>("ui/equipment_bg")
+		};
 		RegisterGameObject(inventoryBackground);
 
 		InventoryView inventoryView = new(Player.Inventory, Camera);
@@ -34,41 +42,66 @@ public class SceneFight : Scene
 		RegisterGameObject(inventoryView);
 
 		// Stats
-		TextObject statsTextLeft = new(new(970, 240), Camera, "StatsLeft",
-			new(255, 255, 255), SpriteManager.DefaultFont);
+		TextObject statsTextLeft = new() {
+			Position = new(970, 240),
+			Camera = Camera,
+			Text = "StatsLeft",
+			Color = new(255, 255, 255)
+		};
 		RegisterGameObject(statsTextLeft);
 
-		TextObject statsTextRight = new(new(1082, 264), Camera, "StatsRight",
-			new(255, 255, 255), SpriteManager.DefaultFont);
+		TextObject statsTextRight = new() {
+			Position = new(1082, 264),
+			Camera = Camera,
+			Text = "StatsRight",
+			Color = new(255, 255, 255)
+		};
 		RegisterGameObject(statsTextRight);
 
 		Player.Stats.AddViewSprites(statsTextLeft, statsTextRight);
 
 		// Player sprite
-		GameObject playerSpriteObject = new(new(150, 480),
-			SpriteManager.CreateSprite<AnimatedSprite>("tiles/player"), Camera);
-		((AnimatedSprite)playerSpriteObject.Sprite!).State = 3;
+		GameObject playerSpriteObject = new() {
+			Position = new(150, 480),
+			Camera = Camera,
+			Sprite = SpriteManager.CreateSprite<AnimatedSprite>("tiles/player")
+		};
+		((AnimatedSprite)playerSpriteObject.Sprite).State = 3;
 		RegisterGameObject(playerSpriteObject);
 
 		// Enemy sprite
-		EnemySpriteObject = new(new(EnemySpriteX, EnemySpriteY),
-			SpriteManager.CreateSprite<StaticSprite>("items/blank_item"), Camera);
+		EnemySpriteObject = new() {
+			Position = new(EnemySpriteX, EnemySpriteY),
+			Camera = Camera,
+			Sprite = SpriteManager.CreateSprite<StaticSprite>("items/blank_item")
+		};
 		RegisterGameObject(EnemySpriteObject);
 
 		// Attack animations
-		GameObject playerAttackAnimationObject = new(new(150, 480),
-			SpriteManager.CreateSprite<PlayableSprite>("ui/attack_animation"), Camera);
+		GameObject playerAttackAnimationObject = new() {
+			Position = new(150, 480),
+			Camera = Camera,
+			Sprite = SpriteManager.CreateSprite<PlayableSprite>("ui/attack_animation")
+		};
 		RegisterGameObject(playerAttackAnimationObject);
 
-		GameObject enemyAttackAnimationObject = new(new(EnemySpriteX - 32, EnemySpriteY - 64),
-			SpriteManager.CreateSprite<PlayableSprite>("ui/attack_animation"), Camera);
+		GameObject enemyAttackAnimationObject = new() {
+			Position = new(EnemySpriteX - 32, EnemySpriteY - 64),
+			Camera = Camera,
+			Sprite = SpriteManager.CreateSprite<PlayableSprite>("ui/attack_animation")
+		};
 		RegisterGameObject(enemyAttackAnimationObject);
 
 		FightManager.PlayerAttackAnimation = (PlayableSprite)playerAttackAnimationObject.Sprite!;
 		FightManager.EnemyAttackAnimation = (PlayableSprite)enemyAttackAnimationObject.Sprite!;
 
 		// Enemy display name
-		EnemyDisplayName = new(new(700, 10), Camera, "NULL", new(255, 255, 255), SpriteManager.DefaultFont);
+		EnemyDisplayName = new() {
+			Position = new(700, 10),
+			Camera = Camera,
+			Text = "NULL",
+			Color = new(255, 255, 255)
+		};
 		RegisterGameObject(EnemyDisplayName);
 
 		// Spell buttons
