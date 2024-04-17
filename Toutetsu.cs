@@ -8,7 +8,7 @@ using Toutetsu.State;
 
 namespace Toutetsu;
 
-public class Toutetsu
+public static class Toutetsu
 {
 	static void Main()
 	{
