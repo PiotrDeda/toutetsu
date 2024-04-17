@@ -10,10 +10,10 @@ public class ItemRegister
 	{
 		try
 		{
-			SimpleEquippableItemTemplate.FromYaml(File.ReadAllText("assets/data/items.yaml"))
+			SimpleEquippableItemTemplate.FromYaml(File.ReadAllText(Path.Combine("assets", "data", "items.yaml")))
 				.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
 
-			SimpleSpellItemTemplate.FromYaml(File.ReadAllText("assets/data/spells.yaml"))
+			SimpleSpellItemTemplate.FromYaml(File.ReadAllText(Path.Combine("assets", "data", "spells.yaml")))
 				.ToList().ForEach(x => ItemTemplates.Add(x.Key, x.Value));
 		}
 		catch (Exception e)

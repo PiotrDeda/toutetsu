@@ -19,7 +19,7 @@ public class EnemyRegister
 	{
 		try
 		{
-			EnemyData.FromYaml(File.ReadAllText("assets/data/enemies.yaml"))
+			EnemyData.FromYaml(File.ReadAllText(Path.Combine("assets", "data", "enemies.yaml")))
 				.ToList().ForEach(x => Enemies.Add(x.Key, x.Value));
 		}
 		catch (Exception e)
