@@ -81,6 +81,11 @@ public class SceneGameMap : Scene, ILevelHandler
 
 		// Level text
 		RegisterGameObject(LevelText);
+
+		// Input events
+		Input.KeyDownEvent += HandleKeyDown;
+		Input.MouseMotionEvent += HandleMouseMotion;
+		Input.MouseWheelEvent += HandleMouseWheel;
 	}
 
 	Camera Camera { get; }
@@ -105,29 +110,32 @@ public class SceneGameMap : Scene, ILevelHandler
 		LevelText.Text = $"Level {CurrentLevel}";
 	}
 
-	public override void HandleEvent(IInputEvent e)
+	void HandleKeyDown(object? sender, KeyDownEventArgs e)
 	{
-		if (e is KeyEvent keyEvent)
-			if (keyEvent == KeyEvents.MoveDown)
-				Map.MovePlayer(new(0, 1));
-			else if (keyEvent == KeyEvents.MoveUp)
-				Map.MovePlayer(new(0, -1));
-			else if (keyEvent == KeyEvents.MoveLeft)
-				Map.MovePlayer(new(-1, 0));
-			else if (keyEvent == KeyEvents.MoveRight)
-				Map.MovePlayer(new(1, 0));
-			else if (keyEvent == KeyEvents.CenterCamera)
-				CenterOnPlayer();
+		if (e.KeyEvent == KeyEvents.MoveDown)
+			Map.MovePlayer(new(0, 1));
+		else if (e.KeyEvent == KeyEvents.MoveUp)
+			Map.MovePlayer(new(0, -1));
+		else if (e.KeyEvent == KeyEvents.MoveLeft)
+			Map.MovePlayer(new(-1, 0));
+		else if (e.KeyEvent == KeyEvents.MoveRight)
+			Map.MovePlayer(new(1, 0));
+		else if (e.KeyEvent == KeyEvents.CenterCamera)
+			CenterOnPlayer();
+	}
 
-		if (e is MouseWheelEvent mouseWheelEvent)
-			if (mouseWheelEvent.Scroll.Y > 0)
-				Camera.ZoomIn();
-			else if (mouseWheelEvent.Scroll.Y < 0)
-				Camera.ZoomOut();
+	void HandleMouseMotion(object? sender, MouseMotionEventArgs e)
+	{
+		if (e.LeftButton)
+			Camera.Position -= e.RelativeMotion / Camera.Scale;
+	}
 
-		if (e is MouseMotionEvent mouseMotionEvent)
-			if (mouseMotionEvent.RightButton)
-				Camera.Position -= mouseMotionEvent.RelativeMotion / Camera.Scale;
+	void HandleMouseWheel(object? sender, MouseWheelEventArgs e)
+	{
+		if (e.Scroll.Y > 0)
+			Camera.ZoomIn();
+		else if (e.Scroll.Y < 0)
+			Camera.ZoomOut();
 	}
 
 	void CenterOnPlayer()

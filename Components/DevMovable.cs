@@ -5,11 +5,16 @@ using Toutetsu.State;
 
 namespace Toutetsu.Components;
 
-public class DevMovable : GameObject, IEventReceiver
+public class DevMovable : GameObject
 {
-	public void HandleEvent(IInputEvent e)
+	public DevMovable()
 	{
-		if (e is KeyEvent keyEvent && keyEvent == KeyEvents.MoveDown)
+		Input.KeyDownEvent += HandleKeyDown;
+	}
+
+	public void HandleKeyDown(object? sender, KeyDownEventArgs e)
+	{
+		if (e.KeyEvent == KeyEvents.MoveDown)
 			Position += new Vector2D(0, 10);
 	}
 }
