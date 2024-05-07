@@ -92,8 +92,8 @@ public class SceneFight : Scene
 		};
 		RegisterGameObject(enemyAttackAnimationObject);
 
-		FightManager.PlayerAttackAnimation = (PlayableSprite)playerAttackAnimationObject.Sprite!;
-		FightManager.EnemyAttackAnimation = (PlayableSprite)enemyAttackAnimationObject.Sprite!;
+		FightManager.PlayerAttackAnimation = (PlayableSprite)playerAttackAnimationObject.Sprite;
+		FightManager.EnemyAttackAnimation = (PlayableSprite)enemyAttackAnimationObject.Sprite;
 
 		// Enemy display name
 		EnemyDisplayName = new() {
