@@ -15,6 +15,6 @@ public class DevMovable : GameObject
 	public void HandleKeyDown(object? sender, KeyDownEventArgs e)
 	{
 		if (e.KeyEvent == KeyEvents.MoveDown)
-			Position += new Vector2D(0, 10);
+			Position += new Vector2I(0, 10);
 	}
 }

@@ -5,7 +5,7 @@ namespace Toutetsu.State;
 
 public class InventorySlot
 {
-	public InventorySlot(int index, Vector2D offset, ItemType type)
+	public InventorySlot(int index, Vector2I offset, ItemType type)
 	{
 		Index = index;
 		Offset = offset;
@@ -14,7 +14,7 @@ public class InventorySlot
 	}
 
 	public int Index { get; set; }
-	public Vector2D Offset { get; set; }
+	public Vector2I Offset { get; set; }
 	public ItemType Type { get; set; }
 	public ItemData Item { get; set; }
 }

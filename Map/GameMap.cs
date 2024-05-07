@@ -22,7 +22,7 @@ public class GameMap : GameObject
 		{
 			for (int j = 0; j < mapSize; j++)
 			{
-				Vector2D position = new(i * TileSize, j * TileSize);
+				Vector2I position = new(i * TileSize, j * TileSize);
 				FloorLayer[i, j] = new(Camera, position);
 				WallLayer[i, j] = new(Camera, position);
 				InteractLayer[i, j] = new(Camera, position);
@@ -35,7 +35,7 @@ public class GameMap : GameObject
 	public Tile[,] FloorLayer { get; }
 	public Tile[,] WallLayer { get; }
 	public Tile[,] InteractLayer { get; }
-	public Vector2D ExitPosition { get; set; }
+	public Vector2I ExitPosition { get; set; } = new(0, 0);
 
 	public override void Draw()
 	{
@@ -47,16 +47,16 @@ public class GameMap : GameObject
 			tile.Draw();
 	}
 
-	public void MoveInteract(Vector2D oldPosition, Vector2D newPosition)
+	public void MoveInteract(Vector2I oldPosition, Vector2I newPosition)
 	{
 		InteractLayer[newPosition.X, newPosition.Y].MapObject = InteractLayer[oldPosition.X, oldPosition.Y].MapObject;
 		InteractLayer[oldPosition.X, oldPosition.Y].MapObject = null;
 	}
 
-	public void MovePlayer(Vector2D direction)
+	public void MovePlayer(Vector2I direction)
 	{
 		// TODO: Refactor how object positioning works (shared handling between GameMap and Player is not good)
-		Vector2D dest = new(Player.Position.X + direction.X, Player.Position.Y + direction.Y);
+		Vector2I dest = new(Player.Position.X + direction.X, Player.Position.Y + direction.Y);
 
 		if (dest.X >= 0 && dest.X < MapSize && dest.Y >= 0 && dest.Y < MapSize)
 			if (WallLayer[dest.X, dest.Y].MapObject == null && FloorLayer[dest.X, dest.Y].MapObject != null)

@@ -21,12 +21,12 @@ public class InventoryView : GameObject, IMouseInteractable
 
 	public bool WasMouseoverHandled { get; set; } = false;
 
-	public bool IsMouseOver(Vector2D mousePosition)
+	public bool IsMouseOver(Vector2I mousePosition)
 	{
 		if (Enabled && Camera != null)
 			foreach (InventorySlot slot in Inventory.Slots)
 			{
-				Vector2D screenPosition = Camera.GetScreenPosition(Position + slot.Offset);
+				Vector2I screenPosition = Camera.GetScreenPosition(Position + slot.Offset);
 				if (slot.Index != Inventory.CursorIndex &&
 					mousePosition.X >= screenPosition.X &&
 					mousePosition.X <= screenPosition.X + slot.Item.Sprite.Width * Camera.Scale &&
@@ -58,8 +58,8 @@ public class InventoryView : GameObject, IMouseInteractable
 				Camera.Draw(slot.Item.Sprite, Position + slot.Offset);
 
 		Sprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
-		Vector2D cursorPosition = Input.GetMousePosition() -
-								  new Vector2D(cursorSprite.Width, cursorSprite.Height) * Camera.Scale / 2;
+		Vector2I cursorPosition = Input.GetMousePosition() -
+								  new Vector2I(cursorSprite.Width, cursorSprite.Height) * Camera.Scale / 2;
 		Camera.Draw(cursorSprite, cursorPosition);
 	}
 }

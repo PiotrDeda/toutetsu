@@ -6,7 +6,7 @@ namespace Toutetsu.Map;
 
 public class Tile : GameObject
 {
-	public Tile(Camera camera, Vector2D position)
+	public Tile(Camera camera, Vector2I position)
 	{
 		Camera = camera;
 		Position = position;

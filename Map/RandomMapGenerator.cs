@@ -50,14 +50,14 @@ public class RandomMapGenerator
 
 		// Generate room grid locations
 		int gridSize = (int)Math.Floor(Math.Sqrt(roomAmount * 2));
-		List<Vector2D> roomGridLocations = new();
+		List<Vector2I> roomGridLocations = new();
 		for (int x = 0; x < gridSize; x++)
 			for (int y = 0; y < gridSize; y++)
 				roomGridLocations.Add(new(x, y));
 		roomGridLocations = roomGridLocations.OrderBy(_ => RNG.Rand.Next()).ToList();
 
 		// Generate rooms
-		List<Vector2D> roomCenters = new();
+		List<Vector2I> roomCenters = new();
 		for (int i = 0; i < roomAmount; i++)
 		{
 			roomCenters.Add(new(
@@ -66,7 +66,7 @@ public class RandomMapGenerator
 				RNG.Rand.Next(roomGridLocations[i].Y * objectMap.MapSize / gridSize + 1,
 					(roomGridLocations[i].Y + 1) * objectMap.MapSize / gridSize - 2)
 			));
-			Vector2D size = new(RNG.Rand.Next(p.MinRoomSize, p.MaxRoomSize + 1),
+			Vector2I size = new(RNG.Rand.Next(p.MinRoomSize, p.MaxRoomSize + 1),
 				RNG.Rand.Next(p.MinRoomSize, p.MaxRoomSize + 1));
 			PlaceRoom(valueMap, roomCenters[i], size.X, size.X, size.Y, size.Y);
 			Logger.LogInfo($"Placed room [{i}] (grid: {roomGridLocations[i]}) at {roomCenters[i]} with size {size}");
@@ -177,7 +177,7 @@ public class RandomMapGenerator
 		ConvertValueMapToObjectMap(valueMap, objectMap, p, currentLevel);
 	}
 
-	void PlaceRoom(MapValues[,] valueMap, Vector2D center, int sizeXLeft, int sizeXRight, int sizeYTop, int sizeYBottom)
+	void PlaceRoom(MapValues[,] valueMap, Vector2I center, int sizeXLeft, int sizeXRight, int sizeYTop, int sizeYBottom)
 	{
 		// Trim size to map edges
 		if (center.X - sizeXLeft < 0)
@@ -213,7 +213,7 @@ public class RandomMapGenerator
 		}
 	}
 
-	void PlaceCorridor(MapValues[,] valueMap, Vector2D beginning, Vector2D end)
+	void PlaceCorridor(MapValues[,] valueMap, Vector2I beginning, Vector2I end)
 	{
 		Action<int, int> placeCorridorTile = (x, y) => {
 			valueMap[x, y] = TileFloor;
