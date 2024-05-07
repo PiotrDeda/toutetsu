@@ -1,6 +1,6 @@
 using Rokuro.Core;
-using Rokuro.Graphics;
 using Rokuro.Inputs;
+using Rokuro.Objects;
 using Toutetsu.Enemies;
 using Toutetsu.Items;
 using Toutetsu.Scenes;

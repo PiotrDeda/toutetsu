@@ -1,4 +1,5 @@
 using Rokuro.Graphics;
+using Rokuro.Objects;
 using Toutetsu.Enemies;
 using Toutetsu.Items;
 
