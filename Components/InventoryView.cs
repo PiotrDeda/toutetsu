@@ -55,11 +55,11 @@ public class InventoryView : GameObject, IMouseInteractable
 
 		foreach (InventorySlot slot in Inventory.Slots)
 			if (slot.Index != Inventory.CursorIndex)
-				Camera.Draw(slot.Item.Sprite, Position + slot.Offset);
+				Camera.DrawSprite(slot.Item.Sprite, Position + slot.Offset);
 
 		Sprite cursorSprite = Inventory.Slots[Inventory.CursorIndex].Item.Sprite;
 		Vector2I cursorPosition = Input.GetMousePosition() -
 								  new Vector2I(cursorSprite.Width, cursorSprite.Height) * Camera.Scale / 2;
-		Camera.Draw(cursorSprite, cursorPosition);
+		Camera.DrawSprite(cursorSprite, cursorPosition);
 	}
 }

@@ -17,6 +17,6 @@ public class Tile : GameObject
 	public override void Draw()
 	{
 		if (Enabled && MapObject != null && Camera != null)
-			Camera.Draw(MapObject.Sprite, Position);
+			Camera.DrawSprite(MapObject.Sprite, Position);
 	}
 }

@@ -38,6 +38,6 @@ public class SpellButton : GameObject, IMouseInteractable
 	public override void Draw()
 	{
 		if (Enabled && Spell != null && Camera != null)
-			Camera.Draw(Spell.Sprite, Position);
+			Camera.DrawSprite(Spell.Sprite, Position);
 	}
 }
