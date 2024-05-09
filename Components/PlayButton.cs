@@ -1,4 +1,3 @@
-using Rokuro.Graphics;
 using Rokuro.Objects;
 
 namespace Toutetsu.Components;
