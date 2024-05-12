@@ -35,7 +35,7 @@ public class GameMap : GameObject
 	public Tile[,] FloorLayer { get; }
 	public Tile[,] WallLayer { get; }
 	public Tile[,] InteractLayer { get; }
-	public Vector2I ExitPosition { get; set; } = new(0, 0);
+	public Vector2I ExitPosition { get; set; } = Vector2I.Zero;
 
 	public override void Draw()
 	{
