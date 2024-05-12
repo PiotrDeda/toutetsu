@@ -15,6 +15,12 @@ public class DevMovable : GameObject
 	public void HandleKeyDown(object? sender, KeyDownEventArgs e)
 	{
 		if (e.KeyEvent == KeyEvents.MoveDown)
-			Position += new Vector2I(0, 10);
+			Coroutines.Start(MoveTo(Position + new Vector2I(0, 100), 1000, Interpolation.Sine));
+		else if (e.KeyEvent == KeyEvents.MoveUp)
+			Coroutines.Start(MoveTo(Position + new Vector2I(0, -100), 1000, Interpolation.Sine));
+		else if (e.KeyEvent == KeyEvents.MoveLeft)
+			Coroutines.Start(MoveTo(Position + new Vector2I(-100, 0), 1000, Interpolation.Sine));
+		else if (e.KeyEvent == KeyEvents.MoveRight)
+			Coroutines.Start(MoveTo(Position + new Vector2I(100, 0), 1000, Interpolation.Sine));
 	}
 }
