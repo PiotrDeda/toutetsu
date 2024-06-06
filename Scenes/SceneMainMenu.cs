@@ -34,12 +34,12 @@ public class SceneMainMenu : Scene
 		};
 		RegisterGameObject(quitButton);
 
-		DevButton devButton = new() {
+		DebugButton debugButton = new() {
 			Position = new(1160, 600),
 			Camera = Camera,
-			Sprite = SpriteManager.CreateSprite<StaticSprite>("dev/dev_button")
+			Sprite = SpriteManager.CreateSprite<StaticSprite>("debug/debug_button")
 		};
-		RegisterGameObject(devButton);
+		RegisterGameObject(debugButton);
 	}
 
 	UICamera Camera { get; }

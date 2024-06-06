@@ -2,7 +2,7 @@ using Rokuro.Objects;
 
 namespace Toutetsu.Components;
 
-public class DevButton : InteractableObject
+public class DebugButton : InteractableObject
 {
 	public override void OnClick() => SceneManager.SetNextScene("Debug");
 }
