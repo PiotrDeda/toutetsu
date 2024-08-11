@@ -89,7 +89,7 @@ public class SceneGameMap : Scene, ILevelHandler
 	}
 
 	Camera Camera { get; }
-	UICamera UICamera { get; }
+	Camera UICamera { get; }
 	RandomEnemyGenerator RandomEnemyGenerator { get; }
 	RandomMapGenerator RandomMapGenerator { get; }
 	FightManager FightManager { get; }

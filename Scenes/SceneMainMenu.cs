@@ -42,5 +42,5 @@ public class SceneMainMenu : Scene
 		RegisterGameObject(debugButton);
 	}
 
-	UICamera Camera { get; }
+	Camera Camera { get; }
 }

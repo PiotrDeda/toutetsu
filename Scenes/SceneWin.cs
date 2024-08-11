@@ -27,5 +27,5 @@ public class SceneWin : Scene
 		RegisterGameObject(quitButton);
 	}
 
-	UICamera Camera { get; }
+	Camera Camera { get; }
 }

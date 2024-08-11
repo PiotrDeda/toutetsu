@@ -28,5 +28,5 @@ public class SceneLose : Scene
 		RegisterGameObject(quitButton);
 	}
 
-	UICamera Camera { get; }
+	Camera Camera { get; }
 }

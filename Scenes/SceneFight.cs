@@ -115,7 +115,7 @@ public class SceneFight : Scene
 		SpellButtons[0].Spell = itemRegister.CreateItem("spell_weapon");
 	}
 
-	UICamera Camera { get; }
+	Camera Camera { get; }
 	Player Player { get; }
 	FightManager FightManager { get; }
 	GameObject EnemySpriteObject { get; }
