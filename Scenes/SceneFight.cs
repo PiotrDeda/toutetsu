@@ -100,7 +100,8 @@ public class SceneFight : Scene
 			Position = new(700, 10),
 			Camera = Camera,
 			Text = "NULL",
-			Color = new(255, 255, 255)
+			Color = new(255, 255, 255),
+			FontSize = 24
 		};
 		RegisterGameObject(EnemyDisplayName);
 

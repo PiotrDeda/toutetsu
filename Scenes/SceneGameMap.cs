@@ -31,7 +31,8 @@ public class SceneGameMap : Scene, ILevelHandler
 			Position = new(800, 10),
 			Camera = UICamera,
 			Text = "Level 1",
-			Color = new(255, 255, 255)
+			Color = new(255, 255, 255),
+			FontSize = 24
 		};
 		Map = new(Camera, Player, 40);
 
