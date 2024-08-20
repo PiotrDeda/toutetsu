@@ -46,10 +46,10 @@ public static class Toutetsu
 		SceneManager.SetNextScene("Main Menu");
 
 		// Input
-		Input.SetKeyEvent(Keycode.SDLK_s, KeyEvents.MoveDown);
-		Input.SetKeyEvent(Keycode.SDLK_w, KeyEvents.MoveUp);
-		Input.SetKeyEvent(Keycode.SDLK_a, KeyEvents.MoveLeft);
-		Input.SetKeyEvent(Keycode.SDLK_d, KeyEvents.MoveRight);
-		Input.SetKeyEvent(Keycode.SDLK_r, KeyEvents.CenterCamera);
+		Input.SetKeyEvent(Keycode.S, KeyEvents.MoveDown);
+		Input.SetKeyEvent(Keycode.W, KeyEvents.MoveUp);
+		Input.SetKeyEvent(Keycode.A, KeyEvents.MoveLeft);
+		Input.SetKeyEvent(Keycode.D, KeyEvents.MoveRight);
+		Input.SetKeyEvent(Keycode.R, KeyEvents.CenterCamera);
 	}
 }
