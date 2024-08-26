@@ -6,7 +6,7 @@ using Toutetsu.State;
 
 namespace Toutetsu.Components;
 
-public class SpellButton : GameObject, IMouseInteractable
+public class SpellButton : InteractableObject
 {
 	public SpellButton(Camera camera, FightManager fightManager)
 	{
@@ -18,18 +18,14 @@ public class SpellButton : GameObject, IMouseInteractable
 
 	FightManager FightManager { get; }
 
-	public bool WasMouseoverHandled { get; set; } = false;
-
-	public bool IsMouseOver(Vector2I mousePosition) =>
+	public override bool IsMouseOver(Vector2I mousePosition) =>
 		Enabled && Spell != null && Camera != null &&
 		mousePosition.X >= Camera.GetScreenPosition(Position).X &&
 		mousePosition.X <= Camera.GetScreenPosition(Position).X + Spell.Sprite.Width * Camera.Scale &&
 		mousePosition.Y >= Camera.GetScreenPosition(Position).Y &&
 		mousePosition.Y <= Camera.GetScreenPosition(Position).Y + Spell.Sprite.Height * Camera.Scale;
 
-	public void OnMouseover() {}
-
-	public void OnClick()
+	public override void OnClick()
 	{
 		if (Enabled && Spell != null && FightManager.IsSpellCastingEnabled)
 			FightManager.DoPlayerAttack(Spell.GetSpellStats());

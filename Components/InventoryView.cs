@@ -6,7 +6,7 @@ using Toutetsu.State;
 
 namespace Toutetsu.Components;
 
-public class InventoryView : GameObject, IMouseInteractable
+public class InventoryView : InteractableObject
 {
 	public InventoryView(Inventory inventory, Camera camera)
 	{
@@ -19,9 +19,7 @@ public class InventoryView : GameObject, IMouseInteractable
 	Inventory Inventory { get; }
 	int LastClickedIndex { get; set; }
 
-	public bool WasMouseoverHandled { get; set; } = false;
-
-	public bool IsMouseOver(Vector2I mousePosition)
+	public override bool IsMouseOver(Vector2I mousePosition)
 	{
 		if (Enabled && Camera != null)
 			foreach (InventorySlot slot in Inventory.Slots)
@@ -41,9 +39,7 @@ public class InventoryView : GameObject, IMouseInteractable
 		return false;
 	}
 
-	public void OnMouseover() {}
-
-	public void OnClick()
+	public override void OnClick()
 	{
 		Inventory.SwitchCursorItem(LastClickedIndex, EquipmentLocked);
 	}
