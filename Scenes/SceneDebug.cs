@@ -10,6 +10,8 @@ namespace Toutetsu.Scenes;
 
 public class SceneDebug : Scene
 {
+	static readonly int BallCount = 500;
+
 	public override void OnLoaded()
 	{
 		PlayButton playButton = new() {
@@ -23,7 +25,7 @@ public class SceneDebug : Scene
 					new RectHitbox {
 						Offset = new(158, 36),
 						Position = new(640, 353),
-						HalfSize = new(158, 36)
+						HalfSizeV = new(158, 36)
 					}
 				}
 			}
@@ -41,7 +43,7 @@ public class SceneDebug : Scene
 					new RectHitbox {
 						Offset = new(158, 36),
 						Position = new(640, 481),
-						HalfSize = new(158, 36)
+						HalfSizeV = new(158, 36)
 					}
 				}
 			}
@@ -49,7 +51,7 @@ public class SceneDebug : Scene
 		RegisterGameObject(quitButton);
 
 		Random random = new();
-		foreach (int i in Enumerable.Range(0, 10))
+		foreach (int i in Enumerable.Range(0, BallCount))
 		{
 			int y = random.Next(100, 800);
 			GameObject ball = new() {
@@ -81,7 +83,7 @@ public class SceneDebug : Scene
 					new RectHitbox {
 						Offset = new(640, 5),
 						Position = new(640, 5),
-						HalfSize = new(640, 5)
+						HalfSizeV = new(640, 5)
 					}
 				}
 			}
@@ -99,7 +101,7 @@ public class SceneDebug : Scene
 					new RectHitbox {
 						Offset = new(640, 5),
 						Position = new(640, 715),
-						HalfSize = new(640, 5)
+						HalfSizeV = new(640, 5)
 					}
 				}
 			}
@@ -117,7 +119,7 @@ public class SceneDebug : Scene
 					new RectHitbox {
 						Offset = new(5, 350),
 						Position = new(5, 360),
-						HalfSize = new(5, 350)
+						HalfSizeV = new(5, 350)
 					}
 				}
 			}
@@ -135,7 +137,7 @@ public class SceneDebug : Scene
 					new RectHitbox {
 						Offset = new(5, 350),
 						Position = new(1275, 360),
-						HalfSize = new(5, 350)
+						HalfSizeV = new(5, 350)
 					}
 				}
 			}
@@ -152,7 +154,7 @@ public class SceneDebug : Scene
 		GetGameObject("Play Button").PhysicsObject?.ApplyForce(new(400, 400));
 		GetGameObject("Quit Button").PhysicsObject?.ApplyForce(new(-400, -400));
 		Random random = new();
-		foreach (int i in Enumerable.Range(0, 10))
+		foreach (int i in Enumerable.Range(0, BallCount))
 			GetGameObject($"Ball {i}").PhysicsObject?.ApplyForce(new(random.Next(-100, 100), random.Next(-100, 100)));
 	}
 
