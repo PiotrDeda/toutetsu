@@ -52,7 +52,8 @@ public class SceneGameMap : Scene, ILevelHandler
 		};
 		RegisterGameObject(inventoryBackground);
 
-		InventoryView inventoryView = new(Player.Inventory, UICamera);
+		InventoryView inventoryView = new();
+		inventoryView.Init(Player.Inventory, UICamera);
 		inventoryView.Position = new(912, 0);
 		RegisterGameObject(inventoryView);
 

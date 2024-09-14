@@ -34,15 +34,8 @@ public static class Toutetsu
 		FightManager fightManager = new(player);
 
 		// Scenes
-		List<Scene> scenes = new();
-
-		scenes.Add(new SceneMainMenu());
-		scenes.Add(new SceneGameMap(randomItemGenerator, randomEnemyGenerator, player, fightManager));
-		scenes.Add(new SceneFight(player, fightManager, itemRegister));
-		scenes.Add(new SceneWin());
-		scenes.Add(new SceneLose());
-
-		SceneManager.LoadScenes(scenes);
+		((SceneFight)SceneManager.GetScene("Fight")).Init(player, fightManager, itemRegister);
+		SceneManager.LoadScenes(new() { new SceneGameMap(randomItemGenerator, randomEnemyGenerator, player, fightManager) });
 		SceneManager.SetNextScene("Main Menu");
 
 		// Input

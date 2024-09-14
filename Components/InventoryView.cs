@@ -8,21 +8,21 @@ namespace Toutetsu.Components;
 
 public class InventoryView : InteractableObject
 {
-	public InventoryView(Inventory inventory, Camera camera)
+	public bool EquipmentLocked { get; set; }
+
+	Inventory? Inventory { get; set; }
+	int LastClickedIndex { get; set; }
+
+	public void Init(Inventory inventory, Camera camera)
 	{
 		Inventory = inventory;
 		Camera = camera;
 	}
 
-	public bool EquipmentLocked { get; set; }
-
-	Inventory Inventory { get; }
-	int LastClickedIndex { get; set; }
-
 	public override bool IsMouseOver(Vector2I mousePosition)
 	{
 		if (Enabled && Camera != null)
-			foreach (InventorySlot slot in Inventory.Slots)
+			foreach (InventorySlot slot in Inventory!.Slots)
 			{
 				Vector2I screenPosition = Camera.GetScreenPosition(Position + slot.Offset);
 				if (slot.Index != Inventory.CursorIndex &&
@@ -41,7 +41,7 @@ public class InventoryView : InteractableObject
 
 	public override void OnClick()
 	{
-		Inventory.SwitchCursorItem(LastClickedIndex, EquipmentLocked);
+		Inventory!.SwitchCursorItem(LastClickedIndex, EquipmentLocked);
 	}
 
 	public override void Draw()
@@ -49,7 +49,7 @@ public class InventoryView : InteractableObject
 		if (!Enabled || Camera == null)
 			return;
 
-		foreach (InventorySlot slot in Inventory.Slots)
+		foreach (InventorySlot slot in Inventory!.Slots)
 			if (slot.Index != Inventory.CursorIndex)
 				Camera.DrawSprite(slot.Item.Sprite, Position + slot.Offset);
 

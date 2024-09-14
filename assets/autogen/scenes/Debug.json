@@ -1,13 +1,1 @@
-{
-  "Name": "Debug",
-  "Class": "Toutetsu.Scenes.SceneDebug",
-  "GameObjects": [],
-  "Cameras": [
-    {
-      "Name": "Camera",
-      "Class": "Rokuro.Graphics.Camera",
-      "CustomProperties": []
-    }
-  ],
-  "CustomProperties": []
-}
+{"Name":"Debug","Class":"Toutetsu.Scenes.SceneDebug","GameObjects":[],"Cameras":[{"Name":"Camera","Class":"Rokuro.Graphics.Camera","CustomProperties":[]}],"CustomProperties":[]}
