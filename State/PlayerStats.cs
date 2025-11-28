@@ -6,33 +6,30 @@ namespace Toutetsu.State;
 
 public class PlayerStats
 {
-	int _currentHP = 100;
-	StatsSet _currentStats = new(100, 0, 0, 0, 0, 1, 1);
-
 	public StatsSet BaseStats { get; } = new(100, 0, 0, 0, 0, 1, 1);
 
 	public StatsSet CurrentStats
 	{
-		get => _currentStats;
+		get;
 		set
 		{
-			_currentStats = value;
+			field = value;
 			RefreshText();
 		}
-	}
+	} = new(100, 0, 0, 0, 0, 1, 1);
 
 	public int CurrentHP
 	{
-		get => _currentHP;
+		get;
 		set
 		{
-			_currentHP = value;
+			field = value;
 			RefreshText();
 		}
-	}
+	} = 100;
 
-	List<TextObject> SpritesLeft { get; } = new();
-	List<TextObject> SpritesRight { get; } = new();
+	List<TextObject> SpritesLeft { get; } = [];
+	List<TextObject> SpritesRight { get; } = [];
 
 	public void AddViewSprites(TextObject spriteLeft, TextObject spriteRight)
 	{
@@ -90,6 +87,7 @@ public class PlayerStats
 			sprite.Text = textRight;
 	}
 
-	int CalculateDamage(int attack, int defense) =>
-		attack < defense ? attack * attack / (2 * defense) : attack - defense / 2;
+	int CalculateDamage(int attack, int defense) => attack < defense
+		? attack * attack / (2 * defense)
+		: attack - defense / 2;
 }

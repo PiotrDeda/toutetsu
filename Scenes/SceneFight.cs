@@ -10,7 +10,7 @@ public class SceneFight : Scene
 {
 	Player? Player { get; set; }
 	FightManager? FightManager { get; set; }
-	List<SpellButton> SpellButtons { get; } = new();
+	List<SpellButton> SpellButtons { get; } = [];
 
 	public void Init(Player player, FightManager fightManager, ItemRegister itemRegister)
 	{
@@ -45,9 +45,8 @@ public class SceneFight : Scene
 		enemySpriteObject.Sprite = FightManager.Enemy.FightSprite;
 		enemySpriteObject.Position = new(732 - enemySpriteObject.Sprite.Width / 2, 544 - enemySpriteObject.Sprite.Height);
 		for (int i = 1; i < 5; i++)
-			if (Player!.Inventory.Slots[Inventory.SpellStartIndex + i - 1].Item.Type == ItemType.Spell)
-				SpellButtons[i].Spell = Player.Inventory.Slots[Inventory.SpellStartIndex + i - 1].Item;
-			else
-				SpellButtons[i].Spell = null;
+			SpellButtons[i].Spell = Player!.Inventory.Slots[Inventory.SpellStartIndex + i - 1].Item.Type == ItemType.Spell
+				? Player.Inventory.Slots[Inventory.SpellStartIndex + i - 1].Item
+				: null;
 	}
 }

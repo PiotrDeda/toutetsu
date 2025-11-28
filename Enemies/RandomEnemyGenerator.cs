@@ -3,7 +3,7 @@ using static Toutetsu.Enemies.RandomEnemyGenerator.Type;
 
 namespace Toutetsu.Enemies;
 
-public class RandomEnemyGenerator
+public class RandomEnemyGenerator(EnemyRegister enemyRegister)
 {
 	public enum Type
 	{
@@ -14,34 +14,19 @@ public class RandomEnemyGenerator
 		Boss
 	}
 
-	public RandomEnemyGenerator(EnemyRegister enemyRegister)
-	{
-		EnemyRegister = enemyRegister;
-	}
-
-	EnemyRegister EnemyRegister { get; }
+	EnemyRegister EnemyRegister { get; } = enemyRegister;
 
 	Dictionary<Type, List<string>> Enemies { get; } = new() {
 		{
-			Tier1, new() {
-				"green_slime", "blue_beholder"
-			}
+			Tier1, ["green_slime", "blue_beholder"]
 		}, {
-			Tier2, new() {
-				"blue_slime", "orange_beholder"
-			}
+			Tier2, ["blue_slime", "orange_beholder"]
 		}, {
-			Tier3, new() {
-				"purple_slime", "pink_beholder"
-			}
+			Tier3, ["purple_slime", "pink_beholder"]
 		}, {
-			Tier4, new() {
-				"fire_slime", "lava_beholder"
-			}
+			Tier4, ["fire_slime", "lava_beholder"]
 		}, {
-			Boss, new() {
-				"toutetsu"
-			}
+			Boss, ["toutetsu"]
 		}
 	};
 
@@ -50,38 +35,30 @@ public class RandomEnemyGenerator
 	public Type GetTypeFromLevel(int currentLevel)
 	{
 		int tierPercentage = RNG.Rand.Next(100);
-		switch (currentLevel)
-		{
-			case 1:
-				if (tierPercentage < 80)
-					return Tier1;
-				if (tierPercentage < 99)
-					return Tier2;
-				return Tier3;
-			case 2:
-				if (tierPercentage < 10)
-					return Tier1;
-				if (tierPercentage < 90)
-					return Tier2;
-				if (tierPercentage < 99)
-					return Tier3;
-				return Tier4;
-			case 3:
-				if (tierPercentage < 1)
-					return Tier1;
-				if (tierPercentage < 10)
-					return Tier2;
-				if (tierPercentage < 90)
-					return Tier3;
-				return Tier4;
-			case 4:
-				if (tierPercentage < 1)
-					return Tier2;
-				if (tierPercentage < 20)
-					return Tier3;
-				return Tier4;
-			default:
-				return Tier4;
-		}
+		return currentLevel switch {
+			1 => tierPercentage switch {
+				< 80 => Tier1,
+				< 99 => Tier2,
+				_ => Tier3
+			},
+			2 => tierPercentage switch {
+				< 10 => Tier1,
+				< 90 => Tier2,
+				< 99 => Tier3,
+				_ => Tier4
+			},
+			3 => tierPercentage switch {
+				< 1 => Tier1,
+				< 10 => Tier2,
+				< 90 => Tier3,
+				_ => Tier4
+			},
+			4 => tierPercentage switch {
+				< 1 => Tier2,
+				< 20 => Tier3,
+				_ => Tier4
+			},
+			_ => Tier4
+		};
 	}
 }

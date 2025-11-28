@@ -2,7 +2,4 @@ using Rokuro.Graphics;
 
 namespace Toutetsu.Map;
 
-public class PlayerPuppet : MapObject
-{
-	public PlayerPuppet() : base(SpriteManager.CreateSprite<AnimatedSprite>("tiles/player")) {}
-}
+public class PlayerPuppet() : MapObject(SpriteManager.CreateSprite<AnimatedSprite>("tiles/player"));

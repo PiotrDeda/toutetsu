@@ -3,14 +3,9 @@ using Toutetsu.State;
 
 namespace Toutetsu.Map;
 
-public class PickupItem : MapObject
+public class PickupItem(ItemData itemData) : MapObject(itemData.Sprite)
 {
-	public PickupItem(ItemData itemData) : base(itemData.Sprite)
-	{
-		ItemData = itemData;
-	}
-
-	ItemData ItemData { get; }
+	ItemData ItemData { get; } = itemData;
 
 	public override bool OnInteract(Player player)
 	{

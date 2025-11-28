@@ -66,19 +66,17 @@ public class GameMap : GameObject
 					return;
 				MoveInteract(Player.Position, dest);
 				Player.Position += direction;
-				if (Camera != null)
-					Camera.Position += direction * TileSize;
+				Camera?.Position += direction * TileSize;
 			}
 
 		var playerSprite = (AnimatedSprite)InteractLayer[Player.Position.X, Player.Position.Y].MapObject!.Sprite;
-		if (direction.X == 0 && direction.Y == 1)
-			playerSprite.State = 0;
-		else if (direction.X == 0 && direction.Y == -1)
-			playerSprite.State = 1;
-		else if (direction.X == -1 && direction.Y == 0)
-			playerSprite.State = 2;
-		else if (direction.X == 1 && direction.Y == 0)
-			playerSprite.State = 3;
+		playerSprite.State = direction switch {
+			{ X: 0, Y: 1 } => 0,
+			{ X: 0, Y: -1 } => 1,
+			{ X: -1, Y: 0 } => 2,
+			{ X: 1, Y: 0 } => 3,
+			_ => playerSprite.State
+		};
 	}
 
 	public void Clear()

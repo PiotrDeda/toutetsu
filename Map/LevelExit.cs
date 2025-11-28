@@ -3,15 +3,9 @@ using Toutetsu.State;
 
 namespace Toutetsu.Map;
 
-public class LevelExit : MapObject
+public class LevelExit(ILevelHandler levelHandler) : MapObject(SpriteManager.CreateSprite<StaticSprite>("tiles/floor_exit"))
 {
-	public LevelExit(ILevelHandler levelHandler) :
-		base(SpriteManager.CreateSprite<StaticSprite>("tiles/floor_exit"))
-	{
-		LevelHandler = levelHandler;
-	}
-
-	ILevelHandler LevelHandler { get; }
+	ILevelHandler LevelHandler { get; } = levelHandler;
 
 	public override bool OnInteract(Player player)
 	{

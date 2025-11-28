@@ -5,20 +5,15 @@ using Toutetsu.Items;
 
 namespace Toutetsu.State;
 
-public class FightManager
+public class FightManager(Player player)
 {
-	public FightManager(Player player)
-	{
-		Player = player;
-	}
-
 	public EnemyData Enemy { get; private set; } = null!;
 	public PlayableSprite PlayerAttackAnimation { get; set; } = null!;
 	public PlayableSprite EnemyAttackAnimation { get; set; } = null!;
 	public bool IsPlayerTurn { get; private set; } = true;
 	public bool IsSpellCastingEnabled { get; set; } = true;
 
-	Player Player { get; }
+	Player Player { get; } = player;
 	bool IsBossFight { get; set; }
 	int EnemyHP { get; set; }
 	int PlayerTurnCount { get; set; }

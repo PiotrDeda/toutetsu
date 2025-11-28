@@ -6,16 +6,10 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Toutetsu.Items;
 
-public class SimpleSpellItemTemplate : IItemTemplate
+public class SimpleSpellItemTemplate(Sprite sprite, StatsSet spellStats) : IItemTemplate
 {
-	public SimpleSpellItemTemplate(Sprite sprite, StatsSet spellStats)
-	{
-		Sprite = sprite;
-		SpellStats = spellStats;
-	}
-
-	Sprite Sprite { get; }
-	StatsSet SpellStats { get; }
+	Sprite Sprite { get; } = sprite;
+	StatsSet SpellStats { get; } = spellStats;
 
 	public ItemData Create() => new SimpleSpellItem(Sprite, SpellStats);
 

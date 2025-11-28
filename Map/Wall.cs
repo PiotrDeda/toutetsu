@@ -2,7 +2,4 @@ using Rokuro.Graphics;
 
 namespace Toutetsu.Map;
 
-public class Wall : MapObject
-{
-	public Wall() : base(SpriteManager.CreateSprite<StaticSprite>("tiles/wall")) {}
-}
+public class Wall() : MapObject(SpriteManager.CreateSprite<StaticSprite>("tiles/wall"));

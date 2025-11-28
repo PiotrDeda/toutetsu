@@ -51,16 +51,11 @@ public class Inventory
 
 	public void SwitchCursorItem(int index, bool equipmentLocked)
 	{
-		if (equipmentLocked && index > CursorIndex && index < MainInventoryStartIndex)
+		if (equipmentLocked && index is > CursorIndex and < MainInventoryStartIndex)
 			return;
 
-		if (Slots[CursorIndex].Item.Type == Blank || Slots[index].Type == General ||
-			Slots[index].Type == Slots[CursorIndex].Item.Type)
-		{
-			ItemData temp = Slots[index].Item;
-			Slots[index].Item = Slots[CursorIndex].Item;
-			Slots[CursorIndex].Item = temp;
-		}
+		if (Slots[CursorIndex].Item.Type == Blank || Slots[index].Type == General || Slots[index].Type == Slots[CursorIndex].Item.Type)
+			(Slots[index].Item, Slots[CursorIndex].Item) = (Slots[CursorIndex].Item, Slots[index].Item);
 
 		RefreshStats();
 	}
@@ -87,7 +82,7 @@ public class Inventory
 
 	void RefreshStats()
 	{
-		List<ItemData> items = new();
+		List<ItemData> items = [];
 		for (int i = EquipmentStartIndex; i <= EquipmentEndIndex; i++)
 			if (Slots[i].Item.Type != Blank)
 				items.Add(Slots[i].Item);

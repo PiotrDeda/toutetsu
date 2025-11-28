@@ -7,7 +7,7 @@ using static Toutetsu.Map.RandomMapGenerator.MapValues;
 
 namespace Toutetsu.Map;
 
-public class RandomMapGenerator
+public class RandomMapGenerator(RandomItemGenerator randomItemGenerator, RandomEnemyGenerator randomEnemyGenerator, FightManager fightManager, ILevelHandler levelHandler)
 {
 	public enum MapValues
 	{
@@ -23,23 +23,14 @@ public class RandomMapGenerator
 		ReservedFloor = '$'
 	}
 
-	public RandomMapGenerator(RandomItemGenerator randomItemGenerator, RandomEnemyGenerator randomEnemyGenerator,
-		FightManager fightManager, ILevelHandler levelHandler)
-	{
-		RandomItemGenerator = randomItemGenerator;
-		RandomEnemyGenerator = randomEnemyGenerator;
-		FightManager = fightManager;
-		LevelHandler = levelHandler;
-	}
-
-	RandomItemGenerator RandomItemGenerator { get; }
-	RandomEnemyGenerator RandomEnemyGenerator { get; }
-	FightManager FightManager { get; }
-	ILevelHandler LevelHandler { get; }
+	RandomItemGenerator RandomItemGenerator { get; } = randomItemGenerator;
+	RandomEnemyGenerator RandomEnemyGenerator { get; } = randomEnemyGenerator;
+	FightManager FightManager { get; } = fightManager;
+	ILevelHandler LevelHandler { get; } = levelHandler;
 
 	public void Generate(GameMap objectMap, RandomMapParameters p, int currentLevel)
 	{
-		// Create map to store tile values
+		// Create a map to store tile values
 		var valueMap = new MapValues[objectMap.MapSize, objectMap.MapSize];
 		for (int i = 0; i < objectMap.MapSize; i++)
 			for (int j = 0; j < objectMap.MapSize; j++)
@@ -149,7 +140,7 @@ public class RandomMapGenerator
 		valueMap[roomCenters[endRoom].X, roomCenters[endRoom].Y] = TileExit;
 		Logger.LogInfo($"Placed entrance in room [{startRoom}] and exit in room [{endRoom}]");
 
-		// Reserve room around entrance
+		// Reserve room around the entrance
 		for (int i = -1; i <= 1; i++)
 			for (int j = -1; j <= 1; j++)
 				if (valueMap[roomCenters[startRoom].X + i, roomCenters[startRoom].Y + j] == TileFloor)
@@ -167,13 +158,13 @@ public class RandomMapGenerator
 				if (valueMap[i, j] == TileFloor && RNG.Rand.Next(100) < p.ItemChance)
 					valueMap[i, j] = TileItem;
 
-		// Convert reserved floor to regular floor
+		// Convert reserved floors to regular floors
 		for (int i = 0; i < valueMap.GetLength(0); i++)
 			for (int j = 0; j < valueMap.GetLength(1); j++)
 				if (valueMap[i, j] == ReservedFloor)
 					valueMap[i, j] = TileFloor;
 
-		// Convert to real map
+		// Convert to a real map
 		ConvertValueMapToObjectMap(valueMap, objectMap, p, currentLevel);
 	}
 
@@ -215,27 +206,29 @@ public class RandomMapGenerator
 
 	void PlaceCorridor(MapValues[,] valueMap, Vector2I beginning, Vector2I end)
 	{
-		Action<int, int> placeCorridorTile = (x, y) => {
+		if (RNG.Rand.Next(2) == 0)
+		{
+			for (int x = Math.Min(beginning.X, end.X); x <= Math.Max(beginning.X, end.X); x++)
+				PlaceCorridorTile(x, beginning.Y);
+			for (int y = Math.Min(beginning.Y, end.Y); y <= Math.Max(beginning.Y, end.Y); y++)
+				PlaceCorridorTile(end.X, y);
+		}
+		else
+		{
+			for (int y = Math.Min(beginning.Y, end.Y); y <= Math.Max(beginning.Y, end.Y); y++)
+				PlaceCorridorTile(beginning.X, y);
+			for (int x = Math.Min(beginning.X, end.X); x <= Math.Max(beginning.X, end.X); x++)
+				PlaceCorridorTile(x, end.Y);
+		}
+		return;
+
+		void PlaceCorridorTile(int x, int y)
+		{
 			valueMap[x, y] = TileFloor;
 			for (int i = -1; i <= 1; i++)
 				for (int j = -1; j <= 1; j++)
 					if (valueMap[x + i, y + j] == TileNothing)
 						valueMap[x + i, y + j] = TileWallRandom;
-		};
-
-		if (RNG.Rand.Next(2) == 0)
-		{
-			for (int x = Math.Min(beginning.X, end.X); x <= Math.Max(beginning.X, end.X); x++)
-				placeCorridorTile(x, beginning.Y);
-			for (int y = Math.Min(beginning.Y, end.Y); y <= Math.Max(beginning.Y, end.Y); y++)
-				placeCorridorTile(end.X, y);
-		}
-		else
-		{
-			for (int y = Math.Min(beginning.Y, end.Y); y <= Math.Max(beginning.Y, end.Y); y++)
-				placeCorridorTile(beginning.X, y);
-			for (int x = Math.Min(beginning.X, end.X); x <= Math.Max(beginning.X, end.X); x++)
-				placeCorridorTile(x, end.Y);
 		}
 	}
 

@@ -12,6 +12,5 @@ public record StatsSet(
 {
 	public StatsSet() : this(0, 0, 0, 0, 0, 0, 0) {}
 
-	public static StatsSet SpellStats(int whiteAttack, int blackAttack, int critChance) =>
-		new(0, whiteAttack, blackAttack, 0, 0, critChance, 0);
+	public static StatsSet SpellStats(int whiteAttack, int blackAttack, int critChance) => new(0, whiteAttack, blackAttack, 0, 0, critChance, 0);
 }

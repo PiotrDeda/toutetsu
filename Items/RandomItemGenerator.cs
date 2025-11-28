@@ -3,7 +3,7 @@ using static Toutetsu.Items.RandomItemGenerator.Type;
 
 namespace Toutetsu.Items;
 
-public class RandomItemGenerator
+public class RandomItemGenerator(ItemRegister itemRegister)
 {
 	public enum Type
 	{
@@ -15,45 +15,36 @@ public class RandomItemGenerator
 		StartingSpell
 	}
 
-	public RandomItemGenerator(ItemRegister itemRegister)
-	{
-		ItemRegister = itemRegister;
-	}
-
-	ItemRegister ItemRegister { get; }
+	ItemRegister ItemRegister { get; } = itemRegister;
 
 	Dictionary<Type, List<string>> Items { get; } = new() {
 		{
-			Tier1, new() {
+			Tier1, [
 				"wooden_wand", "wooden_sword", "wooden_axe", "wooden_staff", "crit_pendant", "white_shield",
 				"black_shield", "spell_zap", "spell_burn", "spell_arrow"
-			}
+			]
 		}, {
-			Tier2, new() {
+			Tier2, [
 				"iron_wand", "iron_sword", "iron_axe", "iron_staff", "iron_helmet", "iron_armor", "iron_boots",
 				"health_pendant", "white_shield", "black_shield", "white_book_i", "black_book_i", "spell_holy_strike",
 				"spell_keystone", "spell_dark_orb"
-			}
+			]
 		}, {
-			Tier3, new() {
+			Tier3, [
 				"golden_wand", "golden_sword", "golden_axe", "golden_staff", "golden_helmet", "golden_armor",
 				"golden_boots", "greater_health_pendant", "white_book_ii", "black_book_ii", "spell_star_shower",
 				"spell_water_gun", "spell_poison"
-			}
+			]
 		}, {
-			Tier4, new() {
+			Tier4, [
 				"enchanted_wand", "enchanted_sword", "enchanted_axe", "enchanted_staff", "enchanted_helmet",
 				"enchanted_armor", "enchanted_boots", "agility_pendant", "white_book_iii", "black_book_iii",
 				"spell_sunray", "spell_elemental_seal", "spell_darkness"
-			}
+			]
 		}, {
-			StartingWeapon, new() {
-				"wooden_wand", "wooden_sword", "wooden_axe", "wooden_staff"
-			}
+			StartingWeapon, ["wooden_wand", "wooden_sword", "wooden_axe", "wooden_staff"]
 		}, {
-			StartingSpell, new() {
-				"spell_zap", "spell_burn", "spell_arrow"
-			}
+			StartingSpell, ["spell_zap", "spell_burn", "spell_arrow"]
 		}
 	};
 
@@ -62,38 +53,30 @@ public class RandomItemGenerator
 	public Type GetTypeFromLevel(int currentLevel)
 	{
 		int tierPercentage = RNG.Rand.Next(100);
-		switch (currentLevel)
-		{
-			case 1:
-				if (tierPercentage < 80)
-					return Tier1;
-				if (tierPercentage < 99)
-					return Tier2;
-				return Tier3;
-			case 2:
-				if (tierPercentage < 10)
-					return Tier1;
-				if (tierPercentage < 90)
-					return Tier2;
-				if (tierPercentage < 99)
-					return Tier3;
-				return Tier4;
-			case 3:
-				if (tierPercentage < 1)
-					return Tier1;
-				if (tierPercentage < 10)
-					return Tier2;
-				if (tierPercentage < 90)
-					return Tier3;
-				return Tier4;
-			case 4:
-				if (tierPercentage < 1)
-					return Tier2;
-				if (tierPercentage < 20)
-					return Tier3;
-				return Tier4;
-			default:
-				return Tier4;
-		}
+		return currentLevel switch {
+			1 => tierPercentage switch {
+				< 80 => Tier1,
+				< 99 => Tier2,
+				_ => Tier3
+			},
+			2 => tierPercentage switch {
+				< 10 => Tier1,
+				< 90 => Tier2,
+				< 99 => Tier3,
+				_ => Tier4
+			},
+			3 => tierPercentage switch {
+				< 1 => Tier1,
+				< 10 => Tier2,
+				< 90 => Tier3,
+				_ => Tier4
+			},
+			4 => tierPercentage switch {
+				< 1 => Tier2,
+				< 20 => Tier3,
+				_ => Tier4
+			},
+			_ => Tier4
+		};
 	}
 }

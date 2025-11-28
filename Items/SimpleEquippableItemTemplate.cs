@@ -6,20 +6,12 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Toutetsu.Items;
 
-public class SimpleEquippableItemTemplate : IItemTemplate
+public class SimpleEquippableItemTemplate(Sprite sprite, ItemType type, StatsSet means, StatsSet deviations) : IItemTemplate
 {
-	public SimpleEquippableItemTemplate(Sprite sprite, ItemType type, StatsSet means, StatsSet deviations)
-	{
-		Sprite = sprite;
-		Type = type;
-		Means = means;
-		Deviations = deviations;
-	}
-
-	Sprite Sprite { get; }
-	ItemType Type { get; }
-	StatsSet Means { get; }
-	StatsSet Deviations { get; }
+	Sprite Sprite { get; } = sprite;
+	ItemType Type { get; } = type;
+	StatsSet Means { get; } = means;
+	StatsSet Deviations { get; } = deviations;
 
 	public ItemData Create() => new SimpleEquippableItem(Sprite, Type, new(
 		RNG.NextStandardInt(Means.MaxHP, Deviations.MaxHP),
@@ -84,13 +76,13 @@ public class SimpleEquippableItemTemplate : IItemTemplate
 	class YamlItemModel
 	{
 		[UsedImplicitly] public string? Id { get; set; }
-		[UsedImplicitly] public List<int> MaxHp { get; set; } = new() { 0, 0 };
-		[UsedImplicitly] public List<int> WhiteAttack { get; set; } = new() { 0, 0 };
-		[UsedImplicitly] public List<int> BlackAttack { get; set; } = new() { 0, 0 };
-		[UsedImplicitly] public List<int> WhiteDefense { get; set; } = new() { 0, 0 };
-		[UsedImplicitly] public List<int> BlackDefense { get; set; } = new() { 0, 0 };
-		[UsedImplicitly] public List<int> CritChance { get; set; } = new() { 0, 0 };
-		[UsedImplicitly] public List<int> Agility { get; set; } = new() { 0, 0 };
+		[UsedImplicitly] public List<int> MaxHp { get; set; } = [0, 0];
+		[UsedImplicitly] public List<int> WhiteAttack { get; set; } = [0, 0];
+		[UsedImplicitly] public List<int> BlackAttack { get; set; } = [0, 0];
+		[UsedImplicitly] public List<int> WhiteDefense { get; set; } = [0, 0];
+		[UsedImplicitly] public List<int> BlackDefense { get; set; } = [0, 0];
+		[UsedImplicitly] public List<int> CritChance { get; set; } = [0, 0];
+		[UsedImplicitly] public List<int> Agility { get; set; } = [0, 0];
 
 		public SimpleEquippableItemTemplate ToItemTemplate(ItemType type) => new(
 			SpriteManager.CreateSprite<StaticSprite>($"items/{Id}"), type,
